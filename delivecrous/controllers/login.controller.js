@@ -14,7 +14,6 @@ const LoginController = {
           res.status(400).send("Invalid credentials");
         }
       } catch (error) {
-        console.log(error);
         res.status(500).send();
       }
     }
