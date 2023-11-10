@@ -1,0 +1,181 @@
+@import url('https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300&display=swap');
+
+.App {
+  height: 100vh;
+  overflow-y: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.App::-webkit-scrollbar {
+  display: none;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  background-color: #181A1B;
+}
+
+input[type=text]{
+  color: #EAE9EC;
+  width: 40vw;
+  background-color: #1C1E1F;
+  border: 2px solid #444444;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  padding: 10px;
+  margin: 4px;
+}
+
+input[type=text]:focus {
+  border: 2px solid #ccc;
+}
+
+input[type=number]{
+  width: 30px;
+  color: #EAE9EC;
+  background-color: #1C1E1F;
+  border: 2px solid #444444;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  padding: 10px;
+  margin: 4px;
+}
+
+textarea{
+  width: 40%;
+  background-color: #1C1E1F;
+  color: #EAE9EC;
+  border: 2px solid #444444;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  margin: 4px;
+  resize: none;
+}
+
+textarea:focus {
+  width: 50%;
+  transition: width 0.4s ease-in-out;
+  border: 2px solid #ccc;
+}
+
+select{
+  color: #ccc;
+  background-color: #1C1E1F;
+  border: 2px solid #444444;
+}
+
+input[type=date]{
+  color: #ccc;
+  background-color: #1C1E1F;
+  border: 2px solid #444444;
+}
+
+select:focus,input[type=date]:focus{
+  border: 2px solid #ccc;
+}
+
+input[type=text]:hover,input[type=number]:hover,textarea:hover,select:hover,input[type=date]:hover{
+  border: 2px solid #888787;
+}
+
+.List {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+}
+
+.Link {
+  cursor: pointer;
+}
+
+.Link:hover{
+  font-weight: bold;
+}
+
+.RightOverlay {
+  position: fixed;
+  bottom: 2em;
+  right: 2em;
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+.LeftOverlay {
+  position: fixed;
+  bottom: 2em;
+  left: 2em;
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+.OverlayButton {
+  color: white;
+  background-color: rgba(63, 61, 57, 0.29);
+  border: #ff8510 solid 2px;
+  margin: 5px;
+  padding: 7px 15px;
+  border-radius: 7px;
+  cursor: pointer;
+}
+
+.AddButton{
+  border: none;
+  background: none;
+  border-radius: 360px;
+  color: #EAE9EC;
+  cursor: pointer;
+}
+
+.DeleteButton{
+  color: red;
+  background-color: rgba(63, 61, 57, 0.29);
+  border: #720808 solid 2px;
+  margin: 30px;
+  padding: 7px 15px;
+  border-radius: 7px;
+  cursor: pointer;
+}
+
+.Button{
+  color: white;
+  background-color: #282828;
+  border: #282828 solid 2px;
+  margin: 5px;
+  padding: 7px 15px;
+  border-radius: 7px;
+  cursor: pointer;
+}
+
+.Button:hover,.OverlayButton:hover,.DeleteButton:hover{
+  border: 2px solid #ccc;
+}
+
+.Button:active,.OverlayButton:active,.AddButton:active,.DeleteButton:active,.Link:active{
+  transform: translateY(4px);
+}
+
+.Image{
+  width: 10vw;
+  height: 25vh;
+  object-fit: cover;
+  border: 5px solid black;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  margin: 15px;
+}
+
+.SearchBar{
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  margin: 20px;
+}

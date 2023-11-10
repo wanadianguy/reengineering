@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Vujahday+Script&display=swap');
+
+.AddSongPage{
+  color : #ccc;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.Song {
+  width: 30vw;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  padding: 15px;
+  word-break: break-word;
+}
+
+.Title {
+  color: #EAE9EC;
+  font-size: 25px;
+  padding-bottom: 10px;
+  font-family: 'Titillium Web', sans-serif;
+}
+
+.SongDetails {
+  color: #EAE9EC;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+}

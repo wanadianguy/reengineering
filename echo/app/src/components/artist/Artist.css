@@ -1,0 +1,24 @@
+.Artist {
+  width: 20vw;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  padding: 15px;
+  word-break: break-word;
+}
+
+.Name {
+  color: #EAE9EC;
+  font-size: 15px;
+  font-family: 'Titillium Web', sans-serif;
+}
+
+.AddArtistPage{
+  color : #ccc;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+}
