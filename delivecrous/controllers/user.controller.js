@@ -1,44 +1,41 @@
+const HttpStatus = require('http-status-codes');
 const UserService = require("../services/user.service");
 
 
 const UserController = {
-    findAll: async (req, res, next) => {
-        const users = await UserService.findAll();
-        res.status(200).send(users);
+    findAll: async (request, response, next) => {
+        response.status(HttpStatus.OK).send(await UserService.findAll());
     },
 
-    findById: async (req, res, next) => {
-        const userId = req.params.id;
-        const user = await UserService.findById(userId);
-        res.status(200).send(user);
+    findById: async (request, response, next) => {
+        response.status(HttpStatus.OK).send(await UserService.findById(request.params.id));
     },
 
-    create: async (req, res, next) => {
-        const user = req.body;
-        await UserService.create(user);
-        res.status(200).send({ message: "user created successfully" });
+    create: async (request, response, next) => {
+        await UserService.create(request.body);
+        response.status(HttpStatus.OK).send({ message: "user created successfully" });
     },
 
-    update: async (req, res, next) => {
-        const userId = req.params.id;
-        const userInfo = req.body;
+    update: async (request, response, next) => {
+        const userId = request.params.id;
+        const userInfo = request.body;
 
         try {
             await UserService.update(userId, userInfo);
-            res.status(200).send({ message: "user updated successfully"});
+            response.status(HttpStatus.OK).send({ message: "user updated successfully"});
         } catch (error) {
-            res.status(404).send({ message: `user with id - ${userId} not found`});
+            response.status(HttpStatus.NOT_FOUND).send({ message: `user with id - ${userId} not found`});
         }
     },
 
-    delete: async (req, res, next) => {
-        const userId = req.params.id;
+    delete: async (request, response, next) => {
+        const userId = request.params.id;
         
         try {
             await UserService.delete(userId);
-            res.status(200).send({ message: "user deleted successfully"});
+            response.status(HttpStatus.OK).send({ message: "user deleted successfully"});
         } catch (error) {
-            res.status(404).send({ message: `user with id - ${userId} not found`});
+            response.status(HttpStatus.NOT_FOUND).send({ message: `user with id - ${userId} not found`});
         }
     },
 }

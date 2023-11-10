@@ -1,20 +1,18 @@
+const HttpStatus = require('http-status-codes');
 const {login} = require("../services/authentication.service");
 
 const LoginController = {
-    async login(req, res, next) {
+    async login(request, response, next) {
       try {
-        const userName = req.body.username;
-        const password = req.body.password;
-  
-        const token = await login(userName, password);
+        const token = await login(request.body.username, request.body.password);
   
         if (token) {
-          res.status(200).send({token});
+          response.status(HttpStatus.OK).send({token});
         } else {
-          res.status(400).send("Invalid credentials");
+          response.status(HttpStatus.BAD_REQUEST).send("Invalid credentials");
         }
       } catch (error) {
-        res.status(500).send();
+        response.status(HttpStatus.INTERNAL_SERVER_ERROR).send();
       }
     }
   }

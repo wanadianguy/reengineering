@@ -1,59 +1,54 @@
+const HttpStatus = require('http-status-codes');
 const DishService = require("../services/dish.service");
 
 const DishController = {
-    findAll: async (req, res, next) => {
-        const dishes = await DishService.findAll();
-        res.status(200).send(dishes);
+    findAll: async (request, response, next) => {
+        response.status(HttpStatus.OK).send(await DishService.findAll());
     },
 
     findById: async (req, res, next) => {
-        const dishId = req.params.id;
-        const dish = await DishService.findById(dishId);
-        res.status(200).send(dish);
+        res.status(HttpStatus.OK).send(await DishService.findById(req.params.id));
     },
 
-    findByKeyWord: async (req, res, next) => {
-        const query = req.query.keyword;
-    
+    findByKeyWord: async (request, response, next) => {
         try {
-          const dishes = await DishService.findByKeyWord(query);
+          const dishes = await DishService.findByKeyWord(request.query.keyword);
           if (dishes) {
-            res.status(200).send(dishes);
+            response.status(HttpStatus.OK).send(dishes);
           } else {
-            res.status(404).send("dish not found");
+            response.status(HttpStatus.NOT_FOUND).send("dish not found");
           }
         } catch (error) {
-          res.status(500).send();
+          response.status(HttpStatus.INTERNAL_SERVER_ERROR).send();
         }
       },
     
 
-    create: async (req, res, next) => {
-        const dish = req.body;
-        await DishService.create(dish);
-        res.status(200).send({ message: "dish created successfully" });
+    create: async (request, response, next) => {
+        await DishService.create(request.body);
+        response.status(HttpStatus.OK).send({ message: "dish created successfully" });
     },
 
-    update: async (req, res, next) => {
-        const dishId = req.params.id;
-        const dishInfo = req.body;
+    update: async (request, response, next) => {
+        const dishId = request.params.id;
+        const dishInfo = request.body;
 
         try {
             await DishService.update(dishId, dishInfo);
-            res.status(200).send({ message: "dish updated successfully"});
+            response.status(HttpStatus.OK).send({ message: "dish updated successfully"});
         } catch (error) {
-            res.status(404).send({ message: `dish with id - ${dishId} not found`});
+            response.status(HttpStatus.NOT_FOUND).send({ message: `dish with id - ${dishId} not found`});
         }
     },
 
-    delete: async (req, res, next) => {
-        const dishId = req.params.id;
+    delete: async (request, response, next) => {
+        const dishId = request.params.id;
         
         try {
             await DishService.delete(dishId);
-            res.status(200).send({ message: "dish deleted successfully"});
+            response.status(HttpStatus.OK).send({ message: "dish deleted successfully"});
         } catch (error) {
-            res.status(404).send({ messgae: `dish with id - ${dishId} not found`});
+            response.status(HttpStatus.NOT_FOUND).send({ message: `dish with id - ${dishId} not found`});
         }
     },
 };

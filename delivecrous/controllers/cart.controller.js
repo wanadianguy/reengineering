@@ -1,65 +1,59 @@
+const HttpStatus = require('http-status-codes');
 const CartService = require("../services/cart.service");
 
 const CartController = {
-    findUserCarts: async (req, res, next) => {
-        const userId = req.user._id;
-        const carts = await CartService.findUserCarts(userId);
-        res.status(200).send(carts);
+    findUserCarts: async (request, response, next) => {
+        response.status(HttpStatus.OK).send(await CartService.findUserCarts(request.user._id));
     },
 
-    findUserCartById: async (req, res, next) => {
-        const userId = req.user._id;
-        const cartId = req.params.id;
-
-        const cart = await CartService.findUserCartById(cartId, userId);
-        res.status(200).send(cart);
+    findUserCartById: async (request, response, next) => {
+        response.status(HttpStatus.OK).send(await CartService.findUserCartById(request.user._id, request.params.id));
     },
 
-    createUserCart: async (req, res, next) => {
-        const userId = req.user._id;
-        const cart = req.body;
+    createUserCart: async (request, response, next) => {
+        const cart = request.body;
 
-        cart.idUser = userId;
-        await CartService.createUserCart(cart);
-        res.status(200).send({ message: "cart created successfully" });
+        cart.idUser = request.user._id;
+        await CartService.createUserCart(request.body);
+        response.status(HttpStatus.OK).send({ message: "cart created successfully" });
     },
 
-    updateUserCart: async (req, res, next) => {
-        const userId = req.user._id;
-        const cartId = req.params.id;
-        const cartInfo = req.body;
+    updateUserCart: async (request, response, next) => {
+        const userId = request.user._id;
+        const cartId = request.params.id;
+        const cartInfo = request.body;
 
         cartInfo.idUser = userId;
         try {
             await CartService.updateUserCart(cartId, cartInfo, userId);
-            res.status(200).send({ message: "cart updated successfully"});
+            response.status(HttpStatus.OK).send({ message: "cart updated successfully"});
         } catch (error) {
-            res.status(404).send({ message: `cart with id - ${cartId} not found`});
+            response.status(HttpStatus.NOT_FOUND).send({ message: `cart with id - ${cartId} not found`});
         }
     },
 
-    deleteUserCart: async (req, res, next) => {
-        const userId = req.user._id;
-        const cartId = req.params.id;
+    deleteUserCart: async (request, response, next) => {
+        const userId = request.user._id;
+        const cartId = request.params.id;
 
         try {
             await CartService.deleteUserCart(cartId, userId);
-            res.status(200).send({ message: "cart deleted successfully"});
+            response.status(HttpStatus.OK).send({ message: "cart deleted successfully"});
         } catch (error) {
-            res.status(404).send({ messgae: `cart with id - ${cartId} not found`});
+            response.status(HttpStatus.NOT_FOUND).send({ message: `cart with id - ${cartId} not found`});
         }
     },
 
-    validateCart: async (req, res, next) => {
-        const userId = req.user._id;
-        const cartId = req.params.id;
-        const userInfo = req.body;
+    validateCart: async (request, response, next) => {
+        const userId = request.user._id;
+        const cartId = request.params.id;
+        const userInfo = request.body;
 
         try {
             await CartService.validateCart(cartId, userId, userInfo);
-            res.status(200).send({ message: "cart validated successfully"});
+            response.status(HttpStatus.OK).send({ message: "cart validated successfully"});
         } catch (error) {
-            res.status(404).send({ messgae: `cart with id - ${cartId} not found`});
+            response.status(HttpStatus.NOT_FOUND).send({ message: `cart with id - ${cartId} not found`});
         }
     }
 };

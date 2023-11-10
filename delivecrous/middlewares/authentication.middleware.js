@@ -4,13 +4,13 @@ const {checkToken} = require("../services/authentication.service");
 const AuthenticationMiddleware = {
 
   verifyToken: async (req, res, next) => {
-    const usertoken = req.headers.authorization;
+    const userToken = req.headers.authorization;
 
-    if (!usertoken) {
+    if (!userToken) {
       return res.status(401).send({error: "A token is required for authentication"});
     }
     try {
-      const token = usertoken.replace("Bearer ", "");
+      const token = userToken.replace("Bearer ", "");
       req.user = await checkToken(token);
     } catch (err) {
       if (err instanceof jwt.TokenExpiredError || err instanceof jwt.JsonWebTokenError) {

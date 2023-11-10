@@ -1,0 +1,659 @@
+{
+  "info": {
+    "_postman_id": "5c94be5d-0d59-478e-a049-307d961d87f5",
+    "name": "Delivecrous",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "User",
+      "item": [
+        {
+          "name": "Recupérer un utilisateur",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "localhost:3000/api/users/61b48af7253e2f956ba4fd00",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "users",
+                "61b48af7253e2f956ba4fd00"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Recupérer tous les utilisateurs Copy",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "localhost:3000/api/users/",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "users",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Création utilisateur",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"username\": \"username5\",\r\n    \"password\": \"password5\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "localhost:3000/api/users",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "users"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Suppression d'un utilisateur",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "localhost:3000/api/users/61b48af7253e2f956ba4fd00",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "users",
+                "61b48af7253e2f956ba4fd00"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Modifier un utilisateur",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"password\": \"password1\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "localhost:3000/api/users/61b48ae6253e2f956ba4fcf8",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "users",
+                "61b48ae6253e2f956ba4fcf8"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Dishes",
+      "item": [
+        {
+          "name": "Consulter les dishes",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MWI0OGFlNjI1M2UyZjk1NmJhNGZjZjgiLCJ1c2VybmFtZSI6InVzZXJuYW1lMSIsImlhdCI6MTYzOTY4MDYzMCwiZXhwIjoxNjM5Njg0MjMwfQ.e3bRXAfu6v-2XW44mDMLtK21Cnh4cYSNvfyq-kteDK0",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"username\": \"Toto\",\r\n    \"password\": \"password\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "localhost:3000/api/dishes",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "dishes"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Consulter une dish avec l'id",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MWIzOGUzZTM2M2E5YzQxMTEyYWE0MmIiLCJ1c2VybmFtZSI6IlRvdG8iLCJpYXQiOjE2MzkyMjA0OTMsImV4cCI6MTYzOTIyNDA5M30.qMwP7beHF7NVFqxuUMwDOtU7xGqDf_TbHTuLCA5CtE4",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"username\": \"Toto\",\r\n    \"password\": \"password\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "localhost:3000/api/dishes/615c6cba247c5598b536434d",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "dishes",
+                "615c6cba247c5598b536434d"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Consulter une dish avec un mot clé",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MWI0OGFlNjI1M2UyZjk1NmJhNGZjZjgiLCJ1c2VybmFtZSI6InVzZXJuYW1lMSIsImlhdCI6MTYzOTY4NDI5NywiZXhwIjoxNjM5Njg3ODk3fQ.Ht9hTzUowDWZfPkY0V-LPD5EzfTpAyckTl3xojPoPVE",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "localhost:3000/api/dishes/search?keyword=i",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "dishes",
+                "search"
+              ],
+              "query": [
+                {
+                  "key": "keyword",
+                  "value": "i"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Modifier une dish avec l'id",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MWI0OGFlNjI1M2UyZjk1NmJhNGZjZjgiLCJ1c2VybmFtZSI6InVzZXJuYW1lMSIsImlhdCI6MTYzOTY1NzA0MCwiZXhwIjoxNjM5NjYwNjQwfQ.j-KA_CDGN_I60zfN9TaHXaXu91hMZA1OUhE3QggPg2U",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"deuxieme dish\",\r\n    \"description\": \"description de la deuxieme dish\",\r\n    \"price\": 100,\r\n    \"allergens\": \"alergens de la deuxieme dish\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "localhost:3000/api/dishes/615c5d11dd86631cb68178f5",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "dishes",
+                "615c5d11dd86631cb68178f5"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Ajouter une dish",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MWI0OGFlNjI1M2UyZjk1NmJhNGZjZjgiLCJ1c2VybmFtZSI6InVzZXJuYW1lMSIsImlhdCI6MTYzOTY4MDYzMCwiZXhwIjoxNjM5Njg0MjMwfQ.e3bRXAfu6v-2XW44mDMLtK21Cnh4cYSNvfyq-kteDK0",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"dish3\",\r\n    \"description\": \"description3\",\r\n    \"price\": 3,\r\n    \"allergens\": \"allergens3\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "localhost:3000/api/dishes/",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "dishes",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Supprimer une dish avec l'id",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MWI0OGFlNjI1M2UyZjk1NmJhNGZjZjgiLCJ1c2VybmFtZSI6InVzZXJuYW1lMSIsImlhdCI6MTYzOTY2NDA4MSwiZXhwIjoxNjM5NjY3NjgxfQ.RAvaMkHEpbaZEC7hJs2U6RGbN0vAdP6UZItvve4iWus",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "localhost:3000/api/dishes/61bb6c149348434170a883e4",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "dishes",
+                "61bb6c149348434170a883e4"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Carts",
+      "item": [
+        {
+          "name": "Récupérer les paniers d'un utilisateur",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MWI0OGFlNjI1M2UyZjk1NmJhNGZjZjgiLCJ1c2VybmFtZSI6InVzZXJuYW1lMSIsImlhdCI6MTYzOTY4NzA5MSwiZXhwIjoxNjM5NjkwNjkxfQ.WCBN676YpJLAfL_0WqMtDVJvScdkHko-aHqamOFc3h8",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"username\": \"Toto\",\r\n    \"password\": \"password\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "localhost:3000/api/carts/",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "carts",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Consulter un panier avec l'id",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MWI0OGFlNjI1M2UyZjk1NmJhNGZjZjgiLCJ1c2VybmFtZSI6InVzZXJuYW1lMSIsImlhdCI6MTYzOTY2MDMyMSwiZXhwIjoxNjM5NjYzOTIxfQ.0xntGcyxtirVn2flWlaoLXjueXk_DiEWObSnsYE_QR0",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"username\": \"Toto\",\r\n    \"password\": \"password\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "localhost:3000/api/carts/61bb43af237736e469a4e026",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "carts",
+                "61bb43af237736e469a4e026"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Ajouter un article au panier",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MWI0OGFlNjI1M2UyZjk1NmJhNGZjZjgiLCJ1c2VybmFtZSI6InVzZXJuYW1lMSIsImlhdCI6MTYzOTY3NjM0NCwiZXhwIjoxNjM5Njc5OTQ0fQ.ex9m50j2X-LYmOP6tRwkVQrz38LAF2JZPd5xRuZ4v4s",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"Mon nouveau panier de Noel\",\r\n    \"cart\": [{\r\n        \"idDish\": \"61bb6b699348434170a883e1\",\r\n        \"quantity\": 3\r\n    }]\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "localhost:3000/api/carts/61bb87744ffb2fb1b17e90e0",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "carts",
+                "61bb87744ffb2fb1b17e90e0"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Ajouter un panier à un utilisateur",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MWI0OGFlNjI1M2UyZjk1NmJhNGZjZjgiLCJ1c2VybmFtZSI6InVzZXJuYW1lMSIsImlhdCI6MTYzOTY4NzA5MSwiZXhwIjoxNjM5NjkwNjkxfQ.WCBN676YpJLAfL_0WqMtDVJvScdkHko-aHqamOFc3h8",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"Panier\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "localhost:3000/api/carts/",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "carts",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Supprimer un panier",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MWI0OGFlNjI1M2UyZjk1NmJhNGZjZjgiLCJ1c2VybmFtZSI6InVzZXJuYW1lMSIsImlhdCI6MTYzOTY4NzE2NSwiZXhwIjoxNjM5NjkwNzY1fQ.qYopW03N5pvaD3PyOf_4oclEpxJzhcjRrZuVPtVvT44",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "localhost:3000/api/carts/61bba3c27831a71215f264bd",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "carts",
+                "61bba3c27831a71215f264bd"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Connection",
+      "item": [
+        {
+          "name": "Récupérer le token d'un utilisateur",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"username\": \"username1\",\r\n    \"password\": \"password1\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "localhost:3000/api/auth",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "auth"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Checkout",
+      "item": [
+        {
+          "name": "Valider un panier",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MWI0OGFlNjI1M2UyZjk1NmJhNGZjZjgiLCJ1c2VybmFtZSI6InVzZXJuYW1lMSIsImlhdCI6MTYzOTY3NjM0NCwiZXhwIjoxNjM5Njc5OTQ0fQ.ex9m50j2X-LYmOP6tRwkVQrz38LAF2JZPd5xRuZ4v4s",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"address\": \"rue de Templeuve\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "localhost:3000/api/carts/61bb87744ffb2fb1b17e90e0/checkout",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "carts",
+                "61bb87744ffb2fb1b17e90e0",
+                "checkout"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
