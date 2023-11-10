@@ -23,7 +23,6 @@ const DishController = {
             res.status(404).send("dish not found");
           }
         } catch (error) {
-          console.log(error);
           res.status(500).send();
         }
       },
@@ -38,6 +37,7 @@ const DishController = {
     update: async (req, res, next) => {
         const dishId = req.params.id;
         const dishInfo = req.body;
+
         try {
             await DishService.update(dishId, dishInfo);
             res.status(200).send({ message: "dish updated successfully"});
@@ -48,6 +48,7 @@ const DishController = {
 
     delete: async (req, res, next) => {
         const dishId = req.params.id;
+        
         try {
             await DishService.delete(dishId);
             res.status(200).send({ message: "dish deleted successfully"});

@@ -13,14 +13,10 @@ const AuthenticationMiddleware = {
       const token = usertoken.replace("Bearer ", "");
       req.user = await checkToken(token);
     } catch (err) {
-      if (err instanceof jwt.TokenExpiredError) {
-        return res.status(401).send("Token expired");
+      if (err instanceof jwt.TokenExpiredError || err instanceof jwt.JsonWebTokenError) {
+        return res.status(401).send(err instanceof jwt.TokenExpiredError ? "Token expired" : "Invalid token");
       }
 
-      if (err instanceof jwt.JsonWebTokenError) {
-        return res.status(401).send("Invalid token");
-      }
-      console.log(err);
       return res.status(500).send();
     }
 

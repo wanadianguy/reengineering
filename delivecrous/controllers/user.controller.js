@@ -22,6 +22,7 @@ const UserController = {
     update: async (req, res, next) => {
         const userId = req.params.id;
         const userInfo = req.body;
+
         try {
             await UserService.update(userId, userInfo);
             res.status(200).send({ message: "user updated successfully"});
@@ -32,6 +33,7 @@ const UserController = {
 
     delete: async (req, res, next) => {
         const userId = req.params.id;
+        
         try {
             await UserService.delete(userId);
             res.status(200).send({ message: "user deleted successfully"});
