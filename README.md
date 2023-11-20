@@ -75,3 +75,8 @@ Néanmoins, Carbonalyser n’est pas un outil d’évaluation ou d’audit. Il s
 
 ### Sélection des règles
 
+#### Éliminer les fonctionnalités non essentielles
+
+#### Créer une architecture applicative modulaire
+
+#### 
