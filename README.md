@@ -41,22 +41,28 @@ Nous choisissons la série de conditions dans le cas où elles amènent au même
 Nous décidons de mettre en place le document de décision pour uniformiser cette gestion d'erreur au sein du projet. 
 -->
 
+<mark>TODO Geoffrey & William : Compléter cette partie</mark>
+
 ## Projet éco-conception
 
 ### Tests de différents plugins d'analyse
+
+Afin de tester différents plugins d'analyse, nous avons choisi de s'appuyer sur le site : <a href="https://TODO-Bryan/"><mark>TODO Bryan : url du site choisi ?</mark></a>.
 
 #### Lighthouse
 
 Lighthouse est un outil d’audit automatisé initié par Google et accessible gratuitement pour tester les performances, l’accessibilité et le référencement d’un site web. Ainsi, nous pouvons aisément et rapidement tester nos sites internet. 
 
 Cet outil nous permet de réaliser des audits et de mettre en lumière cinq informations essentielles d’un site :
- - La performance : score permettant d’évaluer la performance d’un site web, il est estimé grâce à plusieurs métriques (pour assurer sa pertinence, l'équipe Lighthouse effectue régulièrement des recherches et recueille des commentaires pour comprendre ce qui a le plus grand impact sur les performances perçues par les utilisateurs) ;
+- La performance : score permettant d’évaluer la performance d’un site web, il est estimé grâce à plusieurs métriques (pour assurer sa pertinence, l'équipe Lighthouse effectue régulièrement des recherches et recueille des commentaires pour comprendre ce qui a le plus grand impact sur les performances perçues par les utilisateurs) ;
 - L’accessibilité : score indiquant le niveau d’accessibilité d’une application web, cela permet de savoir si elle est utilisable par les personnes handicapées ;
 - Les bonnes pratiques : score reposant sur l’analyse des requêtes réalisées (http et https), la sécurisation des ressources exploitées et la vulnérabilité des bibliothèques utilisées ;
 - Le SEO (ou optimisation pour les moteurs de recherche) : score se référant à l'ensemble des techniques qui visent à améliorer le positionnement d'une page, d'un site ou d'une application web dans la page de résultats d'un moteur de recherche ;
 - Le PWA (progressive web app) : score provenant de l’analyse de la portabilité d’une interface web sur différents types d’écrans, cette mesure n’est pas toujours présente.
 
 Tandis que l’EcoIndex est un service qui, à la suite de nombreuses contributions (le projet étant public), est devenu un outil collectif et ouvert à tous. Il permet de mesurer les émissions de gaz à effet de serre (aussi appelés GES) et la consommation en eau. Ainsi, la combinaison de ces deux outils nous permet d’auditer de façon plus précise nos diverses applications facilement.
+
+<mark>TODO Bryan : Prise de recul sur ce plugin ?</mark>
 
 #### Green IT Analysis (incluant l'éco-index)
 
@@ -67,16 +73,103 @@ Les principales métriques étudiées ici sont la consommation en eau, les émis
 
 Il exporte les valeurs sous format d'un fichier CSV dont chaque colonne représente une métrique, interprétable par tout tableur.
 
+<mark>TODO Bryan : Prise de recul sur ce plugin ?</mark>
+
 #### Carbonalizer
 
 Cette extension de navigateur permet de visualiser la consommation électrique et les émissions de gaz à effet de serre (GES) associées à une navigation internet.
 
 Néanmoins, Carbonalyser n’est pas un outil d’évaluation ou d’audit. Il s’agit d’un support de sensibilisation individuelle, qui permet d’aider à visualiser un certain aspect de nos usages en ligne, au travers de comparaisons et d’indications sur la consommation électrique et émissions associées. Ces comparaisons se caractérisent par un nombre de recharges de téléphone qu'il aurait été possible de faire, ou encore le nombre de kilomètres qu'on aurait effectué en voiture pour la même quantité d'émission de CO2eq.
 
+<mark>TODO Bryan : Prise de recul sur ce plugin ?</mark>
+
 ### Sélection des règles
 
 #### Éliminer les fonctionnalités non essentielles
 
+Plusieurs études (Cast Software et Standish Group, notamment) démontrent que 70 % des fonctionnalités demandées par les utilisateurs ne sont pas essentielles et que 45 % ne sont jamais utilisées. En réduisant la couverture et la profondeur fonctionnelle de l’application, on abaisse son coût de développement initial, sa dette technique et les impacts environnementaux associés.
+
+On diminue ainsi mécaniquement l’infrastructure nécessaire à son exécution. Par ailleurs, à niveau ergonomique constant, plus l’application est pauvre fonctionnellement, plus elle sera simple à utiliser. Il faut donc réduire le plus possible la couverture fonctionnelle de l’application, en la centrant sur le besoin essentiel de l’utilisateur.
+
+Détecter une fonctionnalité non essentielle est possible au moment de l'analyse de l'expression du besoin. La méthode MoSCoW, des ateliers, des wireframes (maquettes fonctionnelles) ou des prototypes avec tests utilisateurs permettent de vérifier l'utilité d’une fonctionnalité en amont de son développement.
+
+<a href="https://github.com/cnumr/best-practices/blob/main/chapters/BP_001_fr.md">https://github.com/cnumr/best-practices/blob/main/chapters/BP_001_fr.md</a>
+
+#### Favoriser un design simple, épuré, adapté au web
+
+Tout design d'interface ou webdesign doit être réfléchi en amont, en prenant en compte :
+
+- les besoins de l'utilisateur (voir la bonne pratique "Optimiser le parcours utilisateur")
+- les heuristiques d'ergonomie (Bastien et Scapin, Nielsen, etc.)
+- les contraintes techniques
+- les bonnes pratiques d'écoconception
+et de préférence les bonnes pratiques d'accessibilité
+
+Privilégiez un design simple et épuré réalisable uniquement en HTML et CSS.
+
+<a href="https://github.com/cnumr/best-practices/blob/main/chapters/BP_005_fr.md">https://github.com/cnumr/best-practices/blob/main/chapters/BP_005_fr.md</a>
+
+#### Proposer un traitement asynchrone lorsque c'est possible
+
+Lorsque l’interaction avec l’utilisateur induit un traitement lourd et long côté serveur, proposer un traitement asynchrone lorsque c’est possible. L’idée est d’encourager l’utilisateur à déclencher le traitement, puis à se reconnecter quand celui-ci est terminé sans attendre sur son terminal la fin de l'exécution ; par exemple, via la réception d’un e-mail contenant un lien. Cette approche permet de réaliser des traitements par lots (batchs), souvent plus efficients en ressources que des traitements synchrones à la volée. On libère ainsi les serveurs de présentation, qui peuvent prendre en charge d’autres internautes pendant que le traitement s’effectue en mode asynchrone côté serveur. Il est également plus aisé de lisser la charge du serveur responsable du traitement, ce qui permet une meilleure mutualisation de serveurs et par conséquent moins de serveurs.
+
+<a href="https://github.com/cnumr/best-practices/blob/main/chapters/BP_008_fr.md">https://github.com/cnumr/best-practices/blob/main/chapters/BP_008_fr.md</a>
+
 #### Créer une architecture applicative modulaire
 
-#### 
+L’architecture modulaire popularisée par les logiciels open source apporte souvent une plus grande capacité à monter en charge, des coûts réduits de maintenance corrective et évolutive, ainsi qu’un code plus efficient. Si la couverture fonctionnelle du site web ou du service en ligne peut être amenée à évoluer, mieux vaut implémenter les fonctionnalités de base dans un noyau et les compléter au besoin par des modules. Ces modules peuvent rassembler des fonctions appartenant à un même domaine métier. Cela permet de les développer indépendamment des autres domaines métier ainsi que les partager à d'autres applications.
+
+Cette approche est valable à tous les niveaux de granularité, pour un développement sur mesure comme pour le choix d’un serveur HTTP ou d’un CMS.
+
+<a href="https://github.com/cnumr/best-practices/blob/main/chapters/BP_014_fr.md">https://github.com/cnumr/best-practices/blob/main/chapters/BP_014_fr.md/</a>
+
+#### Découper les CSS
+
+Employer un ensemble de CSS plutôt qu’une seule, et appeler uniquement les CSS utiles en fonction du contexte. Cette méthode permet de limiter le poids de la page lors du premier téléchargement, donc d’économiser de la bande passante et de réduire la charge CPU.
+
+<a href="https://github.com/cnumr/best-practices/blob/main/chapters/BP_021_fr.md">https://github.com/cnumr/best-practices/blob/main/chapters/BP_021_fr.md</a>
+
+#### N'utilisez que les portions indispensables des bibliothèques JavaScript et frameworks CSS
+
+Les bibliothèques JavaScript telles que jQuery et les frameworks CSS prêts à l’emploi (Bootstrap, skeleton, gumby, foundation…) sont d’excellents outils pour réaliser rapidement des sites, car ils répondent à presque tous les besoins les plus courants. Revers de la médaille, on n’en utilise généralement qu’une petite portion ; or ces frameworks et bibliothèques ne s’appuient pas tous sur une architecture modulaire, ce qui contraint l’internaute à télécharger toute la librairie pour n’utiliser qu’un faible pourcentage de ses fonctionnalités.
+
+Dans la mesure du possible, il est préférable de se passer de ces bibliothèques (voir <a href="https://youmightnotneedjquery.com">https://youmightnotneedjquery.com</a>) ou de n’en conserver que les portions réellement utilisées (voir <a href="https://getbootstrap.com/customize">https://getbootstrap.com/customize</a>).
+
+Utiliser un bundler (ex: Webpack) permet de faire facilement du tree shaking, soit d'éliminer du code "mort" donc non utilisé.
+
+<a href="https://github.com/cnumr/best-practices/blob/main/chapters/BP_040_fr.md">https://github.com/cnumr/best-practices/blob/main/chapters/BP_040_fr.md</a>
+
+#### Modifier plusieurs propriétés CSS en 1 seule fois
+
+Pour limiter le nombre de repaint/reﬂow, il est conseillé de ne pas modifier des propriétés une à une. Préférer l’ajout/la suppression de classes CSS, ce qui permet de modifier en une seule fois plusieurs propriétés, tout en ne générant qu’un repaint/reﬂow (voir <a href="https://github.com/cnumr/best-practices/blob/main/chapters/bonne_pratique_045_fr.md">la bonne pratique n° 45</a>).
+
+<a href="https://github.com/cnumr/best-practices/blob/main/chapters/BP_045_fr.md">https://github.com/cnumr/best-practices/blob/main/chapters/BP_045_fr.md</a>
+
+#### Mettre en cache les objets souvent accédés en JavaScript
+
+L’accès au DOM (Document Object Model) est coûteux en termes de ressources processeur (cycles CPU). Aussi, lorsque vous utilisez plusieurs fois le même élément du DOM depuis JavaScript, stockez sa référence dans une variable afin de ne pas parcourir à nouveau le DOM pour ce même élément.
+
+<a href="https://github.com/cnumr/best-practices/blob/main/chapters/BP_049_fr.md">https://github.com/cnumr/best-practices/blob/main/chapters/BP_049_fr.md</a>
+
+#### Réduire le volume de données stockées au strict nécessaire
+
+Réduire le volume de données stockées au nécessaire consiste à :
+
+- optimiser la gestion des gros volumes de données.
+- nettoyer les anciennes données, soit en les archivant hors ligne, soit en les supprimant.
+- vérifier que les sauvegardes peuvent être restaurées.
+- superviser la taille des espaces de stockage.
+
+Suivant le type de données et leurs propriétaires, des contraintes légales peuvent amener à stocker dans le temps des données jamais utilisées.
+
+L’utilisation des données et leur degré d’importance impactent aussi la manière de les stocker.
+
+Cette bonne pratique s'inscrit dans le cadre de la gestion du cycle de vie de l'information.
+
+<a href="https://github.com/cnumr/best-practices/blob/main/chapters/BP_4011_fr.md">https://github.com/cnumr/best-practices/blob/main/chapters/BP_4011_fr.md</a>
+
+#### S'assurer que les parcours utilisateurs permettent de réaliser leur action prévue
+
+Des services web permettent de réaliser sans se déplacer des démarches administratives, des ouvertures de contrats, des déclarations de sinistres etc... Beaucoup de ces procédures peuvent être complexes à réaliser ou ne pas prendre en compte des cas particuliers. Pour valider la connexion à un service bancaire en ligne par exemple, l'installation d'une application mobile et donc un smartphone peuvent être exigés. Certains utilisateurs peuvent donc se retrouver bloqués dans l'utilisation du service. La mise en place d'une alternative plus "low tech" (appel téléphonique, SMS, point d'accueil physique) peut pallier à cette situation.
+
+<a href="https://github.com/cnumr/best-practices/blob/main/chapters/BP_4014_fr.md">https://github.com/cnumr/best-practices/blob/main/chapters/BP_4014_fr.md</a>
