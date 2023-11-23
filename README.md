@@ -141,7 +141,7 @@ Utiliser un bundler (ex: Webpack) permet de faire facilement du tree shaking, so
 
 #### Modifier plusieurs propriétés CSS en 1 seule fois
 
-Pour limiter le nombre de repaint/reﬂow, il est conseillé de ne pas modifier des propriétés une à une. Préférer l’ajout/la suppression de classes CSS, ce qui permet de modifier en une seule fois plusieurs propriétés, tout en ne générant qu’un repaint/reﬂow (voir <a href="https://github.com/cnumr/best-practices/blob/main/chapters/bonne_pratique_045_fr.md">la bonne pratique n° 45</a>).
+Pour limiter le nombre de repaint/reﬂow, il est conseillé de ne pas modifier des propriétés une à une. Préférer l’ajout/la suppression de classes CSS, ce qui permet de modifier en une seule fois plusieurs propriétés, tout en ne générant qu’un repaint/reﬂow (voir <a href="https://github.com/cnumr/best-practices/blob/main/chapters/BP_045_fr.md">la bonne pratique n° 45</a>).
 
 <a href="https://github.com/cnumr/best-practices/blob/main/chapters/BP_045_fr.md">https://github.com/cnumr/best-practices/blob/main/chapters/BP_045_fr.md</a>
 
