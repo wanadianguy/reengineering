@@ -6,22 +6,40 @@ import com.server.projet.resources.artist.Artist;
 import com.server.projet.resources.feedback.Feedback;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * Classe représentant une chanson.
+ */
 @Entity
 public class Song implements Serializable {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   private long id;
+
+  @NotNull
+  @Size(max = 2000)
   private String url;
+
+  @NotNull
+  @Size(max = 200)
   private String title;
+
+  @NotNull
   private Date date;
+
+  @NotNull
+  @Size(max = 50)
   private String type;
+
   @ManyToOne(fetch = FetchType.EAGER)
   @JsonBackReference(value = "artist-song")
   private Artist artist;
+
   @OneToMany(mappedBy = "song", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
   @JsonManagedReference(value = "song-feedback")
   private List<Feedback> feedback;

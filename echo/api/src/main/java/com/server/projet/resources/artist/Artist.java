@@ -7,6 +7,9 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Set;
 
+/**
+ * Classe représentant un artiste.
+ */
 @Entity
 public class Artist implements Serializable {
   @Id
@@ -17,6 +20,7 @@ public class Artist implements Serializable {
   @OneToMany(mappedBy = "artist", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
   @JsonManagedReference(value = "artist-song")
   private Set<Song> songs;
+
 
   public Artist() {
     super();
@@ -54,7 +58,13 @@ public class Artist implements Serializable {
     this.songs = songs;
   }
 
+  /**
+   * Ajoute une chanson à l'ensemble des chansons de l'artiste.
+   * @param addedSong La chanson à ajouter.
+   */
   public void addSong(Song addedSong) {
-    this.songs.add(addedSong);
+    if (!this.songs.contains(addedSong)) {
+      this.songs.add(addedSong);
+    }
   }
 }
