@@ -79,22 +79,21 @@ Néanmoins, Carbonalyser n’est pas un outil d’évaluation ou d’audit. Il s
 
 #### Comparaison de ces outils sur une page web
 
-L’outil LightHouse est très orienté test technique, car il étudie les pages du site une par une (une étude par URL). Il propose des améliorations techniques (ex : « Image elements do not have explicit width and height ») et une note par thème (performance, accessibilité, …).
+L’outil *LightHouse* est très orienté test technique, car il étudie les pages du site de façon isolée. Il propose des améliorations techniques (exemple : « Image elements do not have explicit width and height ») et une note par thème (performance, accessibilité, …).
 
 ![Lighthouse](./img/lighthouse.png)
 
-Carbonalyser, quant à lui, est plus orienté test métier. En effet, il ne contient que des informations sur l’impact environnemental du site (ex : gCO2e) et s’effectue sur un métier utilisateur, contrairement à LightHouse avec son fonctionnement « page par page ».
+*Carbonalyser*, quant à lui, est plus orienté test métier. En effet, il ne contient que des informations sur l’impact environnemental du site (ex : gCO2e). Il s’effectue sur un métier utilisateur, contrairement à *LightHouse* avec son fonctionnement « page par page ».
 
 ![Carbonalyser](./img/carbonyliser.png)
 
-GreenIT-Analysis, lui, est plus ou moins la fusion de ces deux derniers outils. En effet, il fonctionne de manière « page par page » et affiche des conseils d’amélioration pour la page étudiée, comme le fait LightHouse (GreenIt en propose moins). Cependant, il affiche aussi des informations sur l’impact environnemental comme le fait Carbonalyser.
+*GreenIT-Analysis*, lui, est plus ou moins la fusion de ces deux derniers outils. En effet, il fonctionne de manière « page par page » et affiche des conseils d’amélioration pour la page étudiée, comme le fait *LightHouse*  (GreenIt en propose moins). Cependant, il affiche aussi des informations sur l’impact environnemental comme le fait *Carbonalyser*.
  
 ![GreenIT-Analysis](./img/greenit-analysis.png)
 
-Par rapport aux résultats de ces outils, on peut constater qu’ils n’ont aucune valeur en commun. Par exemple, nous avons 2.88 gCO2e pour GreenIT alors que Carbonalyser donne 1 gCO2e, nous avons également 3800 DOM pour LightHouse contre 3076 DOM pour GreenIT … 
-De plus, il y a la présence de données non concrète dans ces outils. Par exemple, dans GreenIT, il y a l’attribut « EcoIndex » qui est ici à 6.02 ce qui correspond à une notation « G », cependant, nous ne savons pas concrètement ce que cela veut dire ce qui peu amener à certaine confusion. Tout ce que nous savons, c’est que G est la plus basse note que l’outil puisse attribuer, ce qui laisse penser que n’est vraiment pas optimal.
-Ceci prouve que les résultats que nous obtenons dépendent grandement de l’outil utilisé et qu’il faut prendre en compte ces derniers avec précaution et contexte.
-
+Par rapport aux résultats de ces outils, on peut constater qu’ils n’ont aucune valeur en commun. Par exemple, nous avons 2.88 gCO2e pour GreenIT alors que Carbonalyser donne 1 gCO2e, nous avons également 3800 DOM pour LightHouse contre 3076 DOM pour GreenIT.
+De plus, il y a la présence de données non concrète dans ces outils. Par exemple, dans GreenIT, il y a l’attribut « EcoIndex » qui est ici à 6.02 ce qui correspond à une notation « G ». Cependant, nous ne savons pas concrètement ce que cela veut dire, ce qui peu amener à certaine confusion. Tout ce que nous savons, c’est que G est la plus basse note que l’outil puisse attribuer, ce qui laisse penser qu'il n’est pas du tout optimal d'un point de vue environnemental.
+Ceci prouve donc que les résultats que nous obtenons dépendent grandement de l’outil utilisé et qu’il faut prendre en compte ces derniers avec précaution et contexte.
 
 ### Sélection des règles
 
