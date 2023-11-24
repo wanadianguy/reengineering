@@ -34,7 +34,10 @@ Nous avons évité d'utiliser des variables temporaires. Par exemple, nous retou
 - Utilisation du camelCaseSyntax pour les fonctions et variables et SCREAMING_SNAKE_CASE pour les constantes ;
 - Changement des égalités doubles '==' en triples '===' ;
 - Création d'un nouveau type d'erreur personnalisé pour simplifier la gestion des erreurs et pouvoir avoir des réponses plus détaillées ;
-- Remplacement du français en anglais des commentaires, de la documentation et de l'affichage.
+- Remplacement du français en anglais des commentaires, de la documentation et de l'affichage ;
+- Correction de l'authentification et de la gestion des token ;
+- Centralisation des fonctions pour que le code soit plus facile à comprendre ;
+- Implémentation des constantes directement dans le code (il est ensuite utilisé) lorsqu'il n'est utilisé qu'une seule fois.
 
 ### Architecture Decision Record
 
