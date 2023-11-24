@@ -10,15 +10,18 @@
 ## Projet refactorisation : Delivecrous (Node.js & MongoDB)
 
 ### Centralisation des codes de retour d'appel API
+
 Nous avons décidé de placer les codes d'erreur de réponse dans un fichier, sous forme de constantes.
 Cela permet d'uniformiser les codes au sein de l'application, d'éviter des erreurs, et en cas de modification d'un code, de ne pas avoir à le faire partout mais à un seul endroit.
 
-### middlewares
+### Middlewares
+
 Nous avons consacré un temps conséquent sur la gestion d'erreur dans authentication.middleware.js. Cette discussion concernait le code contenu lors des levées d'exceptions. 
 En fin de compte, il a été retenu que la série de conditions au sein de la méthode "catch" était la meilleure (car la seule) option.
 En fait, l'utilsation d'un "switch case" n'était pas adaptée ici, car il fallait vérfier les types d'erreurs, ce qui n'est pas possible dans ce cas.
 
-### controllers
+### Controllers
+
 Nous avons évité d'utiliser des variables temporaires. Par exemple, nous retournons directement le résultat donné par les méthodes asynchrones faisant appel aux services. Nous avons aussi renommé certaines variables qui n'étaient pas assez explicites, en particulier pour un développeur junior.
 
 ### Simplification du code
@@ -38,6 +41,10 @@ Nous avons évité d'utiliser des variables temporaires. Par exemple, nous retou
 - Correction de l'authentification et de la gestion des token ;
 - Centralisation des fonctions pour que le code soit plus facile à comprendre ;
 - Implémentation des constantes directement dans le code (il est ensuite utilisé) lorsqu'il n'est utilisé qu'une seule fois.
+
+### Axes d'amélioration
+
+Nous aurions pu mettre en place des tests unitaires pour chaque route de cette API. Néanmoins, comme ils n'existaient pas auparavant et que des cas n'étaient pas traités, cela aurait pu faire un point sur ce qui existait et sur ce qui restait à traiter. De plus, cela aurait pu servir de support pour vérifier l'exhaustivité des cas à tester.
 
 ### Architecture Decision Record
 
@@ -73,9 +80,15 @@ Nous décidons de mettre en place le document de décision pour uniformiser cett
 - Utilisation de constantes pour verbaliser les intentions ;
 - Suppression de packages / code commenté(s) et / ou inutile(s).
 
+### Refactorisation du code côté APP (car nouveau projet)
+
+#### Axes d'amélioration
+
+Nous aurions pu mettre en place des tests unitaires pour chaque composant de notre application web. En effet, bien que des tests unitaires sur des pages complètes ne soient pas utiles et seraient même détrimentaires aux améliorations futures du code, de par l'aspect rigide de ceux-ci, des tests par composant auraient pu être pertinent pour s'assurer de la conformité du visuel des parties atomiques de l'application. De plus, comme il, comme ils n'existaient pas auparavant, cela aurait pu faire un point sur ce qui existait et sur les objectifs à atteindre.
+
 ### Tests de différents plugins d'analyse
 
-Afin de tester différents plugins d'analyse, nous avons choisi de s'appuyer sur le site : <a href="https://www.dealabs.com/"><mark>Dealabs</mark></a>.
+Afin de tester différents plugins d'analyse, nous avons choisi de s'appuyer sur le site : <a href="https://www.dealabs.com/">Dealabs</a>.
 
 ##### Lighthouse
 
@@ -292,3 +305,17 @@ Des services web permettent de réaliser sans se déplacer des démarches admini
 ##### Justification
 
 Un système interactif bien pensé, autrement dit une architecture fonctionnelle bien réfléchie, va permettre de diminuer le nombre d'interactions de l'utilisateur sur un site web, par exemple, et donc de réduire le nombre de requêtes nécessaires, qu'elles soient locales ou distantes. Ainsi, cette règle nous permet de lier "bonne expérience utilisateur" et "limitation des consommations matérielles".
+
+### Utilisation des outils de monitoring des performances et d'évaluation de charge
+
+#### Perf et Flamegraph
+
+Voici les résultats obtenus avec ces deux outils :
+
+![flamegraph](./img/serveur_sans_data.svg)
+
+De plus, il est nécessaire de préciser que nous avons effectuer ces tests sur le projet echo, avec un nombre de 100 requêtes.
+
+#### Gatling
+
+gatling évaluation de charge
