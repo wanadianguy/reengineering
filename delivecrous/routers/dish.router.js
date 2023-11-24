@@ -1,26 +1,23 @@
-const express = require("express");
-const DishRouter = express.Router();
-const DishController = require("../controllers/dish.controller.js");
-const { validate } = require("express-validation");
-const DishValidator = require("../validators/dish.validators.js");
-const AuthencationMiddleware = require("../middlewares/authentication.middleware");
+import express from 'express';
+import {validate} from 'express-validation';
+import {DishController} from '../controllers/dish.controller.js';
+import {DishValidator} from '../validators/dish.validators.js';
 
-const API_DISH_PARAM = `/:id`;
-const API_DISH_QUERY = `/search`;
+const DishRouter = express.Router();
 
 DishRouter
-    .route("/")
+    .route('/')
     .get(DishController.findAll)
     .post(validate(DishValidator.validateCreate), DishController.create);
 
 DishRouter
-    .route(API_DISH_QUERY)
-    .get(DishController.findByKeyWord);  
+    .route('/search')
+    .get(DishController.findByKeyWord);
 
 DishRouter
-    .route(API_DISH_PARAM)
+    .route('/:id')
     .get(DishController.findById)
     .put(validate(DishValidator.validateUpdate), DishController.update)
     .delete(DishController.delete);
 
-module.exports = DishRouter;
+export default DishRouter;

@@ -1,20 +1,19 @@
-const express = require("express");
-const UserRouter = express.Router();
-const UserController = require("../controllers/user.controller.js");
-const { validate } = require("express-validation");
-const UserValidator = require("../validators/user.validators.js");
+import express from 'express';
+import {UserController} from '../controllers/user.controller.js';
+import {validate} from 'express-validation';
+import {UserValidator} from '../validators/user.validators.js';
 
-const API_USER_PARAM = `/:id`;
+const UserRouter = express.Router();
 
 UserRouter
-    .route("/")
+    .route('/')
     .get(UserController.findAll)
     .post(validate(UserValidator.validateCreate), UserController.create);
 
 UserRouter
-    .route(API_USER_PARAM)
+    .route('/:id')
     .get(UserController.findById)
     .put(UserController.update)
     .delete(UserController.delete);
 
-module.exports = UserRouter;
+export default UserRouter;

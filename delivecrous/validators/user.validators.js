@@ -1,6 +1,6 @@
-const { Joi } = require("express-validation");
+import { Joi } from 'express-validation';
 
-const UserValidators = {
+export const UserValidator = {
     validateCreate: {
         body: Joi.object({
             username: Joi.string().min(5).max(30).required(),
@@ -8,5 +8,3 @@ const UserValidators = {
         }),
     },
 };
-
-module.exports = UserValidators;

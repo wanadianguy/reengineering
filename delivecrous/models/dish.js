@@ -1,3 +1,8 @@
-const mongoose = require("mongoose");
+import mongoose from 'mongoose';
 
-module.exports = mongoose.model("Dish", require("../schemas/dish.schema"));
+export default mongoose.model('Dish', new mongoose.Schema({
+    name: String,
+    description: String,
+    price: Number,
+    allergens: String
+}));

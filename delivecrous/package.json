@@ -1,25 +1,17 @@
 {
-  "name": "Delivecrous",
-  "version": "1.0.0",
-  "description": "",
+  "name": "delivecrous",
+  "description": "API that is used to order food online",
+  "type": "module",
   "main": "index.js",
-  "directories": {
-    "test": "test"
-  },
-  "scripts": {
-    "start": "node index.js"
-  },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/AvesSeven/Delivecrous.git"
+    "url": "https://gitlab.com/Wanada/reengineering"
   },
-  "keywords": [],
-  "author": "",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/AvesSeven/Delivecrous/issues"
-  },
-  "homepage": "https://github.com/AvesSeven/Delivecrous#readme",
   "dependencies": {
     "bcrypt": "^5.0.1",
     "express": "^4.17.1",
@@ -28,5 +20,8 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.0.9",
     "nodemon": "^2.0.13"
+  },
+  "engines": {
+    "node": ">=21"
   }
 }

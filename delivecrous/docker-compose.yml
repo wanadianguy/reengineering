@@ -1,14 +1,11 @@
 version: '3.7'
 services:
   mongodb_container:
-    image: mongo:latest
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: rootpassword
+    image: mongo:7.0.3
     ports:
-      - 27017:27017
+      - "27017:27017"
     volumes:
-      - mongodb_data_container:/data/delivrecrous
+      - mongodb_data_container:/data/delivrecrous/database
 
 volumes:
   mongodb_data_container:

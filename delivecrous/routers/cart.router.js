@@ -1,26 +1,22 @@
-const express = require("express");
+import express from 'express';
+import {CartController} from '../controllers/cart.controller.js';
+import {AuthenticationController} from "../controllers/authentication.controller.js";
+
 const CartRouter = express.Router();
-const CartController = require("../controllers/cart.controller.js");
-const { validate } = require("express-validation");
-const CartValidator = require("../validators/cart.validators.js");
-const AuthencationMiddleware = require("../middlewares/authentication.middleware");
-
-const API_USER_PARAM = `/:id`;
-const API_CHECKOUT = `/:id/checkout`
 
 CartRouter
-    .route("/")
-    .get((req, res, next) => AuthencationMiddleware.verifyToken(req, res, next), CartController.findUserCarts)
-    .post((req, res, next) => AuthencationMiddleware.verifyToken(req, res, next),  validate(CartValidator.validateCreateUserCart), CartController.createUserCart);
+    .route("/:userId")
+    .get((request, response, next) => AuthenticationController.verifyToken(request, response, next), CartController.findUserCarts)
+    .post((request, response, next) => AuthenticationController.verifyToken(request, response, next), CartController.createUserCart);
 
 CartRouter
-    .route(API_USER_PARAM)
-    .get((req, res, next) => AuthencationMiddleware.verifyToken(req, res, next), CartController.findUserCartById)
-    .put((req, res, next) => AuthencationMiddleware.verifyToken(req, res, next), CartController.updateUserCart)
-    .delete((req, res, next) => AuthencationMiddleware.verifyToken(req, res, next), CartController.deleteUserCart);
+    .route('/:userId/:cartId')
+    .get((request, response, next) => AuthenticationController.verifyToken(request, response, next), CartController.findUserCartById)
+    .put((request, response, next) => AuthenticationController.verifyToken(request, response, next), CartController.addDishToCart)
+    .delete((request, response, next) => AuthenticationController.verifyToken(request, response, next), CartController.deleteUserCart);
 
 CartRouter
-    .route(API_CHECKOUT)
-    .post((req, res, next) => AuthencationMiddleware.verifyToken(req, res, next), CartController.validateCart)
+    .route('/:userId/:cartId/confirm')
+    .put((request, response, next) => AuthenticationController.verifyToken(request, response, next), CartController.confirmCart)
 
-module.exports = CartRouter;
+export default CartRouter;

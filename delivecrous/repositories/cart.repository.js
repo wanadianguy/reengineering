@@ -1,33 +1,19 @@
-const db = require("../models/cart.js");
+import database from '../models/cart.js';
 
-const CartRepository = {
-    findAll: () => {
-        return db.find();
-    },
+export const CartRepository = {
+    findAll: () => database.find(),
 
-    findUserCarts: (userId) => {
-        return db.find({ idUser: userId });
-    },
+    findUserCarts: (userId) => database.find({ idUser: userId }),
 
-    findUserCartById: (id) => {
-        return db.findById(id);
-    },
+    findUserCartById: (userId, cartId) => database.findOne({_id: cartId, idUser: userId}),
 
-    createUserCart: (cart) => {
-        return new db(cart).save();
-    },
+    createUserCart: (cart) => new database(cart).save(),
 
-    updateUserCart: (id, cart) => {
-        return db.findByIdAndUpdate(id, cart);
-    },
+    updateCart: (cartId, cart) => database.findByIdAndUpdate(cartId, cart),
 
-    deleteDishFromCart: (idCart, idDish) => {
-        return db.updateMany({ _id:  idCart}, { "$pull": { "cart": { "idDish": idDish }}});
-    },
+    deleteDishFromCarts: (cartId, dishId) => database.updateMany({ _id:  cartId}, { '$pull': { 'cart': { 'idDish': dishId }}}),
 
-    deleteUserCart: (id) => {
-        return db.findByIdAndDelete(id);
-    },
+    deleteCart: (id) => database.findByIdAndDelete(id),
+
+    deleteUserCarts: (userId) => database.deleteMany({idUser: userId}),
 };
-
-module.exports = CartRepository;

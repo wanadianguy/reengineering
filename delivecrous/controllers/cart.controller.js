@@ -1,61 +1,55 @@
-const HttpStatus = require('http-status-codes');
-const CartService = require("../services/cart.service");
+import HttpStatus from 'http-status-codes';
+import {CartService} from '../services/cart.service.js';
+import {CART_CREATED, CART_UPDATED, CART_NOT_FOUND, CART_DELETED, CART_VALIDATED} from '../constants/cart.const.js';
+import {INVALID_REQUEST} from "../constants/commun.const.js";
+import {StatusError} from "../Errors/statusError.js";
 
-const CartController = {
+export const CartController = {
     findUserCarts: async (request, response, next) => {
-        response.status(HttpStatus.OK).send(await CartService.findUserCarts(request.user._id));
+        await CartService.findUserCarts(request.params.userId)
+            .then(carts => response.status(HttpStatus.OK).send(carts))
+            .catch(() => response.status(HttpStatus.BAD_REQUEST).send({message: INVALID_REQUEST}));
     },
 
     findUserCartById: async (request, response, next) => {
-        response.status(HttpStatus.OK).send(await CartService.findUserCartById(request.user._id, request.params.id));
+        await CartService.findUserCartById(request.params.userId, request.params.cartId)
+            .then(cart => cart
+                ? response.status(HttpStatus.OK).send(cart)
+                : response.status(HttpStatus.NOT_FOUND).send({message: CART_NOT_FOUND})
+            )
+            .catch(() => response.status(HttpStatus.BAD_REQUEST).send({message: INVALID_REQUEST}));
     },
 
     createUserCart: async (request, response, next) => {
-        const cart = request.body;
-
-        cart.idUser = request.user._id;
-        await CartService.createUserCart(request.body);
-        response.status(HttpStatus.OK).send({ message: "cart created successfully" });
+        await CartService.createUserCart(request.params.userId)
+            .then(() => response.status(HttpStatus.OK).send({message: CART_CREATED}))
+            .catch(() => response.status(HttpStatus.BAD_REQUEST).send({message: INVALID_REQUEST}));
     },
 
-    updateUserCart: async (request, response, next) => {
-        const userId = request.user._id;
-        const cartId = request.params.id;
-        const cartInfo = request.body;
-
-        cartInfo.idUser = userId;
-        try {
-            await CartService.updateUserCart(cartId, cartInfo, userId);
-            response.status(HttpStatus.OK).send({ message: "cart updated successfully"});
-        } catch (error) {
-            response.status(HttpStatus.NOT_FOUND).send({ message: `cart with id - ${cartId} not found`});
-        }
+    addDishToCart: async (request, response, next) => {
+        await CartService.addDishToCart(request.params.userId, request.params.cartId, request.body)
+            .then(() => response.status(HttpStatus.OK).send({message: CART_UPDATED}))
+            .catch(error => error instanceof StatusError
+                ? response.status(error.requestStatus).send({message: error.message})
+                : response.status(HttpStatus.BAD_REQUEST).send({message: INVALID_REQUEST})
+            );
     },
 
     deleteUserCart: async (request, response, next) => {
-        const userId = request.user._id;
-        const cartId = request.params.id;
-
-        try {
-            await CartService.deleteUserCart(cartId, userId);
-            response.status(HttpStatus.OK).send({ message: "cart deleted successfully"});
-        } catch (error) {
-            response.status(HttpStatus.NOT_FOUND).send({ message: `cart with id - ${cartId} not found`});
-        }
+        await CartService.deleteUserCart(request.params.userId, request.params.cartId)
+            .then(() => response.status(HttpStatus.OK).send({message: CART_DELETED}))
+            .catch(error => error instanceof StatusError
+                ? response.status(error.requestStatus).send({message: error.message})
+                : response.status(HttpStatus.BAD_REQUEST).send({message: INVALID_REQUEST})
+            );
     },
 
-    validateCart: async (request, response, next) => {
-        const userId = request.user._id;
-        const cartId = request.params.id;
-        const userInfo = request.body;
-
-        try {
-            await CartService.validateCart(cartId, userId, userInfo);
-            response.status(HttpStatus.OK).send({ message: "cart validated successfully"});
-        } catch (error) {
-            response.status(HttpStatus.NOT_FOUND).send({ message: `cart with id - ${cartId} not found`});
-        }
+    confirmCart: async (request, response, next) => {
+        await CartService.confirmCart(request.params.userId, request.params.cartId, request.body)
+            .then(() => response.status(HttpStatus.OK).send({message: CART_VALIDATED}))
+            .catch(error => error instanceof StatusError
+                ? response.status(error.requestStatus).send({message: error.message})
+                : response.status(HttpStatus.BAD_REQUEST).send({message: INVALID_REQUEST})
+            );
     }
 };
-
-module.exports = CartController;
