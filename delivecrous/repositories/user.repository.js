@@ -1,31 +1,15 @@
-const db = require("../models/user.js");
+import database from '../models/user.js';
 
-const UserRepository = {
-    findAll: () => {
-        return db.find();
-    },
+export const UserRepository = {
+    findAll: () => database.find(),
 
-    findById: (id) => {
-        return db.findById(id);
-    },
+    findById: (id) => database.findById(id),
 
-    create: (user) => {
-        return new db(user).save();
-    },
+    findByUsername: (username) => database.findOne({username}),
 
-    update: (id, user) => {
-        return db.findByIdAndUpdate(id, user);
-    },
+    create: (user) => new database(user).save(),
 
-    delete: (id) => {
-        return db.findByIdAndDelete(id);
-    },
+    update: (id, user) => database.findByIdAndUpdate(id, user),
 
-    getUserByNameAndPassword: (username) => {
-        const user = db.findOne({ username: username });
-        return user ? user : null;
-      }
-    
+    delete: (id) => database.findByIdAndDelete(id),
 };
-
-module.exports = UserRepository;

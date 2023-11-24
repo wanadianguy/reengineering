@@ -1,3 +1,17 @@
-const mongoose = require("mongoose");
+import mongoose from 'mongoose';
 
-module.exports = mongoose.model("Cart", require("../schemas/cart.schema"));
+export default mongoose.model('Cart', new mongoose.Schema({
+    idUser: String,
+    cart: [{
+        idDish: String,
+        quantity: Number,
+    }],
+    state: {
+        type: Boolean,
+        default: false,
+    },
+    address: {
+        type: String,
+        default: '',
+    }
+}));

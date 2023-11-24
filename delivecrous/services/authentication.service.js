@@ -1,27 +1,25 @@
-const jwt = require("jsonwebtoken");
-const SECRET = "secret";
-const userService = require("./user.service");
+import jwt from 'jsonwebtoken';
+import {StatusError} from "../Errors/statusError.js";
+import HttpStatus from "http-status-codes";
+import {UserRepository} from "../repositories/user.repository.js";
+import bcrypt from "bcrypt";
+import {EXPIRED_TOKEN, INVALID_CREDENTIALS, INVALID_TOKEN} from "../constants/authentication.const.js";
 
-const AuthenticationService = {
-    login: async (userName, password) => {
-    const user = await userService.checkPassword(userName, password);
-    if (user) {
-      return jwt.sign(
-        {
-          _id: user._id,
-          username: user.username,
-        },
-        SECRET,
-        { expiresIn: "1 hours" }
-      );
-    }
+const SECRET = 'secret';
 
-    return null;
-  },
+export const AuthenticationService = {
+    login: async (username, password) => {
+        const user = await UserRepository.findByUsername(username);
+        if (!(user && (await bcrypt.compare(password, user.password)))) throw new StatusError(HttpStatus.BAD_REQUEST, INVALID_CREDENTIALS);
+        return jwt.sign(
+            {
+                _id: user._id,
+                username: user.username,
+            },
+            SECRET,
+            {expiresIn: '1 hours'},
+        );
+    },
 
-  checkToken: async (token) => {
-    return jwt.verify(token, SECRET);
-  }
+    checkToken: (token) => !!jwt.verify(token, SECRET),
 }
-
-module.exports = AuthenticationService;

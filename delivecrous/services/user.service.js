@@ -1,61 +1,33 @@
-const UserRepository = require("../repositories/user.repository");
-const CartService = require("./cart.service");
-const bcrypt = require('bcrypt');
+import {UserRepository} from '../repositories/user.repository.js';
+import bcrypt from 'bcrypt';
+import {USER_ALREADY_EXISTS, USER_NOT_FOUND} from "../constants/user.const.js";
+import {StatusError} from "../Errors/statusError.js";
+import HttpStatus from "http-status-codes";
+import {CartRepository} from "../repositories/cart.repository.js";
 
-const UserService = {
-    findAll: async () => {
-        return await UserRepository.findAll();
-    },
+export const UserService = {
+    findAll: () => UserRepository.findAll(),
 
-    findById: async(id) => {
-        const user = await UserRepository.findById(id);
-        return user;
-    },
+    findById: (id) => UserRepository.findById(id),
 
     create: async (user) => {
-        user.password = bcrypt.hashSync(user.password, 10);
-        await UserRepository.create(user);
+        const existingUser = await UserRepository.findByUsername(user.username);
+        if (existingUser) throw new StatusError(HttpStatus.BAD_REQUEST, USER_ALREADY_EXISTS);
+        user.password = await bcrypt.hash(user.password, 10);
+        return UserRepository.create(user);
     },
 
     update: async (id, userInfo) => {
         const user = await UserRepository.findById(id);
-        if(!user) {
-            throw Error("user not found");
-        }
-
-        if(userInfo.password != null) {
-            userInfo.password = bcrypt.hashSync(userInfo.password, 10);
-        }
-
-        return await UserRepository.update(id, userInfo);
+        if (!user) throw new StatusError(HttpStatus.NOT_FOUND, USER_NOT_FOUND);
+        userInfo.password = await bcrypt.hash(userInfo.password, 10);
+        return UserRepository.update(id, userInfo);
     },
 
     delete: async (id) => {
         const user = await UserRepository.findById(id);
-
-        if(!user) {
-            throw Error("user not found");
-        }
-
-        await CartService.deleteUserCarts(user._id);
-        return await UserRepository.delete(id);
+        if (!user) throw new StatusError(HttpStatus.NOT_FOUND, USER_NOT_FOUND);
+        await CartRepository.deleteUserCarts(id);
+        return UserRepository.delete(id);
     },
-
-    encryptPassword: async (password) => {
-        const salt = await bcrypt.genSalt(10);
-        return bcrypt.hash(password, salt);
-      },
-
-    checkPassword: async (username, password) => {
-        const userLogin = await UserRepository.getUserByNameAndPassword(username);
-    
-        if (userLogin && (await bcrypt.compare(password, userLogin.password))) {
-            userLogin.password = null;
-            return userLogin;
-        }
-    
-        return null;
-      },
 };
-
-module.exports = UserService;

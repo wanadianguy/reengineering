@@ -1,37 +1,21 @@
-const db = require("../models/dish.js");
+import database from '../models/dish.js';
 
-const DishRepository = {
-    findAll: () => {
-        return db.find();
-    },
+export const DishRepository = {
+    findAll: () => database.find(),
 
-    findById: (id) => {
-        return db.findById(id);
-    },
+    findById: (id) => database.findById(id),
 
-    findByName: (query) => {
-        return db.find({ name: { $regex: '.*' + query + '.*' } });
-    },
+    findByName: (name) => database.findOne({name}),
 
-    findByDescription: (query) => {
-        return db.find({ description: { $regex: '.*' + query + '.*' } });
-    },
+    findByNameWithKeyword: (query) => database.find({ name: { $regex: '.*' + query + '.*' } }),
 
-    findByAllergens: (query) => {
-        return db.find({ allergens: { $regex: '.*' + query + '.*' } });
-    },
+    findByDescriptionWithKeyword: (query) => database.find({ description: { $regex: '.*' + query + '.*' } }),
 
-    create: (dish) => {
-        return new db(dish).save();
-    },
+    findByAllergensWithKeyword: (query) => database.find({ allergens: { $regex: '.*' + query + '.*' } }),
 
-    update: (id, dish) => {
-        return db.findByIdAndUpdate(id, dish);
-    },
+    create: (dish) => new database(dish).save(),
 
-    delete: (id) => {
-        return db.findByIdAndDelete(id);
-    },
+    update: (id, dish) => database.findByIdAndUpdate(id, dish),
+
+    delete: (id) => database.findByIdAndDelete(id),
 };
-
-module.exports = DishRepository;

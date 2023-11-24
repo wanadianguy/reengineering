@@ -1,138 +1,62 @@
-const CartRepository = require("../repositories/cart.repository");
-const DishRepository = require("../repositories/dish.repository");
+import {CartRepository} from '../repositories/cart.repository.js';
+import {DishRepository} from '../repositories/dish.repository.js';
+import Cart from "../models/cart.js";
+import {StatusError} from "../Errors/statusError.js";
+import HttpStatus from "http-status-codes";
+import {
+    CART_ADDRESS_NOT_SPECIFIED,
+    CART_ALREADY_CONFIRMED,
+    CART_NOT_FOUND,
+    EMPTY_CART
+} from "../constants/cart.const.js";
 
-const CartService = {
-    findUserCarts: async (userId) => {
-        return await CartRepository.findUserCarts(userId);
+export const CartService = {
+    findUserCarts: (userId) => CartRepository.findUserCarts(userId),
+
+    findUserCartById: (userId, cartId) => CartRepository.findUserCartById(userId, cartId),
+
+    createUserCart: (userId) => {
+        const cart = new Cart();
+        cart.idUser = userId;
+        return CartRepository.createUserCart(cart);
     },
 
-    findUserCartById: async(id, userId) => {
-        const cart = await CartRepository.findUserCartById(id);
-        
-        if(!(cart.idUser == userId)) {
-            throw new Error("Id user not found");
-        }
-        
-         return cart;
-    },
-
-    createUserCart: async (cart) => {
-        await CartRepository.createUserCart(cart);
-    },
-
-    updateUserCart: async (cartId, cartInfo, userId) => {
-        const userCart = await CartRepository.findUserCartById(cartId);
-
-        if(!userCart) {
-            throw new Error("Cart not found");
-        }
-
-        if(!(cart.idUser == userId)) {
-            throw new Error("Id user not found");
-        }
-        
-
-        if(userCart.state == true) {
-            throw new Error("Cart already validated");
-        }
-
-        if(cartInfo.name != null) {
-            userCart.name = cartInfo.name;
-        }
-
-        if(cartInfo.cart != null) {
-            let dishesToRemove = [];
-
-            for(const dishCart of cartInfo.cart) {
-                let found = false;
-
-                if(await DishRepository.findById(dishCart.idDish)) {
-
-                    for(const dishUser of userCart.cart) {
-                        if(dishUser.idDish == dishCart.idDish) {
-                            dishUser.quantity += dishCart.quantity;
-                            
-                            if(dishUser.quantity <= 0) {
-                                dishesToRemove.push(dishUser);
-                            }
-
-                            found = true;
-                        }
-                    }
-
-                    if(!found) {
-                        userCart.cart.push({ idDish: dishCart.idDish, quantity: dishCart.quantity});
-                    }
-                }
-                else {
-                    throw new Error("Dish not found");
-                }
-            }
-
-            if(dishesToRemove.length > 0) {
-                for(const dish of dishesToRemove) {
-                    userCart.cart.splice(userCart.cart.indexOf(dish), 1);
-                }
+    addDishToCart: async (userId, cartId, dishToAdd) => {
+        const cart = await CartRepository.findUserCartById(userId, cartId);
+        if(!cart) throw new StatusError(HttpStatus.NOT_FOUND, CART_NOT_FOUND);
+        if(cart.state === true) throw new StatusError(HttpStatus.BAD_REQUEST, CART_ALREADY_CONFIRMED);
+        for(const dish of cart.cart){
+            if(dish.idDish === dishToAdd.dishId){
+                dish.quantity += dishToAdd.quantity;
+                return CartRepository.updateCart(cartId, cart);
             }
         }
-
-        return await CartRepository.updateUserCart(cartId, userCart);
+        cart.cart.push(dishToAdd);
+        return CartRepository.updateCart(cartId, cart);
     },
 
-    deleteUserCart: async (cartId, userId) => {
-        const cart = await CartRepository.findUserCartById(cartId);
-        
-        if(!cart) {
-            throw Error("cart not found");
-        }
-
-        if(!(cart.idUser == userId)) {
-            throw new Error("Id user not found");
-        }
-
-        return await CartRepository.deleteUserCart(cartId);
+    deleteUserCart: async (userId, cartId) => {
+        const cart = await CartRepository.findUserCartById(userId, cartId);
+        if(!cart) throw new StatusError(HttpStatus.NOT_FOUND, CART_NOT_FOUND);
+        return CartRepository.deleteCart(cartId);
     },
 
-    deleteUserCarts: async (userId) => {
-        const carts = await CartRepository.findUserCarts(userId);
-        if(!carts) {
-            throw Error("cart not found");
-        }
-        return carts.length > 0 ? await CartRepository.deleteMany({ idUser: userId }) : null;
-    },
-
-    deleteDish: async (idDish) => {
+    deleteDishFromCarts: async (dishId) => {
         const carts = await CartRepository.findAll();
 
-        for(const cartUser of carts) {
-            await CartRepository.deleteDishFromCart(cartUser._id, idDish);
+        for(const cart of carts) {
+            await CartRepository.deleteDishFromCarts(cart._id, dishId);
         }
     },
 
-    validateCart: async (cartId, userId, userInfo) => {
-        const cartUser = await CartRepository.findUserCartById(cartId);
-
-        if(cartUser.idUser != userId) {
-            throw new Error("Id user not found");
-        }
-
-        if(cartUser.cart.length <= 0) {
-            throw new Error("Empty cart");
-        }
-
-        if(cartUser.state == true) {
-            throw new Error("Cart already validated");
-        }
-
-        if(userInfo.address == null || userInfo.address.length <= 0) {
-            throw new Error("Empty address");
-        }
-
-        cartUser.address = userInfo.address;
-        cartUser.state = true;
-
-        return await CartRepository.updateUserCart(cartId, cartUser);
+    confirmCart: async (userId, cartId, userAddress) => {
+        const cart = await CartRepository.findUserCartById(userId, cartId);
+        if(!cart) throw new StatusError(HttpStatus.NOT_FOUND, CART_NOT_FOUND);
+        if(cart.cart.length <= 0) throw new StatusError(HttpStatus.BAD_REQUEST, EMPTY_CART);
+        if(cart.state === true) throw new StatusError(HttpStatus.BAD_REQUEST, CART_ALREADY_CONFIRMED);
+        if(userAddress.address == null || userAddress.address.length <= 0) throw new StatusError(HttpStatus.BAD_REQUEST, CART_ADDRESS_NOT_SPECIFIED);
+        cart.address = userAddress.address;
+        cart.state = true;
+        return CartRepository.updateCart(cartId, cart);
     }
 };
-
-module.exports = CartService;
