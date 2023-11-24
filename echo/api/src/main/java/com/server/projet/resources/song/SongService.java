@@ -9,8 +9,10 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
+/**
+ * Service pour les chansons.
+ */
 @Service
 public class SongService {
   private SongRepository songRepository;
@@ -22,55 +24,70 @@ public class SongService {
     this.artistRepository = artistRepository;
   }
 
+  /**
+   * Récupère toutes les chansons.
+   * @return Une liste contenant toutes les chansons.
+   */
   public List<Song> getAllSongs() {
     List<Song> songs = new ArrayList<>();
     songRepository.findAll().forEach(songs::add);
     return songs;
   }
 
-  public Song getSongById(long songId) {
-    Optional<Song> song = songRepository.findById(songId);
-    return song.isPresent() ? song.get() : null;
+  /**
+   * Récupère une chanson par son identifiant.
+   * @param songId L'identifiant de la chanson.
+   * @return La chanson.
+   * @throws BadRequestException si la chanson n'existe pas.
+   */
+  public Song getSongById(long songId) throws BadRequestException {
+    return songRepository.findById(songId).orElseThrow(() -> new BadRequestException("Song does not exist"));
   }
 
-  public Song getSongByTitle(String title){
-    Optional<Song> song = songRepository.findByTitle(title);
-    return song.isPresent() ? song.get() : null;
+  /**
+   * Récupère une chanson par son titre.
+   * @param title Le titre de la chanson.
+   * @return La chanson.
+   * @throws BadRequestException si la chanson n'existe pas.
+   */
+  public Song getSongByTitle(String title) throws BadRequestException {
+    return songRepository.findByTitle(title).orElseThrow(() -> new BadRequestException("Song does not exist"));
   }
 
+  /**
+   * Récupère toutes les chansons d'un artiste.
+   * @param artistId L'identifiant de l'artiste.
+   * @return Une liste contenant toutes les chansons de l'artiste.
+   */
   public List<Song> getAllSongsByArtistId(long artistId) {
-    List<Song> songs = new ArrayList<>();
-    songs.addAll(songRepository.findAllByArtistId(artistId));
-    return songs;
+    return songRepository.findAllByArtistId(artistId);
   }
 
+  /**
+   * Crée une nouvelle chanson.
+   * @param song La chanson à créer.
+   * @param artistId L'identifiant de l'artiste de la chanson.
+   * @return La chanson créée.
+   * @throws BadRequestException si la chanson existe déjà ou si l'artiste n'existe pas.
+   */
   public Song createSong(Song song, long artistId) throws BadRequestException {
-    Optional<Song> fetchedSong = songRepository.findByTitle(song.getTitle());
-    if (fetchedSong.isPresent()) {
+    if (songRepository.findByTitle(song.getTitle()).isPresent()) {
       throw new BadRequestException("Song already exists");
     }
-    Optional<Artist> artist = artistRepository.findById(artistId);
-    if (artist.isPresent()) {
-      song.setArtist(artist.get());
-      songRepository.save(song);
-      return song;
-    } else {
-      throw new BadRequestException("Artist does not exist");
-    }
+    Artist artist = artistRepository.findById(artistId).orElseThrow(() -> new BadRequestException("Artist does not exist"));
+    song.setArtist(artist);
+    songRepository.save(song);
+    return song;
   }
 
+  /**
+   * Supprime une chanson par son identifiant.
+   * @param songId L'identifiant de la chanson à supprimer.
+   * @throws BadRequestException si la chanson n'existe pas.
+   */
   @Transactional
   public void deleteSongById(long songId) throws BadRequestException {
-    Optional<Song> song = songRepository.findById(songId);
-    if (song.isPresent()) {
-      try {
-        song.get().getArtist().getSongs().remove(song.get());
-        songRepository.deleteById(songId);
-      } catch (Exception exception) {
-        throw new BadRequestException("Song could not be deleted");
-      }
-    } else {
-      throw new BadRequestException("Song does not exist");
-    }
+    Song song = songRepository.findById(songId).orElseThrow(() -> new BadRequestException("Song does not exist"));
+    songRepository.delete(song);
   }
 }

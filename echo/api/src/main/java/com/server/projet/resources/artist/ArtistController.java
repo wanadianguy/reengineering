@@ -1,6 +1,5 @@
 package com.server.projet.resources.artist;
 
-import com.server.projet.resources.exception.BadRequestException;
 import com.server.projet.resources.song.Song;
 import com.server.projet.resources.song.SongService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +9,9 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
 
+/**
+ * Contrôleur pour les artistes.
+ */
 @Path("/artists")
 public class ArtistController {
   @Autowired
@@ -17,6 +19,10 @@ public class ArtistController {
   @Autowired
   private SongService songService;
 
+  /**
+   * Récupère tous les artistes.
+   * @return Une réponse contenant tous les artistes.
+   */
   @GET
   @Produces(MediaType.APPLICATION_JSON)
   public Response getAllArtists() {
@@ -24,6 +30,11 @@ public class ArtistController {
     return !artists.isEmpty() ? Response.status(Response.Status.OK).entity(artists).build() : Response.status(Response.Status.NOT_FOUND).build();
   }
 
+  /**
+   * Récupère un artiste par son identifiant.
+   * @param artistId L'identifiant de l'artiste.
+   * @return Une réponse contenant l'artiste.
+   */
   @GET
   @Path("/{artistId}")
   @Produces(MediaType.APPLICATION_JSON)
@@ -32,6 +43,11 @@ public class ArtistController {
     return artist != null ? Response.status(Response.Status.OK).entity(artist).build() : Response.status(Response.Status.NOT_FOUND).build();
   }
 
+  /**
+   * Récupère toutes les chansons d'un artiste.
+   * @param artistId L'identifiant de l'artiste.
+   * @return Une réponse contenant toutes les chansons de l'artiste.
+   */
   @GET
   @Path("/{artistId}/songs")
   @Produces(MediaType.APPLICATION_JSON)
@@ -40,6 +56,11 @@ public class ArtistController {
     return !songs.isEmpty() ? Response.status(Response.Status.OK).entity(songs).build() : Response.status(Response.Status.NOT_FOUND).build();
   }
 
+  /**
+   * Crée un nouvel artiste.
+   * @param artist L'artiste à créer.
+   * @return Une réponse contenant l'artiste créé.
+   */
   @POST
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
@@ -52,6 +73,11 @@ public class ArtistController {
     }
   }
 
+  /**
+   * Supprime un artiste.
+   * @param artistId L'identifiant de l'artiste à supprimer.
+   * @return Une réponse indiquant si l'artiste a été supprimé.
+   */
   @DELETE
   @Path("/{artistId}")
   @Produces(MediaType.APPLICATION_JSON)

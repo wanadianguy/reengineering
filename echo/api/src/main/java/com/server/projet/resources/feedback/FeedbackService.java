@@ -7,12 +7,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
+/**
+ * Service pour les commentaires.
+ */
 @Service
 public class FeedbackService {
   private FeedbackRepository feedbackRepository;
   private SongRepository songRepository;
+
+  private static final int MIN_MARK = 0;
+  private static final int MAX_MARK = 5;
 
   @Autowired
   public FeedbackService(FeedbackRepository feedbackRepository, SongRepository songRepository) {
@@ -20,23 +25,31 @@ public class FeedbackService {
     this.songRepository = songRepository;
   }
 
+  /**
+   * Crée un nouveau commentaire pour une chanson.
+   * @param feedback Le commentaire à ajouter.
+   * @param songId L'identifiant de la chanson.
+   * @return Le commentaire créé.
+   * @throws BadRequestException si la chanson n'existe pas ou si la note n'est pas entre 0 et 5 inclus.
+   */
   public Feedback createFeedbackToSong(Feedback feedback, long songId) throws BadRequestException {
-    Optional<Song> song = songRepository.findById(songId);
-    if (song.isPresent()) {
-      if (feedback.getMark() <= 5 && feedback.getMark() >= 0) {
-        feedback.setSong(song.get());
-        feedbackRepository.save(feedback);
-        return feedback;
-      } else {
-        throw new BadRequestException("Mark must be between 0 and 5 included");
-      }
-    } else {
-      throw new BadRequestException("Song does not exist");
+    Song song = songRepository.findById(songId).orElseThrow(() -> new BadRequestException("Song does not exist"));
+    if (feedback.getMark() < MIN_MARK || feedback.getMark() > MAX_MARK) {
+      throw new BadRequestException("Mark must be between " + MIN_MARK + " and " + MAX_MARK + " included");
     }
+    feedback.setSong(song);
+    feedbackRepository.save(feedback);
+    return feedback;
   }
 
-  public List<Feedback> getAllFeedbackBySong(long songId) {
-    Optional<Song> song = songRepository.findById(songId);
-    return song.isPresent() ? song.get().getFeedback() : null;
+  /**
+   * Récupère tous les commentaires d'une chanson.
+   * @param songId L'identifiant de la chanson.
+   * @return Une liste contenant tous les commentaires de la chanson.
+   * @throws BadRequestException si la chanson n'existe pas.
+   */
+  public List<Feedback> getAllFeedbackBySong(long songId) throws BadRequestException {
+    Song song = songRepository.findById(songId).orElseThrow(() -> new BadRequestException("Song does not exist"));
+    return song.getFeedback();
   }
 }
