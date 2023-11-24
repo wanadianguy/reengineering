@@ -62,7 +62,7 @@ Nous décidons de mettre en place le document de décision pour uniformiser cett
 
 ## Projet éco-conception : echo (ReactJS & Java Springboot)
 
-### Refactorisation du code (car nouveau projet)
+### Refactorisation du code côté API (car nouveau projet)
 
 - Ajout de la javadoc ;
 - Ajout de vérification sur les objets (non nullité) ;
