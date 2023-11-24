@@ -1,11 +1,11 @@
-import './Song.css'
+import '../songList/songList.css'
 import {useNavigate, useParams} from 'react-router-dom';
 import {useEffect, useState} from 'react';
 import axios from 'axios';
 import Moment from 'react-moment';
 import ReactPlayer from 'react-player/youtube';
-import Input from "../Input";
-import Feedback from "../feedback/Feedback";
+import Input from "../../components/Input.js";
+import Feedback from "../../components/feedback/feedback.js";
 
 function SongDetails() {
   const [song, setSong] = useState(null);

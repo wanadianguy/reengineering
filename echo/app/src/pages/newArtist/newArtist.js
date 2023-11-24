@@ -1,9 +1,9 @@
-import Input from "../Input";
+import Input from "../../components/Input.js";
 import {useState} from "react";
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
 
-function AddArtist() {
+function NewArtist() {
   const [artist, setArtist] = useState({name: '', image: ''});
   const navigate = useNavigate();
 
@@ -51,4 +51,4 @@ function AddArtist() {
   )
 }
 
-export default AddArtist;
+export default NewArtist;

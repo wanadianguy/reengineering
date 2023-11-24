@@ -1,10 +1,10 @@
-import './Song.css';
-import Input from "../Input";
+import '../songList/songList.css';
+import Input from "../../components/Input.js";
 import {useEffect, useState} from "react";
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
 
-function AddSong() {
+function NewSong() {
   const [song, setSong] = useState({title: '', artistId: 0, type: '', date: new Date, url: ''});
   const [artists, setArtists] = useState([]);
   const navigate = useNavigate();
@@ -84,4 +84,4 @@ function AddSong() {
   )
 }
 
-export default AddSong;
+export default NewSong;

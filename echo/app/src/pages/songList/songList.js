@@ -1,10 +1,10 @@
-import Song from "./Song";
+import Song from "../../components/song/song.js";
 import {useEffect, useState} from "react";
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faPlus} from "@fortawesome/free-solid-svg-icons";
-import Input from "../Input";
+import Input from "../../components/Input.js";
 
 function SongList() {
   const [songs, setSongs] = useState([]);

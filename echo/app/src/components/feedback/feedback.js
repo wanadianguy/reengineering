@@ -1,4 +1,4 @@
-import './Feedback.css'
+import './feedback.css'
 
 function Feedback({feedback}) {
 

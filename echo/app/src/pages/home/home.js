@@ -1,7 +1,7 @@
-import './Welcome.css'
+import './home.css'
 import {useNavigate} from "react-router-dom";
 
-function Welcome() {
+function Home() {
   const navigate = useNavigate();
 
   function handleSongClick(event) {
@@ -28,4 +28,4 @@ function Welcome() {
   );
 }
 
-export default Welcome;
+export default Home;

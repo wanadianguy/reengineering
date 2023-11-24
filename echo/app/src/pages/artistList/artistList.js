@@ -1,4 +1,4 @@
-import Artist from "./Artist";
+import Artist from "../../components/artist/artist.js";
 import {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import axios from "axios";
