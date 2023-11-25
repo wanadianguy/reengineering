@@ -26,21 +26,7 @@ Nous avons évité d'utiliser des variables temporaires. Par exemple, nous retou
 
 ### Simplification du code
 
-- Simplification du code en supprimant la déclaration inutile des variables ;
-- Extraction des messages dans des fichiers séparés pour modifier les messages plus facilement ;
-- Simplification de code en utilisant un package de type module afin de pouvoir utiliser la syntaxe ES6 ;
-- Correction des erreurs qui n'ont pas été détectées afin que l'API ne plante pas lorsqu'elle les rencontre ;
-- Correction du docker-compose afin que la base de données n'ait pas besoin d'un mot de passe pour y accéder ;
-- Amélioration des noms de variables afin que le code soit plus lisible et aux normes ;
-- Suppression des fichiers inutiles contenant des constantes qui n'ont été utilisées qu'une seule fois ;
-- Remplacement des guillemets doubles par des guillemets simples pour correspondre à la syntaxe recommandée par js ;
-- Utilisation du camelCaseSyntax pour les fonctions et variables et SCREAMING_SNAKE_CASE pour les constantes ;
-- Changement des égalités doubles '==' en triples '===' ;
-- Création d'un nouveau type d'erreur personnalisé pour simplifier la gestion des erreurs et pouvoir avoir des réponses plus détaillées ;
-- Remplacement du français en anglais des commentaires, de la documentation et de l'affichage ;
-- Correction de l'authentification et de la gestion des token ;
-- Centralisation des fonctions pour que le code soit plus facile à comprendre ;
-- Implémentation des constantes directement dans le code (il est ensuite utilisé) lorsqu'il n'est utilisé qu'une seule fois.
+Dans un premier temps, nous avons supprimé la déclaration inutile des variables, simplifiant ainsi le code source. Nous avons également extrait les messages d'erreurs, entre autres, dans des fichiers distincts pour faciliter la modification ultérieure des messages sans altérer le code principal et pour donner plus de contextualisation. Une simplification du code a été mise en oeuvre, en utilisant un package de type module, permettant l'adoption de la syntaxe ES6, renforçant ainsi la modernité du code. Aussi, les erreurs non détectées ont été corrigées pour éviter tout plantage potentiel de l'API lors de leur occurrence. Par ailleurs, nous avons ajouté la configuration du docker-compose pour que la base de données n'exige plus de mot de passe d'accès. De plus, les noms de variables ont été améliorés pour renforcer la clarté et conformité aux normes, ce qui favorise une meilleure compréhension pour les développeurs. Les fichiers inutiles contenant des constantes utilisées une seule fois ont été supprimés, épurant ainsi la structure du projet. Nous avons aussi standardisé la syntaxe des guillemets, en utilisant des guillemets simples, conforme à la convention JS recommandée. De la même manière, le camelCaseSyntax a été adoptée pour les fonctions et variables, tandis que SCREAMING_SNAKE_CASE a été utilisé pour les constantes, assurant une cohérence dans le style du code. Les égalités doubles ont été remplacées par des égalités triples pour une comparaison plus stricte. De surcroît, un nouveau type d'erreur personnalisé a été créé pour simplifier la gestion des erreurs et fournir des réponses plus détaillées. Par ailleurs, nous avons traduit les commentaires, la documentation et l'affichage en anglais pour homogénéiser la langue du code. L'authentification et la gestion des tokens ont été corrigées pour une meilleure sécurité. Enfin, la centralisation des fonctions a été effectuée pour rendre le code plus compréhensible, et les constantes ont été implantées directement dans le code lorsqu'elles n'étaient utilisées qu'une seule fois, optimisant ainsi la structure globale du projet.
 
 ### Axes d'amélioration
 
@@ -71,14 +57,7 @@ Nous décidons de mettre en place le document de décision pour uniformiser cett
 
 ### Refactorisation du code côté API (car nouveau projet)
 
-- Ajout de la javadoc ;
-- Ajout de vérification sur les objets (non nullité) ;
-- Suppression des variables intermédiaires pour améliorer la lisibilité du code ;
-- Utilisation de lambda expression pour améliorer la lisibilité du code ;
-- Précision des exceptions ;
-- Ajout de validations sur les paramètres des entités (@NotNull, par exemple) ;
-- Utilisation de constantes pour verbaliser les intentions ;
-- Suppression de packages / code commenté(s) et / ou inutile(s).
+Dans le cadre de la refactorisation du code côté API, nous avons ajouté de la javadoc a été pour documenter les composants, favorisant ainsi une meilleure compréhension des fonctionnalités pour les développeurs. Des vérifications sur les objets ont été introduites, assurant leur non-nullité et renforçant le bon fonctionnement du projet. De plus, pour améliorer la lisibilité du code, les variables intermédiaires superflues ont été supprimées, et l'utilisation de lambda expressions a été privilégiée. La précision des exceptions a été aussi accentuée, facilitant le processus de débogage et de maintenance. Aussi, des validations ont été intégrées sur les paramètres des entités, par exemple avec l'annotation @NotNull, afin de renforcer la robustesse du code. L'utilisation de constantes a été mise en place pour rendre explicites les intentions du code, simplifiant ainsi la compréhension des développeurs. Enfin, dans une démarche de propreté du code, des packages, du code commenté et/ou inutile ont été supprimés, allégeant ainsi la base de code et facilitant sa gestion à long terme.
 
 ### Refactorisation du code côté APP (car nouveau projet)
 
@@ -154,7 +133,7 @@ Détecter une fonctionnalité non essentielle est possible au moment de l'analys
 
 ##### Justification
 
-Non avons choisi cette règle, car il nous semble important de limiter les fonctionnalités à celles qui sont vraiment essentielles afin de limiter la densité de code mort, ainsi qu'à favoriser la durabilité environnementale et l'efficacité économique. En effet, elle permet de réduire les coûts de développement initial, ainsi que les impacts environnementaux et de diminuer de la dette technique.
+Nous avons choisi cette règle car il nous semble important de prendre en compte l'impact environnemental et économique d'une application dès sa conception. En éliminant les fonctionnalités non essentielles, nous réduisons la complexité du code, limitons la dette technique, et minimisons les ressources nécessaires pour le développement et l'exécution de l'application. Cela contribue directement à une meilleure réduction des coûts de développement initial, ainsi que des impacts environnementaux et une diminution de la dette technique, tout en maintenant l'application centrée sur les besoins essentiels des utilisateurs.
 
 #### Favoriser un design simple, épuré, adapté au web
 
@@ -175,7 +154,7 @@ Privilégiez un design simple et épuré réalisable uniquement en HTML et CSS.
 
 ##### Justification
 
-La simplification et l'épuration des pages web permet d'une part une meilleure expérience utilisateur, en termes de lisibilité et d'accessibilité, ainsi que de limiter le nombre de composants non pertinents. Cela limite alors l'exécution du code aux éléments essentiels uniquement.
+La simplification et l'épuration des pages web sont des principes non négligeables pour garantir une meilleure expérience utilisateur. En adoptant un design simple, épuré, et adapté au web, nous améliorons la lisibilité, l'accessibilité, et réduisons la complexité du code. Cela permet non seulement d'optimiser les performances de l'application, mais aussi de limiter la consommation de ressources, favorisant ainsi une approche éco-conception tout en offrant une meilleure expérience aux utilisateurs. De plus, cela limite l'exécution du code aux éléments essentiels uniquement.
 
 #### Proposer un traitement asynchrone lorsque c'est possible
 
@@ -189,7 +168,7 @@ Lorsque l’interaction avec l’utilisateur induit un traitement lourd et long 
 
 ##### Justification
 
-La mise en place de cette pratique permet, dans un premier temps, de limiter le temps d'attente côté client (en exploitant le multi-threading) et d'afficher les données qui sont déjà disponibles. Par conséquent, cela nous permet de charger les éléments au fur et à mesure, sans avoir à recharger l'intégralité de la page, ce qui peut être très énergivore. De plus, cela permet de rendre le traitement de l'information plus efficient.
+La mise en place d'un traitement asynchrone présente de nombreux avantages en termes d'efficacité, de gestion des ressources, et d'expérience utilisateur. En effet, en permettant aux utilisateurs de déclencher des traitements lourds de manière asynchrone, nous réduisons les temps d'attente (en exploitant le multi-threading), optimisons l'utilisation des ressources serveur, et contribuons à une exécution plus efficiente des divers traitements. Cela se traduit par une meilleure réactivité de l'application tout en minimisant son impact environnemental. De plus, le chargement progressif des différents éléments d'une page nous permet d'afficher les données déjà disponible, sans avoir à recharger l'intégralité de la page, ce qui peut être très énergivore. 
 
 #### Créer une architecture applicative modulaire
 
@@ -205,7 +184,7 @@ Cette approche est valable à tous les niveaux de granularité, pour un dévelop
 
 ##### Justification
 
-Ce modèle architectural permet de favoriser la factorisation du code et donc de diminuer les redondances de code. De surcroît, cela permet de rendre possible l'interconnexion entre composants de différentes technologies, de façon à optimiser les ressources existantes. Cette modularité permet également de pouvoir interchanger les diverses couches, sans devoir refactoriser l'intégralité d'un projet.
+L'adoption d'une architecture applicative modulaire s'aligne avec les principes d'éco-conception en favorisant la réutilisation du code, la diminution des redondances, ainsi que la flexibilité du développement. En permettant le développement indépendant de modules, cette approche réduit la complexité du code, facilite la maintenance, et offre une plus grande adaptabilité aux évolutions fonctionnelles. Elle contribue ainsi à la réduction de la dette technique et à une utilisation plus efficace des ressources. De surcroît, cela permet de rendre possible l'interconnexion entre composants de différentes technologies, de façon à optimiser les ressources existantes, ainsi qu'à pouvoir interchanger les diverses couches, sans devoir refactoriser l'intégralité d'un projet.
 
 #### Découper les CSS
 
@@ -219,7 +198,7 @@ Employer un ensemble de CSS plutôt qu’une seule, et appeler uniquement les CS
 
 ##### Justification
 
-Cette règle est intéressante, car elle prône, entre autres, la modularité et la factorisation des styles pour l'ensemble d'un projet. En effet, elle permet d'avoir des fichiers plus légers, ces derniers étant sollicités uniquement sur les composants des pages en question.
+La découpe des fichiers CSS en plusieurs fichiers favorise la modularité et la légèreté des pages web. En adoptant cette pratique, nous limitons le poids des fichiers CSS téléchargés initialement, réduisant ainsi la consommation de bande passante et la charge CPU, puisque ces derniers ne sont sollicités que sur les composants des pages en question. Cette approche contribue à une meilleure performance du site, tout en minimisant son impact environnemental, en optimisant l'utilisation des ressources et en factorisant les différents styles d'un projet.
 
 #### N'utilisez que les portions indispensables des bibliothèques JavaScript et frameworks CSS
 
@@ -237,7 +216,7 @@ Utiliser un bundler (ex: Webpack) permet de faire facilement du tree shaking, so
 
 ##### Justification
 
-Le choix et les portions de librairies permettent d'éviter des chargements lourds et de faciliter la lisbilité du code. En effet, l'ajout de code inutile complexifie sa lecture. De plus, de trop nombreuses fois, des librairies sont surexploitées. Aussi, cela peut aussi éviter de générer des comportements qui ne sont pas forcément souhaités, ce qui limite par conséquent les effets de bord.
+L'utilisation sélective des bibliothèques JavaScript et frameworks CSS répond à une logique d'optimisation des performances et de réduction de la consommation de ressources. En effet, en n'utilisant que les portions nécessaires de ces bibliothèques, nous évitons le surchargement inutile de code, améliorons la lisibilité, et limitons les effets de bord indésirables. Cette pratique favorise une approche plus économe en ressources, alignée avec les principes d'éco-conception. Aussi, cela peut aussi éviter de générer des comportements qui ne sont pas forcément souhaités, ce qui limite encore une fois les effets de bord.
 
 #### Modifier plusieurs propriétés CSS en 1 seule fois
 
@@ -251,7 +230,7 @@ Pour limiter le nombre de repaint/reﬂow, il est conseillé de ne pas modifier 
 
 ##### Justification
 
-Nous pouvons lier cette règle à celle promouvant le découpage des fichiers CSS. En effet, le fait de regrouper les éléments CSS similaires va nous éviter les bouts de code redondants et va nous permettre de réduire le nombre de changements à effectuer, s'il y en a. Par conséquent, cela va , à termes, limiter le code mort, ainsi que la dette technique.
+L'approche évoquée ici, qui consiste à regrouper des propriétés CSS, offre des avantages en termes d'efficacité et de réduction des opérations. En effet, en regroupant les modifications dans des classes CSS, nous limitons les changements, réduisant ainsi la complexité du code et évitant les répétitions inutiles. Cela contribue à une optimisation des performances et à une diminution de la dette technique, ainsi que du code mort.
 
 #### Mettre en cache les objets souvent accédés en JavaScript
 
@@ -265,7 +244,7 @@ L’accès au DOM (Document Object Model) est coûteux en termes de ressources p
 
 ##### Justification
 
-La mise en cache des objets nous permet de limiter le nombre de requêtes HTTP(S) ou à la base de données, ce qui, sur une grande échelle, limite les consommations CPU, en plus de celles des serveurs, et donc réduit l'impact environemmental de ces systèmes applicatifs.
+La mise en cache des objets en JavaScript représente une pratique efficiente pour minimiser les accès coûteux et le nombre de requêtes HTTP(S) ou à la base de données, réduisant ainsi la consommation de ressources CPU. De plus, cette approche contribue à une exécution plus fluide des opérations JS, limitant l'impact environnemental associé.
 
 #### Réduire le volume de données stockées au strict nécessaire
 
@@ -290,7 +269,7 @@ Cette bonne pratique s'inscrit dans le cadre de la gestion du cycle de vie de l'
 
 ##### Justification
 
-Il nous semble important de le volume de données stockées au strict nécessaire afin de limiter la densité de données mortes, de favoriser la durabilité environnementale (car faible dimensionnement des infrastructures, par exemple). En effet, cette règle permet de réduire les impacts environnementaux et de diminuer de la dette technique (notamment dans le cas de sauvegardes de données plus légères).
+Réduire le volume de données stockées au strict nécessaire s'inscrit dans une approche de gestion responsable des ressources. En optimisant la gestion des données, en nettoyant les anciennes données et en supervisant les espaces de stockage, nous limitons la surcharge inutile des infrastructures et contribuons à une utilisation plus efficiente des ressources. Cela favorise la durabilité environnementale, la réduction des coûts liés au stockage des données, ainsi que la dette technique.
 
 #### S'assurer que les parcours utilisateurs permettent de réaliser leur action prévue
 
@@ -304,7 +283,7 @@ Des services web permettent de réaliser sans se déplacer des démarches admini
 
 ##### Justification
 
-Un système interactif bien pensé, autrement dit une architecture fonctionnelle bien réfléchie, va permettre de diminuer le nombre d'interactions de l'utilisateur sur un site web, par exemple, et donc de réduire le nombre de requêtes nécessaires, qu'elles soient locales ou distantes. Ainsi, cette règle nous permet de lier "bonne expérience utilisateur" et "limitation des consommations matérielles".
+S'assurer que les parcours utilisateurs permettent de réaliser leur action prévue, autrement dit concevoir un système interactif bien pensé, garantit une utilisation efficace des services web tout en limitant les besoins en ressources, puisque nous réduisons le nombre de requêtes nécessaires. Aussi, en simplifiant les démarches et en offrant des alternatives "low tech" lorsque nécessaire, nous réduisons le nombre d'interactions complexes, diminuant ainsi la charge tant du côté utilisateur que du côté serveur. Cette approche contribue à une meileure expérience utilisateur, tout en minimisant l'empreinte environnementale.
 
 ### Utilisation des outils de monitoring des performances et d'évaluation de charge
 
