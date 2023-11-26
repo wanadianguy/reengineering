@@ -1,0 +1,9 @@
+.AddSongPage{
+    color : #ccc;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+}
