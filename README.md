@@ -62,6 +62,10 @@ Dans le cadre de la refactorisation du code côté API, nous avons ajouté de la
 
 ### Refactorisation du code côté APP (car nouveau projet)
 
+#### Simplification du code
+
+Pour cette simplification du code de la partie Front, nous avons entrepris plusieurs actions pour optimiser la structure du code et faciliter sa compréhension. Tout d'abord, les fichiers inutiles ont été éliminés, allégeant ainsi le projet. Les configurations de test ont été supprimées, étant donné l'absence de tests. Ensuite, une réorganisation des fichiers a été effectuée pour créer une architecture plus claire et plus intuitive, limitant ainsi la dette technique pour les nouvelles personnes qui arrivent sur le projet. Cela inclut l'ordonnancement des fonctions CSS afin de mieux comprendre l'impact de chaque fichier sur les composants respectifs. Les noms de classe CSS ont été renommés pour aligner leur syntaxe sur les directives recommandées, suivant ainsi les normes générales de dénomination en CSS. Les guillemets superflus ont été corrigés, tout comme les points-virgules manquants. De plus, l'URL de l'API de base a été modifiée en constante, facilitant ainsi les modifications ultérieures si nécessaire.
+
 #### Axes d'amélioration
 
 Nous aurions pu mettre en place des tests unitaires pour chaque composant de notre application web. En effet, bien que des tests unitaires sur des pages complètes ne soient pas utiles et seraient même détrimentaires aux améliorations futures du code, de par l'aspect rigide de ceux-ci, des tests par composant auraient pu être pertinent pour s'assurer de la conformité du visuel des parties atomiques de l'application. De plus, comme il, comme ils n'existaient pas auparavant, cela aurait pu faire un point sur ce qui existait et sur les objectifs à atteindre.
