@@ -1,6 +1,6 @@
 import 'song.css';
 import ReactPlayer from 'react-player/youtube';
-import {useNavigate} from "react-router-dom";
+import {useNavigate} from 'react-router-dom';
 
 function Song({song}) {
   const navigate = useNavigate();

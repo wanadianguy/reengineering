@@ -3,6 +3,7 @@ import Input from '../../components/Input.js';
 import {useEffect, useState} from 'react';
 import axios from 'axios';
 import {useNavigate} from 'react-router-dom';
+import {baseApiUrl} from '../../app.const.js';
 
 function NewSong() {
   const [song, setSong] = useState({title: '', artistId: 0, type: '', date: new Date, url: ''});
@@ -11,7 +12,7 @@ function NewSong() {
 
   useEffect(() => {
     async function fetchArtists() {
-      const result = await axios.get('http://localhost:8080/artists');
+      const result = await axios.get(`${baseApiUrl}/artists`);
       if (result.data) {
         setArtists(result.data)
         const newSong = {...song, artistId: result.data[0].id};
@@ -45,7 +46,7 @@ function NewSong() {
   async function handleSubmit(event) {
     event.preventDefault();
     try {
-      const result = await axios.post(`http://localhost:8080/songs/${song.artistId}`, song);
+      const result = await axios.post(`${baseApiUrl}/songs/${song.artistId}`, song);
       navigate(`/songs/${result.data.id}`);
     } catch (error) {
       console.log('Error');

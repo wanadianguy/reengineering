@@ -5,20 +5,21 @@ import {useNavigate} from 'react-router-dom';
 import axios from 'axios';
 import {faPlus} from '@fortawesome/free-solid-svg-icons';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {baseApiUrl} from '../../app.const.js';
 
 function ArtistList() {
   const [artists, setArtists] = useState([]);
   const navigate = useNavigate();
 
-  useEffect(() => {
+  useEffect(async () => {
     async function fetchArtists() {
-      const result = await axios.get('http://localhost:8080/artists');
+      const result = await axios.get(`${baseApiUrl}/artists`);
       if (result.data) {
         setArtists(result.data)
       }
     }
 
-    fetchArtists();
+    await fetchArtists();
   }, []);
 
   function handleHomeClick(event) {

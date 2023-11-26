@@ -3,6 +3,7 @@ import Input from '../../components/Input.js';
 import {useState} from 'react';
 import axios from 'axios';
 import {useNavigate} from 'react-router-dom';
+import {baseApiUrl} from '../../app.const.js';
 
 function NewArtist() {
   const [artist, setArtist] = useState({name: '', image: ''});
@@ -26,7 +27,7 @@ function NewArtist() {
   async function handleSubmit(event) {
     event.preventDefault();
     try {
-      await axios.post('http://localhost:8080/artists', artist);
+      await axios.post(`${baseApiUrl}/artists`, artist);
       navigate('/artists');
     } catch (error) {
       console.log('Error');

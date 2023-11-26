@@ -6,6 +6,7 @@ import {useNavigate} from 'react-router-dom';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faPlus} from '@fortawesome/free-solid-svg-icons';
 import Input from '../../components/Input.js';
+import {baseApiUrl} from '../../app.const.js';
 
 function SongList() {
   const [songs, setSongs] = useState([]);
@@ -14,7 +15,7 @@ function SongList() {
 
   useEffect(() => {
     async function fetchSongs() {
-      const result = await axios.get('http://localhost:8080/songs');
+      const result = await axios.get(`${baseApiUrl}/songs`);
       if (result.data) {
         setSongs(result.data)
       }
@@ -31,7 +32,7 @@ function SongList() {
   async function handleSearchClick(event) {
     event.preventDefault()
     try {
-      const result = await axios.get(`http://localhost:8080/songs/search/${title.title}`, title);
+      const result = await axios.get(`${baseApiUrl}/songs/search/${title.title}`, title);
       console.log(result.data)
       navigate(`/songs/${result.data.id}`);
     } catch (error) {
