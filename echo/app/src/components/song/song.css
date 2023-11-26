@@ -1,4 +1,4 @@
-.Song {
+.song {
     width: 30vw;
     display: flex;
     flex-flow: column nowrap;
@@ -7,7 +7,7 @@
     word-break: break-word;
 }
 
-.Title {
+.title {
     color: #EAE9EC;
     font-size: 25px;
     padding-bottom: 10px;

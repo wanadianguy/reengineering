@@ -1,28 +1,28 @@
-import './home.css'
-import {useNavigate} from "react-router-dom";
+import './home.css';
+import {useNavigate} from 'react-router-dom';
 
 function Home() {
   const navigate = useNavigate();
 
   function handleSongClick(event) {
     event.preventDefault();
-    navigate(`/songs`);
+    navigate('/songs');
   }
 
   function handleArtistClick(event) {
     event.preventDefault();
-    navigate(`/artists`);
+    navigate('/artists');
   }
 
   return (
-    <div className={'WelcomeBackground'}>
-      <div className={'WelcomePage'}>
+    <div className={'welcome-background'}>
+      <div className={'welcome-page'}>
         Echo
       </div>
-      <div className={'Footer'}>
+      <div className={'footer'}>
         <div> Click to Explore Echo :</div>
-        <span className={'Link'} onClick={handleSongClick}>Songs</span>
-        <span className={'Link'} onClick={handleArtistClick}>Artists</span>
+        <span className={'link'} onClick={handleSongClick}>Songs</span>
+        <span className={'link'} onClick={handleArtistClick}>Artists</span>
       </div>
     </div>
   );

@@ -1,11 +1,11 @@
-.Title {
+.title {
     color: #EAE9EC;
     font-size: 25px;
     padding-bottom: 10px;
     font-family: 'Titillium Web', sans-serif;
 }
 
-.SongDetails {
+.song-details {
     color: #EAE9EC;
     display: flex;
     flex-flow: column nowrap;
@@ -13,4 +13,3 @@
     align-items: center;
     padding: 15px;
 }
-

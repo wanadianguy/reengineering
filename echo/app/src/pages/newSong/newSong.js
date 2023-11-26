@@ -1,8 +1,8 @@
-import '../songList/songList.css';
-import Input from "../../components/Input.js";
-import {useEffect, useState} from "react";
-import axios from "axios";
-import {useNavigate} from "react-router-dom";
+import './newSong.css';
+import Input from '../../components/Input.js';
+import {useEffect, useState} from 'react';
+import axios from 'axios';
+import {useNavigate} from 'react-router-dom';
 
 function NewSong() {
   const [song, setSong] = useState({title: '', artistId: 0, type: '', date: new Date, url: ''});
@@ -11,7 +11,7 @@ function NewSong() {
 
   useEffect(() => {
     async function fetchArtists() {
-      const result = await axios.get(`http://localhost:8080/artists`);
+      const result = await axios.get('http://localhost:8080/artists');
       if (result.data) {
         setArtists(result.data)
         const newSong = {...song, artistId: result.data[0].id};
@@ -34,12 +34,12 @@ function NewSong() {
 
   function handleHomeClick(event) {
     event.preventDefault();
-    navigate(`/`);
+    navigate('/');
   }
 
   function handleBackClick(event) {
     event.preventDefault();
-    navigate(`/songs`);
+    navigate('/songs');
   }
 
   async function handleSubmit(event) {
@@ -54,7 +54,7 @@ function NewSong() {
 
   return (
     <>
-      <div className={"AddSongPage"}>
+      <div className={'add-song-page'}>
         <div>
           Title:
           <Input property={'title'} type={'text'} value={song.title} placeholder={'Title'}
@@ -72,13 +72,13 @@ function NewSong() {
             {artists.map((artist) => <option key={artist.id} value={artist.id}>{artist.name}</option>)}
           </select>
           <div>
-            <button className={'Button'} onClick={handleSubmit}>Save</button>
+            <button className={'button'} onClick={handleSubmit}>Save</button>
           </div>
         </div>
       </div>
-      <div className={'RightOverlay'}>
-        <button className={'OverlayButton'} onClick={handleHomeClick}>Home</button>
-        <button className={'OverlayButton'} onClick={handleBackClick}>Back</button>
+      <div className={'right-overlay'}>
+        <button className={'overlay-button'} onClick={handleHomeClick}>Home</button>
+        <button className={'overlay-button'} onClick={handleBackClick}>Back</button>
       </div>
     </>
   )

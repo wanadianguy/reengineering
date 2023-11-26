@@ -1,15 +1,15 @@
 import './app.css';
-import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
-import Home from "./pages/home/home.js";
-import SongList from "./pages/songList/songList.js";
-import SongDetails from "./pages/songDetails/songDetails.js";
-import ArtistList from "./pages/artistList/artistList.js";
-import NewSong from "./pages/newSong/newSong.js";
-import NewArtist from "./pages/newArtist/newArtist.js";
+import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
+import Home from './pages/home/home.js';
+import SongList from './pages/songList/songList.js';
+import SongDetails from './pages/songDetails/songDetails.js';
+import ArtistList from './pages/artistList/artistList.js';
+import NewSong from './pages/newSong/newSong.js';
+import NewArtist from './pages/newArtist/newArtist.js';
 
 function AppRouter() {
   return (
-    <div className={'App'}>
+    <div className={'app'}>
       <Router>
         <Routes>
           <Route exact path={''} element={<Home/>}/>

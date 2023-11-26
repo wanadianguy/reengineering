@@ -1,9 +1,10 @@
-import Artist from "../../components/artist/artist.js";
-import {useEffect, useState} from "react";
-import {useNavigate} from "react-router-dom";
-import axios from "axios";
-import {faPlus, faPlusCircle} from "@fortawesome/free-solid-svg-icons";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import './artistList.css';
+import Artist from '../../components/artist/artist.js';
+import {useEffect, useState} from 'react';
+import {useNavigate} from 'react-router-dom';
+import axios from 'axios';
+import {faPlus} from '@fortawesome/free-solid-svg-icons';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 
 function ArtistList() {
   const [artists, setArtists] = useState([]);
@@ -11,7 +12,7 @@ function ArtistList() {
 
   useEffect(() => {
     async function fetchArtists() {
-      const result = await axios.get(`http://localhost:8080/artists`);
+      const result = await axios.get('http://localhost:8080/artists');
       if (result.data) {
         setArtists(result.data)
       }
@@ -22,12 +23,12 @@ function ArtistList() {
 
   function handleHomeClick(event) {
     event.preventDefault();
-    navigate(`/`);
+    navigate('/');
   }
 
   async function handleAddClick(event) {
     event.preventDefault();
-    navigate(`/artists/add`);
+    navigate('/artists/add');
   }
 
   function deleteArtist(index) {
@@ -38,15 +39,15 @@ function ArtistList() {
 
   return (
     <>
-      <div className={"List"}>
+      <div className={'list'}>
         {artists.map((artist, index) =>
           <Artist key={artist.id} index={index} artist={artist} deleteArtist={deleteArtist}/>
         )}
       </div>
-      <button className={'AddButton LeftOverlay'} onClick={handleAddClick}>
-        <FontAwesomeIcon className={'AddButton'} icon={faPlus} size={'3x'}/>
+      <button className={'add-button left-overlay'} onClick={handleAddClick}>
+        <FontAwesomeIcon className={'add-button'} icon={faPlus} size={'3x'}/>
       </button>
-      <button className={'OverlayButton RightOverlay'} onClick={handleHomeClick}>Home</button>
+      <button className={'overlay-button right-overlay'} onClick={handleHomeClick}>Home</button>
     </>
   )
 }

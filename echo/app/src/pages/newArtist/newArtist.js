@@ -1,7 +1,8 @@
-import Input from "../../components/Input.js";
-import {useState} from "react";
-import axios from "axios";
-import {useNavigate} from "react-router-dom";
+import 'newArtist.css';
+import Input from '../../components/Input.js';
+import {useState} from 'react';
+import axios from 'axios';
+import {useNavigate} from 'react-router-dom';
 
 function NewArtist() {
   const [artist, setArtist] = useState({name: '', image: ''});
@@ -14,19 +15,19 @@ function NewArtist() {
 
   function handleHomeClick(event) {
     event.preventDefault();
-    navigate(`/`);
+    navigate('/');
   }
 
   function handleBackClick(event) {
     event.preventDefault();
-    navigate(`/artists`);
+    navigate('/artists');
   }
 
   async function handleSubmit(event) {
     event.preventDefault();
     try {
-      await axios.post(`http://localhost:8080/artists`, artist);
-      navigate(`/artists`);
+      await axios.post('http://localhost:8080/artists', artist);
+      navigate('/artists');
     } catch (error) {
       console.log('Error');
     }
@@ -34,18 +35,18 @@ function NewArtist() {
 
   return (
     <>
-      <div className={'AddArtistPage'}>
+      <div className={'add-artist-page'}>
         <div>
           Name:
           <Input property={'name'} type={'text'} value={artist.name} placeholder={'Name'} handleChangeValue={handleChangeValue}/>
           Image URL:
           <Input property={'image'} type={'text'} value={artist.image} placeholder={'URL'} handleChangeValue={handleChangeValue}/>
         </div>
-        <button className={'Button'} onClick={handleSubmit}>Save</button>
+        <button className={'button'} onClick={handleSubmit}>Save</button>
       </div>
-      <div className={'RightOverlay'}>
-        <button className={'OverlayButton'} onClick={handleHomeClick}>Home</button>
-        <button className={'OverlayButton'} onClick={handleBackClick}>Back</button>
+      <div className={'right-overlay'}>
+        <button className={'overlay-button'} onClick={handleHomeClick}>Home</button>
+        <button className={'overlay-button'} onClick={handleBackClick}>Back</button>
       </div>
     </>
   )

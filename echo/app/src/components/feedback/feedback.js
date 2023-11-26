@@ -1,12 +1,12 @@
-import './feedback.css'
+import './feedback.css';
 
 function Feedback({feedback}) {
 
-  return (<div className={'Feedback'}>
+  return (<div className={'feedback'}>
       <div>
-        <span className={'Mark'}> Mark : {feedback.mark}/5 </span>
+        <span className={'mark'}> Mark : {feedback.mark}/5 </span>
       </div>
-      <div className={'Comment'}>
+      <div className={'comment'}>
         {feedback.comment}
       </div>
     </div>)

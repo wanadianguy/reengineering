@@ -1,6 +1,6 @@
-import '../../pages/artistList/artistList.css'
-import axios from "axios";
-import {useNavigate} from "react-router-dom";
+import './artist.css';
+import axios from 'axios';
+import {useNavigate} from 'react-router-dom';
 
 function Artist({index, artist, deleteArtist}) {
   const navigate = useNavigate();
@@ -17,12 +17,12 @@ function Artist({index, artist, deleteArtist}) {
 
   return (
     <>
-      <div className={'Artist'}>
-        <img className={'Image'} src={artist.image}/>
-        <div className={'Name'}>
+      <div className={'artist'}>
+        <img className={'image'} src={artist.image}/>
+        <div className={'name'}>
           {artist.name}
         </div>
-        <button className={'DeleteButton'} onClick={handleDeleteClick}>Delete artist</button>
+        <button className={'delete-button'} onClick={handleDeleteClick}>Delete artist</button>
       </div>
     </>
   )

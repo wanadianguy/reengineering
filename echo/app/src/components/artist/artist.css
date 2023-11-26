@@ -1,4 +1,4 @@
-.Artist {
+.artist {
     width: 20vw;
     display: flex;
     flex-flow: column nowrap;
@@ -7,7 +7,7 @@
     word-break: break-word;
 }
 
-.Name {
+.name {
     color: #EAE9EC;
     font-size: 15px;
     font-family: 'Titillium Web', sans-serif;
