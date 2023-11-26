@@ -1,10 +1,12 @@
-import Song from "./Song";
-import {useEffect, useState} from "react";
-import axios from "axios";
-import {useNavigate} from "react-router-dom";
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {faPlus} from "@fortawesome/free-solid-svg-icons";
-import Input from "../Input";
+import './songList.css';
+import Song from '../../components/song/song.js';
+import {useEffect, useState} from 'react';
+import axios from 'axios';
+import {useNavigate} from 'react-router-dom';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faPlus} from '@fortawesome/free-solid-svg-icons';
+import Input from '../../components/Input.js';
+import {baseApiUrl} from '../../app.const.js';
 
 function SongList() {
   const [songs, setSongs] = useState([]);
@@ -13,7 +15,7 @@ function SongList() {
 
   useEffect(() => {
     async function fetchSongs() {
-      const result = await axios.get(`http://localhost:8080/songs`);
+      const result = await axios.get(`${baseApiUrl}/songs`);
       if (result.data) {
         setSongs(result.data)
       }
@@ -30,7 +32,7 @@ function SongList() {
   async function handleSearchClick(event) {
     event.preventDefault()
     try {
-      const result = await axios.get(`http://localhost:8080/songs/search/${title.title}`, title);
+      const result = await axios.get(`${baseApiUrl}/songs/search/${title.title}`, title);
       console.log(result.data)
       navigate(`/songs/${result.data.id}`);
     } catch (error) {
@@ -50,19 +52,19 @@ function SongList() {
 
   return (
     <>
-      <div className={'SearchBar'}>
+      <div className={'search-bar'}>
         <Input property={'title'} type={'text'} value={title.title} placeholder={'Title'} handleChangeValue={handleChangeValue}/>
-        <button className={'Button'} onClick={handleSearchClick}>Search</button>
+        <button className={'button'} onClick={handleSearchClick}>Search</button>
       </div>
-      <div className={"List"}>
+      <div className={"list"}>
         {songs.map((song) =>
           <Song key={song.id} song={song}/>
         )}
       </div>
-      <button className={'AddButton LeftOverlay'} onClick={handleAddClick}>
-        <FontAwesomeIcon className={'AddButton'} icon={faPlus} size={'3x'}/>
+      <button className={'add-button left-overlay'} onClick={handleAddClick}>
+        <FontAwesomeIcon className={'add-button'} icon={faPlus} size={'3x'}/>
       </button>
-      <button className={'OverlayButton RightOverlay'} onClick={handleHomeClick}>Home</button>
+      <button className={'overlay-button right-overlay'} onClick={handleHomeClick}>Home</button>
     </>
   )
 }

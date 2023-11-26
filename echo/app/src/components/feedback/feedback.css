@@ -1,4 +1,4 @@
-.Feedback {
+.feedback {
   display: flex;
   flex-flow: column wrap;
   justify-content: left;
@@ -11,12 +11,12 @@
   margin: 5px;
 }
 
-.Comment{
+.comment{
   margin: 10px;
   word-break: break-word;
 }
 
-.Mark{
+.mark{
   margin: 7px;
   padding: 3px;
   border-bottom: #801313 solid  1px;

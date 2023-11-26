@@ -3,24 +3,24 @@
 
 @keyframes gradient {
   0% {
-    background-position: 0% 50%;
+    background-position: 0 50%;
   }
   50% {
     background-position: 100% 50%;
   }
   100% {
-    background-position: 0% 50%;
+    background-position: 0 50%;
   }
 }
 
-.WelcomeBackground {
+.welcome-background {
   height: 100vh;
   background: linear-gradient(100deg, #590303, #147504, #053177, #590303);
   background-size: 400% 400%;
   animation: gradient 20s alternate-reverse infinite;
 }
 
-.WelcomePage {
+.welcome-page {
   height: 90%;
   display: flex;
   flex-flow: column nowrap;
@@ -31,7 +31,7 @@
   font-size: 150px;
 }
 
-.Footer {
+.footer {
   color: #EAE9EC;
   position: absolute;
   bottom: 2em;

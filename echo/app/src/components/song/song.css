@@ -1,0 +1,15 @@
+.song {
+    width: 30vw;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    padding: 15px;
+    word-break: break-word;
+}
+
+.title {
+    color: #EAE9EC;
+    font-size: 25px;
+    padding-bottom: 10px;
+    font-family: 'Titillium Web', sans-serif;
+}
