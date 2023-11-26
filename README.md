@@ -31,6 +31,7 @@ Dans un premier temps, nous avons supprimé la déclaration inutile des variable
 ### Axes d'amélioration
 
 Nous aurions pu mettre en place des tests unitaires pour chaque route de cette API. Néanmoins, comme ils n'existaient pas auparavant et que des cas n'étaient pas traités, cela aurait pu faire un point sur ce qui existait et sur ce qui restait à traiter. De plus, cela aurait pu servir de support pour vérifier l'exhaustivité des cas à tester.
+Nous aurions également pu mettre en place un système d'analyse static de code pour être sûrs que le code produit est conforme aux bonnes pratiques que nous nous sommes fixées sur le projet.
 
 ### Architecture Decision Record
 
@@ -64,6 +65,7 @@ Dans le cadre de la refactorisation du code côté API, nous avons ajouté de la
 #### Axes d'amélioration
 
 Nous aurions pu mettre en place des tests unitaires pour chaque composant de notre application web. En effet, bien que des tests unitaires sur des pages complètes ne soient pas utiles et seraient même détrimentaires aux améliorations futures du code, de par l'aspect rigide de ceux-ci, des tests par composant auraient pu être pertinent pour s'assurer de la conformité du visuel des parties atomiques de l'application. De plus, comme il, comme ils n'existaient pas auparavant, cela aurait pu faire un point sur ce qui existait et sur les objectifs à atteindre.
+Nous aurions également pu mettre en place un système d'analyse static de code pour être sûrs que le code produit est conforme aux bonnes pratiques que nous nous sommes fixées sur le projet.
 
 ### Tests de différents plugins d'analyse
 
