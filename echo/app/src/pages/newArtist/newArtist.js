@@ -1,4 +1,4 @@
-import 'newArtist.css';
+import './newArtist.css';
 import Input from '../../components/Input.js';
 import {useState} from 'react';
 import axios from 'axios';

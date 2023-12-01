@@ -1,4 +1,4 @@
-import 'song.css';
+import './song.css';
 import ReactPlayer from 'react-player/youtube';
 import {useNavigate} from 'react-router-dom';
 
