@@ -295,11 +295,25 @@ S'assurer que les parcours utilisateurs permettent de réaliser leur action pré
 
 #### Perf et Flamegraph
 
+##### Définition
+
+Tout d'abord, perf est un outil de ligne de commande pour la collecte de données de performances sous Linux. Il fait partie du paquetage "perf-tools" et est souvent utilisé pour profiler le comportement d'un programme, en mesurant diverses métriques telles que le temps d'exécution, les appels système, les interruptions, etc. Cet outil peut également générer des rapports détaillés pour aider les développeurs à identifier les goulots d'étranglement et à optimiser les performances de leurs applications.
+
+Puis, flamegraph permet lui de réaliser une représentation graphique interactive qui affiche les données de profilage. Le flamegraph affiche une hiérarchie des fonctions appelées dans une application, avec la largeur des barres indiquant la quantité de temps ou de ressources consommée. Les barres sont disposées de manière à représenter la pile d'appels, facilitant ainsi l'identification des parties du code qui méritent une attention particulière en termes d'optimisation. Par conséquent, l'utilisation de cet outil peut grandement simplifier le processus d'analyse des performances, en permettant aux développeurs de visualiser rapidement les zones critiques du code et de prendre des décisions informées sur les améliorations à apporter.
+
+Ainsi, ces deux outils sont souvent utilisés de pair pour analyser, puis visualiser facilement les performances et les parties du code qui consomment le plus de ressources.
+
+##### Résultats
+
 Voici les résultats obtenus avec ces deux outils :
 
-![flamegraph](./img/serveur_sans_data.svg)
+- Premièrement avec l'exécution d'une seule requête :
 
-De plus, il est nécessaire de préciser que nous avons effectuer ces tests sur le projet echo, avec un nombre de 100 requêtes.
+![flamegraph_une_requete](./img/flamegraph_une_requete.svg)
+
+- Deuxièmement avec l'exécution de cent requêtes :
+
+![flamegraph_cent_requetes](./img/flamegraph_cent_requetes.svg)
 
 #### Gatling
 
