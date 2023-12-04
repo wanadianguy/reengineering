@@ -326,3 +326,5 @@ Tout d'abord, Gatling est un outil open-source de test de performance, utilisé 
 Suite à l'exploitation de l'outil Gatling, nous avons identifié plusieurs problèmes. Lors de l'exécution de requêtes GET en l'absence de données dans la base de données, le contrôleur Spring renvoie un code d'erreur (par exemple, `getAllArtist` renvoie une erreur 404). Cette pratique n'étant pas recommandée, il est nécessaire d'ajuster ce comportement.
 
 En ce qui concerne Top, nous avons observé un potentiel problème de performance. La consommation du CPU oscille en moyenne autour de 40%, avec des pics atteignant jusqu'à 373%. Il est donc impératif d'analyser et de résoudre ce problème.
+
+![top](./img/top.png)
