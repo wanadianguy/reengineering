@@ -325,9 +325,7 @@ Tout d'abord, Gatling est un outil open-source de test de performance, utilisé 
 
 Suite à l'exploitation de l'outil Gatling, nous avons identifié plusieurs problèmes. Lors de l'exécution de requêtes GET, en l'absence de données dans la base de données, le contrôleur Spring renvoie un code d'erreur (par exemple, `getAllArtist` renvoie une erreur 404). Cette pratique n'étant pas recommandée, il est nécessaire d'ajuster ce comportement.
 
-En ce qui concerne Top, nous avons observé un potentiel problème de performance. La consommation du CPU oscille en moyenne autour de 40%, avec des pics atteignant jusqu'à 373%. Il est donc impératif d'analyser et de résoudre ce problème.
-
-![top](./img/top.png)
+En ce qui concerne Top, nous avons observé un potentiel problème de performance. La consommation du CPU oscille en moyenne autour de 40%, avec des pics atteignant jusqu'à 373%. Il est donc impératif d'analyser et de résoudre ce problème.\
 
 ![top](./img/graphe_corrige.png)
 
@@ -347,7 +345,9 @@ De plus, Top nous a permis de constater que le pique d'utilisation de notre appl
 
 La conteneurisation Docker offre de nombreux avantages pour le déploiement d’applications. Tout d’abord, elle permet une portabilité accrue. Les conteneurs Docker encapsulent tout ce dont une application a besoin pour fonctionner, y compris le système d’exploitation, les dépendances et les bibliothèques. Cela signifie que vous pouvez exécuter votre application sur n’importe quelle machine qui a Docker installé, sans vous soucier des problèmes de compatibilité. Deuxièmement, Docker offre une isolation entre les conteneurs, ce qui signifie que chaque application s’exécute dans son propre environnement sécurisé et ne peut pas interférer avec les autres. Enfin, Docker permet une mise à l’échelle facile.
 
-##### Conteneurisation de l'application "echo"
+## Projet de Dockerisation et de déploiement : echo
+
+### Conteneurisation
 
 Pour initier la phase de construction et d’exécution de l’ensemble des conteneurs Docker nécessaires au projet ‘echo’, exécuter la commande suivante à la racine du projet. 
 
