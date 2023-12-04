@@ -19,13 +19,9 @@ public class CORSResponseFilter implements ContainerResponseFilter {
 
   @Override
   public void filter(ContainerRequestContext requestContext, ContainerResponseContext responseContext) {
-    try {
-      responseContext.getHeaders().add(ALLOW_ORIGIN, ALLOW_ORIGIN_VALUE);
-      responseContext.getHeaders().add(ALLOW_HEADERS, ALLOW_HEADERS_VALUE);
-      responseContext.getHeaders().add(ALLOW_CREDENTIALS, ALLOW_CREDENTIALS_VALUE);
-      responseContext.getHeaders().add(ALLOW_METHODS, ALLOW_METHODS_VALUE);
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
+    responseContext.getHeaders().add(ALLOW_ORIGIN, ALLOW_ORIGIN_VALUE);
+    responseContext.getHeaders().add(ALLOW_HEADERS, ALLOW_HEADERS_VALUE);
+    responseContext.getHeaders().add(ALLOW_CREDENTIALS, ALLOW_CREDENTIALS_VALUE);
+    responseContext.getHeaders().add(ALLOW_METHODS, ALLOW_METHODS_VALUE);
   }
 }

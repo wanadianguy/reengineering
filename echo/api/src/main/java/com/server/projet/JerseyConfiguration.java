@@ -5,6 +5,10 @@ import org.glassfish.jersey.servlet.ServletProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
+import com.server.projet.resources.artist.ArtistController;
+import com.server.projet.resources.feedback.FeedbackController;
+import com.server.projet.resources.song.SongController;
+
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.ext.Provider;
 import java.util.Arrays;

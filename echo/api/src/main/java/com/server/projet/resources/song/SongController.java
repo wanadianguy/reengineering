@@ -3,7 +3,13 @@ package com.server.projet.resources.song;
 import com.server.projet.resources.exception.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.ws.rs.*;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
@@ -31,11 +37,12 @@ public class SongController {
    * Récupère une chanson par son identifiant.
    * @param songId L'identifiant de la chanson.
    * @return Une réponse contenant la chanson.
+   * @throws BadRequestException
    */
   @GET
   @Path("/{songId}")
   @Produces(MediaType.APPLICATION_JSON)
-  public Response getSongById(@PathParam("songId") long songId) {
+  public Response getSongById(@PathParam("songId") long songId) throws BadRequestException {
     Song song = songService.getSongById(songId);
     return song != null ? Response.status(Response.Status.OK).entity(song).build() : Response.status(Response.Status.NOT_FOUND).build();
   }
@@ -44,11 +51,12 @@ public class SongController {
    * Récupère une chanson par son titre.
    * @param title Le titre de la chanson.
    * @return Une réponse contenant la chanson.
+   * @throws BadRequestException
    */
   @GET
   @Path("/search/{title}")
   @Produces(MediaType.APPLICATION_JSON)
-  public Response getSongByTitle(@PathParam("title") String title){
+  public Response getSongByTitle(@PathParam("title") String title) throws BadRequestException{
     Song song = songService.getSongByTitle(title);
     return song != null ? Response.status(Response.Status.OK).entity(song).build() : Response.status(Response.Status.NOT_FOUND).build();
   }
