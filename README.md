@@ -311,10 +311,18 @@ Voici les résultats obtenus avec ces deux outils :
 
 ![flamegraph_une_requete](./img/flamegraph_une_requete.svg)
 
-- Deuxièmement avec l'exécution de cent requêtes :
+- Deuxièmement avec l'exécution de mille requêtes :
 
-![flamegraph_cent_requetes](./img/flamegraph_cent_requetes.svg)
+![flamegraph_mille_requetes](./img/flamegraph_mille_requetes.svg)
 
 #### Gatling
 
-gatling évaluation de charge
+##### Définition
+
+Tout d'abord, Gatling est un outil open-source de test de performance, utilisé pour simuler des charges de travail virtuelles sur des applications web afin de mesurer leur performance. Il utilise le langage de script Scala pour définir des scénarios de test (nous pouvons également utiliser le Java et le Rust) et propose à la fois une interface utilisateur graphique (Gatling FrontLine) et une interface en ligne de commande. Néanmoins, Gatling seul ne nous aide pas dans le contexte de l'éco-conception. C'est pourquoi, à ces fins, nous devons le coupler à l'outil Top, utilisable en ligne de commande.
+
+##### Résultats
+
+Suite à l'exploitation de l'outil Gatling, nous avons identifié plusieurs problèmes. Lors de l'exécution de requêtes GET en l'absence de données dans la base de données, le contrôleur Spring renvoie un code d'erreur (par exemple, `getAllArtist` renvoie une erreur 404). Cette pratique n'étant pas recommandée, il est nécessaire d'ajuster ce comportement.
+
+En ce qui concerne Top, nous avons observé un potentiel problème de performance. La consommation du CPU oscille en moyenne autour de 40%, avec des pics atteignant jusqu'à 373%. Il est donc impératif d'analyser et de résoudre ce problème.
