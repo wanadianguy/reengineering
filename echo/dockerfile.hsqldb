@@ -1,0 +1,9 @@
+FROM openjdk:22-ea-17-jdk-slim as hsqldb
+
+RUN apt-get update -y && apt-get upgrade -y
+
+COPY ./hsqldb_v2.6.1/ /db/
+
+WORKDIR /db
+
+CMD java -cp ./lib/hsqldb.jar org.hsqldb.server.Server --database.0 file:db_dev_web --dbname.0 db_dev_web --port 12345

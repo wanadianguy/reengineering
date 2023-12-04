@@ -1,0 +1,39 @@
+version: "3.9"
+name: "echo"
+services:
+  db:
+      container_name: hsqldb
+      profiles:
+        - "db"
+        - "all"
+      ports:
+        - "12345:12345"
+      build:
+        context: ./echo/
+        dockerfile: dockerfile.hsqldb
+  
+  app:
+      container_name: app
+      profiles:
+        - "app"
+        - "all"
+      depends_on:
+        - "db"
+      ports:
+        - "3000:3000"
+      build:
+        context: ./echo/
+        dockerfile: dockerfile.app
+  
+  api:
+      container_name: api
+      profiles:
+        - "api"
+        - "all"
+      ports:
+        - "8080:8080"
+      depends_on:
+        - db
+      build:
+        context: ./echo/
+        dockerfile: dockerfileApi

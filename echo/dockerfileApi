@@ -1,0 +1,21 @@
+FROM archlinux:base-devel as build_api
+
+RUN printf "y\n" | pacman -Syu && printf "3\ny\n" | pacman -S maven
+
+COPY ./api/ /api/
+
+WORKDIR /api/
+
+RUN mvn clean install package
+
+CMD tail -f /dev/null
+
+FROM archlinux:base-devel as api
+
+RUN printf "y\n" | pacman -Syu && printf "y\n" | pacman -S jdk17-openjdk && mkdir api
+
+WORKDIR /api/
+
+COPY --from=build_api /api/target/projet-0.0.1-SNAPSHOT.jar /api/projet-0.0.1-SNAPSHOT.jar 
+
+CMD java -jar projet-0.0.1-SNAPSHOT.jar
