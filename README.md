@@ -323,8 +323,20 @@ Tout d'abord, Gatling est un outil open-source de test de performance, utilisé 
 
 ##### Résultats
 
-Suite à l'exploitation de l'outil Gatling, nous avons identifié plusieurs problèmes. Lors de l'exécution de requêtes GET en l'absence de données dans la base de données, le contrôleur Spring renvoie un code d'erreur (par exemple, `getAllArtist` renvoie une erreur 404). Cette pratique n'étant pas recommandée, il est nécessaire d'ajuster ce comportement.
+Suite à l'exploitation de l'outil Gatling, nous avons identifié plusieurs problèmes. Lors de l'exécution de requêtes GET, en l'absence de données dans la base de données, le contrôleur Spring renvoie un code d'erreur (par exemple, `getAllArtist` renvoie une erreur 404). Cette pratique n'étant pas recommandée, il est nécessaire d'ajuster ce comportement.
 
 En ce qui concerne Top, nous avons observé un potentiel problème de performance. La consommation du CPU oscille en moyenne autour de 40%, avec des pics atteignant jusqu'à 373%. Il est donc impératif d'analyser et de résoudre ce problème.
 
+![top](./img/graphe_corrige.png)
+
 ![top](./img/top.png)
+
+Nous pouvons maintenant constater ci-dessous que toutes les requêtes ont obtenues un résultat "ok". Cela fait suite aux modifications effectuées sur le code, notamment au niveau des contrôleurs, en ne renvoyant plus une erreur 404 lorsque aucune donnée n'a été trouvé dans la BDD.
+
+Ceci est dû au fait que suite au changement, nous envoyons une liste vide au lieu d'une erreur (aucun changement n'a dû être effectué du coté front).
+
+![top](./img/graphe_corrige.png)
+
+De plus, Top nous a permis de constater que le pique d'utilisation de notre application est descendu d'environ 20% (de 93.5% à 72%) avec une utilisation moyenne inchangée.
+
+![top](./img/top_corrige.png)
