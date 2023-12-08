@@ -8,8 +8,6 @@ WORKDIR /api/
 
 RUN mvn clean install package
 
-# CMD tail -f /dev/null
-
 FROM archlinux:base-devel as api
 
 RUN printf "y\n" | pacman -Syu && printf "y\n" | pacman -S jdk17-openjdk && mkdir api

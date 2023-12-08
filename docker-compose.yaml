@@ -11,7 +11,10 @@ services:
       build:
         context: ./echo/
         dockerfile: dockerfile.hsqldb
-  
+      deploy:
+        resources:
+          limits:
+            memory: "1g"
   app:
       container_name: app
       profiles:
@@ -24,7 +27,11 @@ services:
       build:
         context: ./echo/
         dockerfile: dockerfile.app
-  
+      deploy:
+        resources:
+          limits:
+            memory: "1g"
+            
   api:
       container_name: api
       profiles:
@@ -37,3 +44,7 @@ services:
       build:
         context: ./echo/
         dockerfile: dockerfileApi
+      deploy:
+        resources:
+          limits:
+            memory: "1g"

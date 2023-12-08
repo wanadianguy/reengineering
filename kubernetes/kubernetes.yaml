@@ -1,0 +1,95 @@
+apiVersion: v1
+items:
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    annotations:
+      deployment.kubernetes.io/revision: "2"
+    creationTimestamp: "2023-12-08T16:25:54Z"
+    generation: 2
+    labels:
+      app: echoapp
+    name: echoapp
+    namespace: default
+    resourceVersion: "2275"
+    uid: ad8d1b57-8dd1-44c9-b473-175eace251c2
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        app: echoapp
+    strategy:
+      rollingUpdate:
+        maxSurge: 25%
+        maxUnavailable: 25%
+      type: RollingUpdate
+    template:
+      metadata:
+        creationTimestamp: null
+        labels:
+          app: echoapp
+      spec:
+        containers:
+        - image: echo-app:latest
+          imagePullPolicy: Never
+          name: echo-app
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+  status:
+    availableReplicas: 1
+    conditions:
+    - lastTransitionTime: "2023-12-08T16:32:06Z"
+      lastUpdateTime: "2023-12-08T16:32:06Z"
+      message: Deployment has minimum availability.
+      reason: MinimumReplicasAvailable
+      status: "True"
+      type: Available
+    - lastTransitionTime: "2023-12-08T16:25:54Z"
+      lastUpdateTime: "2023-12-08T16:32:06Z"
+      message: ReplicaSet "echoapp-6f8695854f" has successfully progressed.
+      reason: NewReplicaSetAvailable
+      status: "True"
+      type: Progressing
+    observedGeneration: 2
+    readyReplicas: 1
+    replicas: 1
+    updatedReplicas: 1
+- apiVersion: v1
+  kind: Service
+  metadata:
+    creationTimestamp: "2023-12-08T15:26:55Z"
+    labels:
+      component: apiserver
+      provider: kubernetes
+    name: kubernetes
+    namespace: default
+    resourceVersion: "192"
+    uid: b55e7eab-54ec-48b1-bd78-552d282c156f
+  spec:
+    clusterIP: 10.43.0.1
+    clusterIPs:
+    - 10.43.0.1
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: https
+      port: 443
+      protocol: TCP
+      targetPort: 6443
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+kind: List
+metadata:
+  resourceVersion: ""
