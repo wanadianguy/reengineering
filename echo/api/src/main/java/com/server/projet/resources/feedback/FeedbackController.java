@@ -23,6 +23,7 @@ public class FeedbackController {
 
   /**
    * Récupère tous les commentaires d'une chanson.
+   * 
    * @param songId L'identifiant de la chanson.
    * @return Une réponse contenant tous les commentaires de la chanson.
    * @throws BadRequestException
@@ -32,13 +33,14 @@ public class FeedbackController {
   @Produces(MediaType.APPLICATION_JSON)
   public Response getFeedbackOfSong(@PathParam("songId") long songId) throws BadRequestException {
     List<Feedback> feedback = feedbackService.getAllFeedbackBySong(songId);
-    return !feedback.isEmpty() ? Response.status(Response.Status.OK).entity(feedback).build() : Response.status(Response.Status.NOT_FOUND).build();
+    return Response.status(Response.Status.OK).entity(feedback).build();
   }
 
   /**
    * Commente une chanson.
+   * 
    * @param feedback Le commentaire à ajouter.
-   * @param songId L'identifiant de la chanson.
+   * @param songId   L'identifiant de la chanson.
    * @return Une réponse contenant le commentaire créé.
    */
   @POST
