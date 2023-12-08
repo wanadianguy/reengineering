@@ -359,3 +359,20 @@ docker compose --profile all up -d
 Après avoir effectué les opérations de construction et d’exécution des conteneurs Docker, vous pouvez observer l’état de ces conteneurs via l’interface de “Docker Desktop”. Vous devriez voir un affichage similaire à celui ci-dessous, qui liste tous les conteneurs Docker associés à notre projet.
 
 ![docker_echo](./img/docker_echo.png)
+
+### Orchestration via Kubernetes
+
+Il a été nécessaire d'installer Rancher Desktop au préalable.
+
+Voici les commandes qui ont été utilisées pour mettre en place l'orchestrateur : 
+```
+rancher-desktop // permet de lancer l'API Rancher
+docker-compose --profile all build // générer un conteneur localement
+docker tag echo-app rancher/echo-app // renommer le conteneur
+kubectl run echoapp --image=echo-app --image-pull-policy=Never // exécuter l'image sous Kubernetes
+kubectl get pods echoapp // vérifier l'état du pod (devrait être running)
+kubectl port-forward pods/echoapp 8080:80
+
+kubectl create deployment echoapp --image=echo-app
+// changement du fichier de config (ajout de imagePullPolicy: Never dans specs/containers du fichier manifest.yaml)
+```

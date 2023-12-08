@@ -35,8 +35,7 @@ public class ArtistController {
   @Produces(MediaType.APPLICATION_JSON)
   public Response getAllArtists() {
     List<Artist> artists = artistService.getAllArtists();
-    return !artists.isEmpty() ? Response.status(Response.Status.OK).entity(artists).build()
-        : Response.status(Response.Status.NOT_FOUND).build();
+    return Response.status(Response.Status.OK).entity(artists).build();
   }
 
   /**
@@ -66,8 +65,7 @@ public class ArtistController {
   @Produces(MediaType.APPLICATION_JSON)
   public Response getAllSongsOfArtist(@PathParam("artistId") long artistId) {
     List<Song> songs = songService.getAllSongsByArtistId(artistId);
-    return !songs.isEmpty() ? Response.status(Response.Status.OK).entity(songs).build()
-        : Response.status(Response.Status.NOT_FOUND).build();
+    return Response.status(Response.Status.OK).entity(songs).build();
   }
 
   /**
