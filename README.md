@@ -341,11 +341,11 @@ De plus, Top nous a permis de constater que le pique d'utilisation de notre appl
 
 ![top](./img/top_corrige.png)
 
-#### (Docker) Conteneurisation des applications
+## Projet de Dockerisation et de déploiement : echo
+
+### Définition
 
 La conteneurisation Docker offre de nombreux avantages pour le déploiement d’applications. Tout d’abord, elle permet une portabilité accrue. Les conteneurs Docker encapsulent tout ce dont une application a besoin pour fonctionner, y compris le système d’exploitation, les dépendances et les bibliothèques. Cela signifie que vous pouvez exécuter votre application sur n’importe quelle machine qui a Docker installé, sans vous soucier des problèmes de compatibilité. Deuxièmement, Docker offre une isolation entre les conteneurs, ce qui signifie que chaque application s’exécute dans son propre environnement sécurisé et ne peut pas interférer avec les autres. Enfin, Docker permet une mise à l’échelle facile.
-
-## Projet de Dockerisation et de déploiement : echo
 
 ### Conteneurisation
 
