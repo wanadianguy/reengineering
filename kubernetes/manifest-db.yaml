@@ -1,0 +1,66 @@
+apiVersion: v1
+kind: List
+items:
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    annotations:
+      deployment.kubernetes.io/revision: "2"
+    generation: 2
+    labels:
+      app: echodb
+    name: echodb
+    namespace: default
+    resourceVersion: "2275"
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        app: echodb
+    strategy:
+      rollingUpdate:
+        maxSurge: 25%
+        maxUnavailable: 25%
+      type: RollingUpdate
+    template:
+      metadata:
+        labels:
+          app: echodb
+      spec:
+        containers:
+        - image: echo-db:latest
+          imagePullPolicy: Never
+          name: echo-db
+          resources: {}
+          ports:
+          - containerPort: 12345
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        terminationGracePeriodSeconds: 30
+- apiVersion: v1
+  kind: Service
+  metadata:
+    labels:
+      component: apiserver
+      provider: kubernetes
+    name: echodb
+    namespace: default
+  spec:
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: https
+      port: 12345
+      protocol: TCP
+      targetPort: 12345
+    sessionAffinity: None
+    type: ClusterIP
+    selector:
+      app: echodb
