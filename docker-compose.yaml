@@ -43,7 +43,7 @@ services:
         - db
       build:
         context: ./echo/
-        dockerfile: dockerfileApi
+        dockerfile: dockerfile.api
       deploy:
         resources:
           limits:

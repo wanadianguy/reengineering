@@ -35,24 +35,38 @@ Nous aurions également pu mettre en place un système d'analyse static de code 
 
 ### Architecture Decision Record
 
-Au départ, nous avions choisi de mettre en place un ADR afin de discuter de la gestion des conditions dans les cas d'erreurs. Cependant, après de multiples recherches, nous n'avons pas trouvé d'alternative.
+Nous avions choisi de mettre en place un ADR afin de discuter de la gestion des conditions dans les cas d'erreurs. Cependant, après de multiples recherches, nous n'avons pas trouvé d'alternative.
 
-<!-- 
-Exemple ADR
-#### Contexte
-Nous avons eu un débat quant à la gestion d'erreurs dans authentication.middleware.js, en particulier dans les blocs de catch. 
+Afin de garder une trace écrite de ce recherche, nous avons spécifié l'ADR suivant :
 
-#### Options envisagées
-Nous avons donc pris le choix de réaliser un Architecture Decision Record. Les différents choix portaient sur : 
-- L'utilisation d'une série de conditions dans le bloc catch,
+```
+# Numéro
+1
+
+# Date
+10/11/2023
+
+# Auteur
+Amandine
+
+# Contexte
+Nous avons eu un débat quant à la gestion d'erreurs dans authentication.`middleware.js`, en particulier dans les blocs de catch. 
+
+# Options envisagées
+Les différents choix portaient sur : 
+- L'utilisation d'une série de conditions dans le bloc catch ;
+- L'utilisation de if/else ou de ternaire ;
 - L'utilisation d'un switch case.
 
-#### Décision
-Nous choisissons la série de conditions dans le cas où elles amènent au même code d'erreur, et le "switch case" dans le cas contraire.
+# Décision
+Nous choisissons de garder la série de conditions dans le cas où elles amènent au même code d'erreur, en effet nous en pouvons pas effectuer de série de catch en Node.js.
 
-#### Conséquence
+# Status
+Terminé (cette solution a été mise en place autant que possible dans le projet).
+
+# Conséquence
 Nous décidons de mettre en place le document de décision pour uniformiser cette gestion d'erreur au sein du projet. 
--->
+```
 
 ## Projet éco-conception : echo (ReactJS & Java Springboot)
 
@@ -262,10 +276,10 @@ La mise en cache des objets en JavaScript représente une pratique efficiente po
 
 Réduire le volume de données stockées au nécessaire consiste à :
 
-- optimiser la gestion des gros volumes de données.
-- nettoyer les anciennes données, soit en les archivant hors ligne, soit en les supprimant.
-- vérifier que les sauvegardes peuvent être restaurées.
-- superviser la taille des espaces de stockage.
+- Optimiser la gestion des gros volumes de données ;
+- Nettoyer les anciennes données, soit en les archivant hors ligne, soit en les supprimant ;
+- Vérifier que les sauvegardes peuvent être restaurées ;
+- Superviser la taille des espaces de stockage.
 
 Suivant le type de données et leurs propriétaires, des contraintes légales peuvent amener à stocker dans le temps des données jamais utilisées.
 
@@ -349,30 +363,80 @@ La conteneurisation Docker offre de nombreux avantages pour le déploiement d’
 
 ### Conteneurisation
 
-Pour initier la phase de construction et d’exécution de l’ensemble des conteneurs Docker nécessaires au projet ‘echo’, exécuter la commande suivante à la racine du projet. 
-
-Cette commande garantit que toutes les dépendances sont correctement gérées et que l’environnement est configuré pour le bon fonctionnement du projet.
+Pour initier la phase de construction et d’exécution de l’ensemble des conteneurs Docker nécessaires au projet `echo`, exécuter la commande suivante à la racine du projet. 
 
 ```bash
 docker compose --profile all up -d
 ```
+
+Cette commande garantit que toutes les dépendances sont correctement gérées et que l’environnement est configuré pour le bon fonctionnement du projet.
+
 Après avoir effectué les opérations de construction et d’exécution des conteneurs Docker, vous pouvez observer l’état de ces conteneurs via l’interface de “Docker Desktop”. Vous devriez voir un affichage similaire à celui ci-dessous, qui liste tous les conteneurs Docker associés à notre projet.
+
+À noter que pour la conteneurisation de ce projet, nous avons instancié plusieurs dockerfiles : 
+- un pour le front de notre aplication (notre `app`) ;
+- un pour le back de notre application (notre `api`) ;
+- un pour la base de données de notre application (`hsqldb`).
+
+Ensuite, nous avons réalisé le `docker-compose` qui permet d'orchestrer l'ensemble des dockerfiles préalablement écrit.
 
 ![docker_echo](./img/docker_echo.png)
 
+```
+# Numéro
+2
+
+# Date
+18/12/2023
+
+# Auteur
+Amandine
+
+# Contexte
+Nous avons eu un échangé autour de la présence de la commande `mvn spring-boot:run` au sein du docker-compose. En effet, cette dernière n'est pas optimisée, car elle implique la recompilation du code à chaque fois, et cela peut être causer des erreurs par la suite
+
+# Options envisagées
+Les différents choix portaient sur : 
+- Garder la ligne de commande ;
+- La remplacer par un .jar du projet.
+
+# Décision
+Nous choisissons de générer les .jar et de les lancer, sans utiliser la commande maven.
+
+# Status
+Terminé (cette solution a été mise en place autant que possible dans le projet).
+
+# Conséquence
+Cet ADR nous permet d'unifier et de clarifier le lancement des applications au sein des docker-compose et nous permet d'éviter les erreurs non souhaitées. 
+```
+
 ### Orchestration via Kubernetes
 
-Il a été nécessaire d'installer Rancher Desktop au préalable.
+Pour commencer, il a été nécessaire d'installer Rancher Desktop au préalable. Pour plus de précision, Rancher est une plateforme open-source simplifiant la gestion de clusters Kubernetes. Il offre une interface conviviale pour le déploiement, la configuration et la supervision des applications conteneurisées, facilitant ainsi l'administration de Kubernetes.
 
-Voici les commandes qui ont été utilisées pour mettre en place l'orchestrateur : 
+Dans un premier temps, nous nous sommes concentré sur la partie front de notre projet `echo`. De cette façon, voici les commandes qui ont été utilisées pour mettre en place notre orchestrateur : 
+
 ```
 rancher-desktop // permet de lancer l'API Rancher
-docker-compose --profile all build // générer un conteneur localement
-docker tag echo-app rancher/echo-app // renommer le conteneur
-kubectl run echoapp --image=echo-app --image-pull-policy=Never // exécuter l'image sous Kubernetes
-kubectl get pods echoapp // vérifier l'état du pod (devrait être running)
+docker-compose --profile all build // génère un conteneur localement
+docker tag echo-app rancher/echo-app // renomme le conteneur
+kubectl run echoapp --image=echo-app --image-pull-policy=Never // exécute l'image sous Kubernetes
+kubectl get pods echoapp // vérifie l'état du pod (devrait être running)
 kubectl port-forward pods/echoapp 8080:80
 
 kubectl create deployment echoapp --image=echo-app
 // changement du fichier de config (ajout de imagePullPolicy: Never dans specs/containers du fichier manifest.yaml)
 ```
+
+Une fois toutes ces lignes de commandes réalisée, nous avons pu récupérer le `manifest-app.yaml` généré et le modifier afin de ne garder que les éléments nécessaires. Nous l'avons ensuite déplacé dans le répertoire `kubernetes` de notre projet `reengineering`.
+
+L'idée maintenant est de créer deux autres `manifest.yaml`, afin d'en obtenir au final trois différent, de pouvoir segmenter notre application en diverses briques et d'être cohérent avec nos dockerfiles :
+- un pour le front de notre aplication (notre `app`) ;
+- un pour le back de notre application (notre `api`) ;
+- un pour la base de données de notre application (`hsqldb`).
+
+Un défi important que nous avons rencontré lors de la configuration de notre application orchestrée par Kubernetes était la gestion de la connexion à la base de données, particulièrement en ce qui concerne l'alignement avec le III. Config des 12 factors, où la configuration doit être distincte du code. Initialement, la configuration de la base de données résidait dans le backend, ce qui entraînait un désaccord avec les principes des 12 factors.
+
+Pour résoudre ce problème, nous avons choisi de surmonter cette configuration en utilisant des variables d'environnement. Nous avons ajusté le `manifest-api.yaml` de notre API `api` en utilisant des entrées "env" pour établir le lien avec la base de données. Cette approche nous a permis de séparer la configuration du code, suivant ainsi les meilleures pratiques des 12 factors.
+
+Cependant, cette modification a également nécessité une adaptation dans le `manifest-db.yaml` de la base de données `hsqldb`. Pour que les autres pods puissent accéder à la base de données, nous avons introduit un service Kubernetes. Ce service identifie les pods utilisés et met à leur disposition les informations nécessaires pour établir la connexion avec la base de données. Cette stratégie nous a permis de maintenir une architecture cohérente tout en résolvant efficacement les problèmes liés à la gestion de la configuration de la base de données dans un environnement Kubernetes orchestré par Rancher.
