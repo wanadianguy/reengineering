@@ -428,7 +428,7 @@ kubectl create deployment echoapp --image=echo-app
 // changement du fichier de config (ajout de imagePullPolicy: Never dans specs/containers du fichier manifest.yaml)
 ```
 
-Une fois toutes ces lignes de commandes réalisées, nous avons pu récupérer le `manifest-app.yaml` généré et le modifier afin de ne garder que les éléments nécessaires. Nous l'avons ensuite déplacé dans le répertoire `kubernetes` de notre projet `reengineering`, sous le nom de `kubernetes.yaml`.
+Une fois toutes ces lignes de commandes réalisées, nous avons pu récupérer le `manifest-app.yaml` généré et le modifier afin de ne garder que les éléments nécessaires. Nous l'avons ensuite déplacé dans le répertoire `kubernetes` de notre projet `reengineering`.
 
 L'idée maintenant est de créer deux autres `manifest.yaml`, afin d'en obtenir au final trois différent, de pouvoir segmenter notre application en diverses briques et d'être cohérent avec nos dockerfiles :
 - un pour le front de notre aplication (notre `app`) ;
