@@ -428,15 +428,15 @@ kubectl create deployment echoapp --image=echo-app
 // changement du fichier de config (ajout de imagePullPolicy: Never dans specs/containers du fichier manifest.yaml)
 ```
 
-Une fois toutes ces lignes de commandes réalisée, nous avons pu récupérer le `manifest-app.yaml` généré et le modifier afin de ne garder que les éléments nécessaires. Nous l'avons ensuite déplacé dans le répertoire `kubernetes` de notre projet `reengineering`.
+Une fois toutes ces lignes de commandes réalisées, nous avons pu récupérer le `manifest-app.yaml` généré et le modifier afin de ne garder que les éléments nécessaires. Nous l'avons ensuite déplacé dans le répertoire `kubernetes` de notre projet `reengineering`, sous le nom de `kubernetes.yaml`.
 
 L'idée maintenant est de créer deux autres `manifest.yaml`, afin d'en obtenir au final trois différent, de pouvoir segmenter notre application en diverses briques et d'être cohérent avec nos dockerfiles :
 - un pour le front de notre aplication (notre `app`) ;
 - un pour le back de notre application (notre `api`) ;
 - un pour la base de données de notre application (`hsqldb`).
 
-Un défi important que nous avons rencontré lors de la configuration de notre application orchestrée par Kubernetes était la gestion de la connexion à la base de données, particulièrement en ce qui concerne l'alignement avec le III. Config des 12 factors, où la configuration doit être distincte du code. Initialement, la configuration de la base de données résidait dans le backend, ce qui entraînait un désaccord avec les principes des 12 factors.
+Un défi important que nous avons rencontré lors de la configuration de notre application orchestrée par Kubernetes était la gestion de la connexion à la base de données, particulièrement en ce qui concerne l'alignement avec le point 3 des "12 factors" (Config), qui mentionne que la configuration doit être distincte du code. Initialement, la configuration de la base de données résidait dans le backend, ce qui entraînait un désaccord avec les principes des 12 factors.
 
-Pour résoudre ce problème, nous avons choisi de surmonter cette configuration en utilisant des variables d'environnement. Nous avons ajusté le `manifest-api.yaml` de notre API `api` en utilisant des entrées "env" pour établir le lien avec la base de données. Cette approche nous a permis de séparer la configuration du code, suivant ainsi les meilleures pratiques des 12 factors.
+Pour résoudre ce problème, nous avons choisi de surcharger cette configuration en utilisant des variables d'environnement. Nous avons ajusté le `manifest-api.yaml` de notre API `api` en utilisant des entrées "env" pour établir le lien avec la base de données. Cette approche nous a permis de séparer la configuration du code, suivant ainsi les pratiques recommadées par le 12 factors.
 
 Cependant, cette modification a également nécessité une adaptation dans le `manifest-db.yaml` de la base de données `hsqldb`. Pour que les autres pods puissent accéder à la base de données, nous avons introduit un service Kubernetes. Ce service identifie les pods utilisés et met à leur disposition les informations nécessaires pour établir la connexion avec la base de données. Cette stratégie nous a permis de maintenir une architecture cohérente tout en résolvant efficacement les problèmes liés à la gestion de la configuration de la base de données dans un environnement Kubernetes orchestré par Rancher.
