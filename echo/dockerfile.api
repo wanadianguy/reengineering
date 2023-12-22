@@ -1,6 +1,6 @@
 FROM archlinux:base-devel as build_api
 
-RUN pacman -Syu --noconfirm && pacman -S maven --noconfirm
+RUN pacman -Syu --noconfirm && pacman -Sy --noconfirm maven
 
 COPY ./api/ /api/
 
@@ -10,7 +10,7 @@ RUN mvn clean install package
 
 FROM archlinux:base-devel as api
 
-RUN pacman -Syu --noconfirm && pacman -S jdk17-openjdk --noconfirm && mkdir api
+RUN pacman -Syu --noconfirm && pacman -Sy --noconfirm jdk17-openjdk && mkdir api
 
 WORKDIR /api/
 
