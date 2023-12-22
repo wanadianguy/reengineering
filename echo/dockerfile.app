@@ -1,6 +1,6 @@
 FROM archlinux:base-devel as app
 
-RUN printf "y\n" | pacman -Syu  && printf "y\n" | pacman -S npm
+RUN pacman -Syu --noconfirm  &&  pacman -S npm --noconfirm
 
 COPY ./app/ /app/
 
