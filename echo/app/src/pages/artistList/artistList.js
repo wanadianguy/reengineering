@@ -12,7 +12,7 @@ function ArtistList() {
 
   useEffect(async () => {
     async function fetchArtists() {
-      const result = await axios.get(`${process.env.REQUEST_API_URL}/artists`);
+      const result = await axios.get(`${process.env.REACT_APP_REQUEST_API_URL}/artists`);
       if (result.data) {
         setArtists(result.data)
       }

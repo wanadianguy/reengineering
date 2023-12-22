@@ -26,7 +26,7 @@ function NewArtist() {
   async function handleSubmit(event) {
     event.preventDefault();
     try {
-      await axios.post(`${process.env.REQUEST_API_URL}/artists`, artist);
+      await axios.post(`${process.env.REACT_APP_REQUEST_API_URL}/artists`, artist);
       navigate('/artists');
     } catch (error) {
       console.log('Error');

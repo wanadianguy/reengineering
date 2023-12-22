@@ -16,7 +16,7 @@ function SongDetails() {
 
   useEffect(() => {
     async function fetchSong() {
-      const result = await axios.get(`${process.env.REQUEST_API_URL}/songs/${songId}`);
+      const result = await axios.get(`${process.env.REACT_APP_REQUEST_API_URL}/songs/${songId}`);
       if (result.data) {
         setSong(result.data)
       }
@@ -43,7 +43,7 @@ function SongDetails() {
   async function handleDeleteClick(event) {
     event.preventDefault();
     try {
-      await axios.delete(`${process.env.REQUEST_API_URL}/songs/${songId}`);
+      await axios.delete(`${process.env.REACT_APP_REQUEST_API_URL}/songs/${songId}`);
       navigate('/songs');
     } catch (error) {
       console.log('Error');
@@ -53,7 +53,7 @@ function SongDetails() {
   async function handleFeedbackClick(event) {
     event.preventDefault();
     try {
-      const result = await axios.post(`${process.env.REQUEST_API_URL}/comments/${songId}`, feedback);
+      const result = await axios.post(`${process.env.REACT_APP_REQUEST_API_URL}/comments/${songId}`, feedback);
       const modifiedSong = {...song};
       modifiedSong.feedback.push(result.data);
       setSong(modifiedSong);
