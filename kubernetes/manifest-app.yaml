@@ -37,8 +37,8 @@ items:
           ports:
           - containerPort: 3000
           env:
-          - name: baseApiUrl
-            value: "http://echoapi:8080"
+          - name: REACT_APP_REQUEST_API_URL
+            value: http://localhost:30080
           terminationMessagePath: /dev/termination-log
           terminationMessagePolicy: File
         dnsPolicy: ClusterFirst
