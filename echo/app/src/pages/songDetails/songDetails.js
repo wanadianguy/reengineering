@@ -6,7 +6,6 @@ import Moment from 'react-moment';
 import ReactPlayer from 'react-player/youtube';
 import Input from '../../components/Input.js';
 import Feedback from '../../components/feedback/feedback.js';
-import {baseApiUrl} from '../../app.const.js';
 
 function SongDetails() {
   const [song, setSong] = useState(null);
@@ -17,7 +16,7 @@ function SongDetails() {
 
   useEffect(() => {
     async function fetchSong() {
-      const result = await axios.get(`${baseApiUrl}/songs/${songId}`);
+      const result = await axios.get(`${process.env.REQUEST_API_URL}/songs/${songId}`);
       if (result.data) {
         setSong(result.data)
       }
@@ -44,7 +43,7 @@ function SongDetails() {
   async function handleDeleteClick(event) {
     event.preventDefault();
     try {
-      await axios.delete(`${baseApiUrl}/songs/${songId}`);
+      await axios.delete(`${process.env.REQUEST_API_URL}/songs/${songId}`);
       navigate('/songs');
     } catch (error) {
       console.log('Error');
@@ -54,7 +53,7 @@ function SongDetails() {
   async function handleFeedbackClick(event) {
     event.preventDefault();
     try {
-      const result = await axios.post(`${baseApiUrl}/comments/${songId}`, feedback);
+      const result = await axios.post(`${process.env.REQUEST_API_URL}/comments/${songId}`, feedback);
       const modifiedSong = {...song};
       modifiedSong.feedback.push(result.data);
       setSong(modifiedSong);
