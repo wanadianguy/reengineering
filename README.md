@@ -447,11 +447,12 @@ Cependant, cette modification a également nécessité une adaptation dans le `m
 ### Refactorez votre application pour le cloud
 
 #### Comment faire pour que ça fonctionne dans Kubernetes avec front, middle et back ? Décrivez vos changements d'architecture, et implémentez les
-.env replace .const.js. this file is accessible through kubernates so that we can change the api url through kubernates.
 
-Delete le deploy cause apply doesn’t change the environment variables.
+Remplacement du fichier const.js par .env pour que ce fichier soit accessible via Kubernetes et pour que nous puissions modifier l'URL de l'API via Kubernetes directement.
 
-Expose API on localhost so that the frontend can access it since kubernates network is isolated.
+Mise à jour des variables d'environnement à l'aide d'un redeploiement, car cela ne se fait pas automatiquement.
+
+Exposition de l'API en localhost afin que le front puisse y accéder, étant donné que le réseau de Kubernetes est isolé.
 
 En termes d'architecture, nous avons créé des fichiers yml lors des séances précédentes pour chaque microservice.
 
@@ -460,7 +461,7 @@ La Base de Données possède une IP Cluster et un Host Kubernetes. Tout d'abord,
 
 #### Que changeriez vous pour faire fonctionner ça sur Amazon Web Services, et pourquoi ?
 
-Dans un premier temps, nous pouvons préciser que nous avons déjà mis en place des conteneurs Docker pour chacune de nos briques.
+Étant donné que nous avons déjà mis en place des conteneurs Docker pour chacune de nos briques de façon à utiliser Kubernetes, le passage à AWS est plus rapide que si nous partions de zéro.
 
 Ainsi, pour faire fonctionner notre application sur AWS, il faudrait utiliser AWS Elastic Container Service ou Elastic Kubernetes Service pour l'orchestration des conteneurs (à de Kubernetes).
 
@@ -483,3 +484,5 @@ Aussi, nous utilisons du scaling horizontal des pods Kubernetes pour gérer les 
 // TODO
 
 #### Que changeriez vous pour faire fonctionner ça sur Amazon Web Services, et pourquoi (oui, à nouveau :)) ?
+
+Rien, car AWS est un orchestrateur également, d'où l'intérêt d'utiliser des fichiers de configuration ?
