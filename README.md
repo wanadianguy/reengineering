@@ -412,12 +412,13 @@ Cet ADR nous permet d'unifier et de clarifier le lancement des applications au s
 
 ### Orchestration via Kubernetes
 
-Pour commencer, il a été nécessaire d'installer Rancher Desktop au préalable. Pour plus de précision, Rancher est une plateforme open-source simplifiant la gestion de clusters Kubernetes. Il offre une interface conviviale pour le déploiement, la configuration et la supervision des applications conteneurisées, facilitant ainsi l'administration de Kubernetes.
+Pour commencer, il a été nécessaire d'installer Rancher Desktop au préalable. Pour plus de précision, Rancher est une plateforme open-source simplifiant la gestion de clusters Kubernetes. Il offre une interface conviviale pour le déploiement, la configuration et la supervision des applications conteneurisées, facilitant ainsi l'administration de Kubernetes. Pour cette installation, nous avons suivi ce lien : https://docs.rancherdesktop.io/getting-started/installation/#linux. Puis dans un second temps, nous avons activé l'extension WLS dans Docker. Enfin, nous avons installer pacman (le gestionnaire de paquets officiel de la distribution Linux Arch Linux).
 
 Dans un premier temps, nous nous sommes concentré sur la partie front de notre projet `echo`. De cette façon, voici les commandes qui ont été utilisées pour mettre en place notre orchestrateur : 
 
 ```
 rancher-desktop // permet de lancer l'API Rancher
+sudo apt install pacman // install pacman
 docker-compose --profile all build // génère un conteneur localement
 docker tag echo-app rancher/echo-app // renomme le conteneur
 kubectl run echoapp --image=echo-app --image-pull-policy=Never // exécute l'image sous Kubernetes
@@ -440,3 +441,48 @@ Un défi important que nous avons rencontré lors de la configuration de notre a
 Pour résoudre ce problème, nous avons choisi de surcharger cette configuration en utilisant des variables d'environnement. Nous avons ajusté le `manifest-api.yaml` de notre API `api` en utilisant des entrées "env" pour établir le lien avec la base de données. Cette approche nous a permis de séparer la configuration du code, suivant ainsi les pratiques recommadées par le 12 factors.
 
 Cependant, cette modification a également nécessité une adaptation dans le `manifest-db.yaml` de la base de données `hsqldb`. Pour que les autres pods puissent accéder à la base de données, nous avons introduit un service Kubernetes. Ce service identifie les pods utilisés et met à leur disposition les informations nécessaires pour établir la connexion avec la base de données. Cette stratégie nous a permis de maintenir une architecture cohérente tout en résolvant efficacement les problèmes liés à la gestion de la configuration de la base de données dans un environnement Kubernetes orchestré par Rancher.
+
+## Application pour le Cloud et Résilience : echo
+
+### Refactorez votre application pour le cloud
+
+#### Comment faire pour que ça fonctionne dans Kubernetes avec front, middle et back ? Décrivez vos changements d'architecture, et implémentez les
+
+Remplacement du fichier const.js par .env pour que ce fichier soit accessible via Kubernetes et pour que nous puissions modifier l'URL de l'API via Kubernetes directement.
+
+Mise à jour des variables d'environnement à l'aide d'un redeploiement, car cela ne se fait pas automatiquement.
+
+Exposition de l'API en localhost afin que le front puisse y accéder, étant donné que le réseau de Kubernetes est isolé.
+
+En termes d'architecture, nous avons créé des fichiers yml lors des séances précédentes pour chaque microservice.
+
+Pour la communication entre le front et back, nous avons utilisé les NodePorts. En effet, un service NodePort dans Kubernetes permet d'exposer un service au niveau de chaque nœud du cluster sur un port spécifié. Cela assure une communication entre le front-end et le back-end à travers ce service.
+La Base de Données possède une IP Cluster et un Host Kubernetes. Tout d'abord, l'IP Cluster est une adresse IP interne spécifique au cluster Kubernetes. De ce fait, le service de la base de données expose cette adresse IP pour que le back-end puisse s'y connecter. De plus, Kubernetes attribue un nom d'hôte à chaque service. Ce nom d'hôte est utilisé dans la configuration du back-end pour se connecter à la base de données.
+
+#### Que changeriez vous pour faire fonctionner ça sur Amazon Web Services, et pourquoi ?
+
+Étant donné que nous avons déjà mis en place des conteneurs Docker pour chacune de nos briques de façon à utiliser Kubernetes, le passage à AWS est plus rapide que si nous partions de zéro.
+
+Ainsi, pour faire fonctionner notre application sur AWS, il faudrait utiliser AWS Elastic Container Service ou Elastic Kubernetes Service pour l'orchestration des conteneurs (à de Kubernetes).
+
+### Bâtissez une architecture résiliente, cassez tout, Verdict : est-ce que ça a fonctionné ?
+
+#### écoutez le business de votre application. Quel risque devez vous mitiger et pourquoi ?, quels choix d'architecture peuvent vous aider ?
+
+Pour nous aider, nous pouvons nous aider du principe d'Event Driven Architecture (EDA). En effet, l'EDA est un modèle architectural où la communication entre les composants du système est basée sur la notification asynchrone des événements. Les événements, représentant des changements significatifs d'état ou des actions, sont émis par des composants et reçus par d'autres, permettant ainsi une réactivité souple et un découplage entre les parties du système. L'EDA favorise la scalabilité, la flexibilité et la réactivité, permettant l'évolution indépendante des composants tout en facilitant la gestion des systèmes distribués et des flux de données.
+
+Avec ce principe, nous pouvons nous appuyer sur un principe de redondance. Cela nous permettrait de mettre en place de la redondance et donc de la résilience, afin de prévenir les potentiels problèmes.
+
+#### Comment faire pour que ça fonctionne dans Kubernetes avec deux instances middle ? refactorez votre code pour qu'il soit résilient en justifiant l'approche
+
+Nous mettons en place un loadbalancing, nous permettant de communiquer avec nos deux instances. Dans notre cas, l'équilibrage de charge pour les instances middle se fait à l'aide des Services Kubernetes.
+   
+Aussi, nous utilisons du scaling horizontal des pods Kubernetes pour gérer les charges variables.
+
+#### Cassez des morceaux de l'application, vérifiez ce qui se passe, expliquez
+
+// TODO
+
+#### Que changeriez vous pour faire fonctionner ça sur Amazon Web Services, et pourquoi (oui, à nouveau :)) ?
+
+Rien, car AWS est un orchestrateur également, d'où l'intérêt d'utiliser des fichiers de configuration ?
