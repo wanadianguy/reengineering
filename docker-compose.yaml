@@ -2,15 +2,15 @@ version: "3.9"
 name: "echo"
 services:
   db:
-      container_name: hsqldb
+      container_name: mysql
       profiles:
         - "db"
         - "all"
       ports:
-        - "12345:12345"
+        - "3306:3306"
       build:
         context: ./echo/
-        dockerfile: dockerfile.hsqldb
+        dockerfile: dockerfile.mysql
       deploy:
         resources:
           limits:
