@@ -454,6 +454,8 @@ Mise à jour des variables d'environnement à l'aide d'un redeploiement, car cel
 
 Exposition de l'API en localhost afin que le front puisse y accéder, étant donné que le réseau de Kubernetes est isolé.
 
+Changement de la BDD HsqlDb pour du MySQL dans le but de faciliter les échanges et la gestion de la sécurité (user, password, ...) entre l'API et la BDD au sein de Kubernetes.
+
 En termes d'architecture, nous avons créé des fichiers yml lors des séances précédentes pour chaque microservice.
 
 Pour la communication entre le front et back, nous avons utilisé les NodePorts. En effet, un service NodePort dans Kubernetes permet d'exposer un service au niveau de chaque nœud du cluster sur un port spécifié. Cela assure une communication entre le front-end et le back-end à travers ce service.
