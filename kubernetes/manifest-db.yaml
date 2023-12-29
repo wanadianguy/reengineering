@@ -35,7 +35,10 @@ items:
           name: echo-db
           resources: {}
           ports:
-          - containerPort: 12345
+          - containerPort: 3306
+          env:
+          - name: MYSQL_ROOT_PASSWORD
+            value: password
           terminationMessagePath: /dev/termination-log
           terminationMessagePolicy: File
         dnsPolicy: ClusterFirst
@@ -57,9 +60,9 @@ items:
     ipFamilyPolicy: SingleStack
     ports:
     - name: https
-      port: 12345
+      port: 3306
       protocol: TCP
-      targetPort: 12345
+      targetPort: 3306
     sessionAffinity: None
     type: ClusterIP
     selector:

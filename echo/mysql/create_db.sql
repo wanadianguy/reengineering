@@ -1,0 +1,27 @@
+CREATE DATABASE db_dev_web;
+
+USE db_dev_web;
+
+CREATE TABLE Artist(
+    id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(255) NOT NULL,
+    image VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE Song(
+    id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    url VARCHAR(255) NOT NULL,
+    title VARCHAR(255) NOT NULL,
+    date DATE NOT NULL,
+    type VARCHAR(255) NOT NULL,
+    artist INT NOT NULL,
+    FOREIGN KEY (artist) REFERENCES Artist(id)
+);
+
+CREATE TABLE Feedback(
+    id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    mark INT NOT NULL,
+    comment TEXT NOT NULL,
+    song INT NOT NULL,
+    FOREIGN KEY (song) REFERENCES Song(id)
+);

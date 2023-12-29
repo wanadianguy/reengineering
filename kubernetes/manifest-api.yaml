@@ -38,11 +38,11 @@ items:
           - containerPort: 8080
           env:
           - name: SPRING_DATASOURCE_URL
-            value: "jdbc:hsqldb:hsql://echodb:12345/db_dev_web"
+            value: "jdbc:mysql://echodb:3306/db_dev_web"
           - name: SPRING_DATASOURCE_USERNAME
-            value: "SA"
+            value: root
           - name: SPRING_DATASOURCE_PASSWORD
-            value: ""
+            value: password
           terminationMessagePath: /dev/termination-log
           terminationMessagePolicy: File
         dnsPolicy: ClusterFirst
