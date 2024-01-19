@@ -472,7 +472,8 @@ Ainsi, pour faire fonctionner notre application sur AWS, il faudrait utiliser AW
 
 #### écoutez le business de votre application. Quel risque devez vous mitiger et pourquoi ? Quels choix d'architecture peuvent vous aider ?
 
-Pour nous aider, nous pouvons nous aider du principe d'Event Driven Architecture (EDA). En effet, l'EDA est un modèle architectural où la communication entre les composants du système est basée sur la notification asynchrone des événements. \
+Pour nous aider, nous pouvons nous aider du principe d'Event Driven Architecture (EDA). En effet, l'EDA est un modèle architectural où la communication entre les composants du système est basée sur la notification asynchrone des événements.
+
 Les événements, représentant des changements significatifs d'état ou des actions, sont émis par des composants et reçus par d'autres, permettant ainsi une réactivité souple et un découplage entre les parties du système. L'EDA favorise la scalabilité, la flexibilité et la réactivité, permettant l'évolution indépendante des composants tout en facilitant la gestion des systèmes distribués et des flux de données.
 
 Avec ce principe, nous pouvons nous appuyer sur un principe de redondance. Cela nous permettrait de mettre en place de la redondance et donc de la résilience, afin de prévenir les potentiels problèmes.
