@@ -7,6 +7,8 @@
 - FREMEAUX Maxime
 - MOREAU Bryan
 
+FISA 5 Informatique | INSA Hauts-de-France
+
 ## Projet refactorisation : Delivecrous (Node.js & MongoDB)
 
 ### Centralisation des codes de retour d'appel API
@@ -26,7 +28,7 @@ Nous avons évité d'utiliser des variables temporaires. Par exemple, nous retou
 
 ### Simplification du code
 
-Dans un premier temps, nous avons supprimé la déclaration inutile des variables, simplifiant ainsi le code source. Nous avons également extrait les messages d'erreurs, entre autres, dans des fichiers distincts pour faciliter la modification ultérieure des messages sans altérer le code principal et pour donner plus de contextualisation. Une simplification du code a été mise en oeuvre, en utilisant un package de type module, permettant l'adoption de la syntaxe ES6, renforçant ainsi la modernité du code. Aussi, les erreurs non détectées ont été corrigées pour éviter tout plantage potentiel de l'API lors de leur occurrence. Par ailleurs, nous avons ajouté la configuration du docker-compose pour que la base de données n'exige plus de mot de passe d'accès. De plus, les noms de variables ont été améliorés pour renforcer la clarté et conformité aux normes, ce qui favorise une meilleure compréhension pour les développeurs. Les fichiers inutiles contenant des constantes utilisées une seule fois ont été supprimés, épurant ainsi la structure du projet. Nous avons aussi standardisé la syntaxe des guillemets, en utilisant des guillemets simples, conforme à la convention JS recommandée. De la même manière, le camelCaseSyntax a été adoptée pour les fonctions et variables, tandis que SCREAMING_SNAKE_CASE a été utilisé pour les constantes, assurant une cohérence dans le style du code. Les égalités doubles ont été remplacées par des égalités triples pour une comparaison plus stricte. De surcroît, un nouveau type d'erreur personnalisé a été créé pour simplifier la gestion des erreurs et fournir des réponses plus détaillées. Par ailleurs, nous avons traduit les commentaires, la documentation et l'affichage en anglais pour homogénéiser la langue du code. L'authentification et la gestion des tokens ont été corrigées pour une meilleure sécurité. Enfin, la centralisation des fonctions a été effectuée pour rendre le code plus compréhensible, et les constantes ont été implantées directement dans le code lorsqu'elles n'étaient utilisées qu'une seule fois, optimisant ainsi la structure globale du projet.
+Dans un premier temps, nous avons supprimé la déclaration inutile des variables, simplifiant ainsi le code source. Nous avons également extrait les messages d'erreurs, entre autres, dans des fichiers distincts pour faciliter la modification ultérieure des messages sans altérer le code principal et pour donner plus de contextualisation. Une simplification du code a été mise en oeuvre, en utilisant un package de type module, permettant l'adoption de la syntaxe ES6, renforçant ainsi la modernité du code. Aussi, les erreurs non détectées ont été corrigées pour éviter tout plantage potentiel de l'API lors de leur occurrence. Par ailleurs, nous avons ajouté la configuration du docker-compose pour que la base de données n'exige plus de mot de passe d'accès. De plus, les noms de variables ont été améliorés pour renforcer la clarté et conformité aux normes, ce qui favorise une meilleure compréhension pour les développeurs. Aussi, les fichiers inutiles contenant des constantes utilisées une seule fois ont été supprimés, épurant ainsi la structure du projet. Nous avons aussi standardisé la syntaxe des guillemets, en utilisant des guillemets simples, conforme à la convention JS recommandée. De la même manière, le camelCaseSyntax a été adoptée pour les fonctions et variables, tandis que SCREAMING_SNAKE_CASE a été utilisé pour les constantes, assurant une cohérence dans le style du code. Par la même occasion, les égalités doubles ont été remplacées par des égalités triples pour une comparaison plus stricte. De surcroît, un nouveau type d'erreur personnalisé a été créé pour simplifier la gestion des erreurs et fournir des réponses plus détaillées. Par surcroît, nous avons traduit les commentaires, la documentation et l'affichage en anglais pour homogénéiser la langue du code. De la même façon, l'authentification et la gestion des tokens ont été corrigées pour une meilleure sécurité. Enfin, la centralisation des fonctions a été effectuée pour rendre le code plus compréhensible, et les constantes ont été implantées directement dans le code lorsqu'elles n'étaient utilisées qu'une seule fois, optimisant ainsi la structure globale du projet.
 
 ### Axes d'amélioration
 
@@ -70,11 +72,11 @@ Nous décidons de mettre en place le document de décision pour uniformiser cett
 
 ## Projet éco-conception : echo (ReactJS & Java Springboot)
 
-### Refactorisation du code côté API (car nouveau projet)
+### Refactorisation du code côté API (car autre projet)
 
-Dans le cadre de la refactorisation du code côté API, nous avons ajouté de la javadoc a été pour documenter les composants, favorisant ainsi une meilleure compréhension des fonctionnalités pour les développeurs. Des vérifications sur les objets ont été introduites, assurant leur non-nullité et renforçant le bon fonctionnement du projet. De plus, pour améliorer la lisibilité du code, les variables intermédiaires superflues ont été supprimées, et l'utilisation de lambda expressions a été privilégiée. La précision des exceptions a été aussi accentuée, facilitant le processus de débogage et de maintenance. Aussi, des validations ont été intégrées sur les paramètres des entités, par exemple avec l'annotation @NotNull, afin de renforcer la robustesse du code. L'utilisation de constantes a été mise en place pour rendre explicites les intentions du code, simplifiant ainsi la compréhension des développeurs. Enfin, dans une démarche de propreté du code, des packages, du code commenté et/ou inutile ont été supprimés, allégeant ainsi la base de code et facilitant sa gestion à long terme.
+Dans le cadre de la refactorisation du code côté API, nous avons ajouté de la javadoc a été pour documenter les composants, favorisant ainsi une meilleure compréhension des fonctionnalités pour les développeurs. De plus, des vérifications sur les objets ont été introduites, assurant leur non-nullité et renforçant le bon fonctionnement du projet. Pour améliorer la lisibilité du code, les variables intermédiaires superflues ont été supprimées, et l'utilisation de lambda expressions a été privilégiée. De la même manière, la précision des exceptions a été aussi accentuée, facilitant le processus de débogage et de maintenance. Aussi, des validations ont été intégrées sur les paramètres des entités, par exemple avec l'annotation @NotNull, afin de renforcer la robustesse du code. L'utilisation de constantes a été mise en place pour rendre explicites les intentions du code, simplifiant ainsi la compréhension des développeurs. Enfin, dans une démarche de propreté du code, des packages, du code commenté et/ou inutile ont été supprimés, allégeant ainsi la base de code et facilitant sa gestion à long terme.
 
-### Refactorisation du code côté APP (car nouveau projet)
+### Refactorisation du code côté APP (car autre projet)
 
 #### Simplification du code
 
@@ -82,8 +84,7 @@ Pour cette simplification du code de la partie Front, nous avons entrepris plusi
 
 #### Axes d'amélioration
 
-Nous aurions pu mettre en place des tests unitaires pour chaque composant de notre application web. En effet, bien que des tests unitaires sur des pages complètes ne soient pas utiles et seraient même détrimentaires aux améliorations futures du code, de par l'aspect rigide de ceux-ci, des tests par composant auraient pu être pertinent pour s'assurer de la conformité du visuel des parties atomiques de l'application. De plus, comme il, comme ils n'existaient pas auparavant, cela aurait pu faire un point sur ce qui existait et sur les objectifs à atteindre.
-Nous aurions également pu mettre en place un système d'analyse static de code pour être sûrs que le code produit est conforme aux bonnes pratiques que nous nous sommes fixées sur le projet.
+Nous aurions pu mettre en place des tests unitaires pour chaque composant de notre application web. En effet, bien que des tests unitaires sur des pages complètes ne soient pas utiles et seraient même détrimentaires aux améliorations futures du code, de par l'aspect rigide de ceux-ci, des tests par composant auraient pu être pertinent pour s'assurer de la conformité du visuel des parties atomiques de l'application. De plus, comme il, comme ils n'existaient pas auparavant, cela aurait pu faire un point sur ce qui existait et sur les objectifs à atteindre. Nous aurions également pu mettre en place un système d'analyse static de code pour être sûrs que le code produit est conforme aux bonnes pratiques que nous nous sommes fixées sur le projet.
 
 ### Tests de différents plugins d'analyse
 
@@ -131,8 +132,8 @@ L’outil *LightHouse* est très orienté test technique, car il étudie les pag
  
 ![GreenIT-Analysis](./img/greenit-analysis.png)
 
-Par rapport aux résultats de ces outils, nous pouvons constater qu’ils n’ont aucune valeur en commun. Par exemple, nous avons 2.88 gCO2e pour GreenIT alors que Carbonalyser donne 1 gCO2e, nous avons également 3800 DOM pour LightHouse contre 3076 DOM pour GreenIT.
-De plus, il y a la présence de données non concrète dans ces outils. Par exemple, dans GreenIT, il y a l’attribut « EcoIndex » qui est ici à 6.02 ce qui correspond à une notation « G ». Cependant, nous ne savons pas concrètement ce que cela veut dire, ce qui peu amener à certaine confusion. Tout ce que nous savons, c’est que G est la plus basse note que l’outil puisse attribuer, ce qui laisse penser qu'il n’est pas du tout optimal d'un point de vue environnemental.
+Par rapport aux résultats de ces outils, nous pouvons constater qu’ils n’ont aucune valeur en commun. Par exemple, nous avons 2.88 gCO2e pour GreenIT alors que Carbonalyser donne 1 gCO2e, nous avons également 3800 DOM pour LightHouse contre 3076 DOM pour GreenIT. De plus, il y a la présence de données non concrète dans ces outils. Par exemple, dans GreenIT, il y a l’attribut « EcoIndex » qui est ici à 6.02 ce qui correspond à une notation `G`. Cependant, nous ne savons pas concrètement ce que cela veut dire, ce qui peut amener à certaines confusions. Nous savons que les lettres vont de `A` à `G`, cette dernière étant la plus basse note que l’outil puisse attribuer, ce qui laisse penser qu'il n’est pas du tout optimal d'un point de vue environnemental.
+
 Ceci prouve donc que les résultats que nous obtenons dépendent grandement de l’outil utilisé et qu’il faut prendre en compte ces derniers avec précaution et contexte.
 
 ### Sélection des règles
@@ -339,7 +340,7 @@ Tout d'abord, Gatling est un outil open-source de test de performance, utilisé 
 
 Suite à l'exploitation de l'outil Gatling, nous avons identifié plusieurs problèmes. Lors de l'exécution de requêtes GET, en l'absence de données dans la base de données, le contrôleur Spring renvoie un code d'erreur (par exemple, `getAllArtist` renvoie une erreur 404). Cette pratique n'étant pas recommandée, il est nécessaire d'ajuster ce comportement.
 
-En ce qui concerne Top, nous avons observé un potentiel problème de performance. La consommation du CPU oscille en moyenne autour de 40%, avec des pics atteignant jusqu'à 373%. Il est donc impératif d'analyser et de résoudre ce problème.\
+En ce qui concerne Top, nous avons observé un potentiel problème de performance. La consommation du CPU oscille en moyenne autour de 40%, avec des pics atteignant jusqu'à 373%. Il est donc impératif d'analyser et de résoudre ce problème.
 
 ![top](./img/graphe_corrige.png)
 
@@ -355,7 +356,7 @@ De plus, Top nous a permis de constater que le pique d'utilisation de notre appl
 
 ![top](./img/top_corrige.png)
 
-## Projet de Dockerisation et de déploiement : echo
+## Projet de dockerisation et de déploiement : echo
 
 ### Définition
 
@@ -448,46 +449,26 @@ Cependant, cette modification a également nécessité une adaptation dans le `m
 
 #### Comment faire pour que ça fonctionne dans Kubernetes avec front, middle et back ? Décrivez vos changements d'architecture, et implémentez les.
 
-Remplacement du fichier `const.js` par un `.env` pour que ce fichier soit accessible via Kubernetes et pour que nous puissions modifier l'URL de l'API via Kubernetes directement.
-
-Mise à jour des variables d'environnement à l'aide d'un redéploiement, car cela ne se fait pas automatiquement.
-
-Exposition de l'API en localhost afin que le front puisse y accéder, étant donné que le réseau de Kubernetes est isolé.
-
-Changement de la BDD HsqlDb pour du MySQL, dans le but de faciliter les échanges et la gestion de la sécurité (user, password, ...) entre l'API et la BDD au sein de Kubernetes.
-
-En termes d'architecture, nous avons créé des fichiers YAML lors des séances précédentes pour chaque microservice.
-
-Pour la communication entre le front-end et le back-end, nous avons utilisé les **NodePorts**. En effet, un service NodePort dans Kubernetes permet d'exposer un service au niveau de chaque nœud du cluster sur un port spécifié. Cela assure une communication entre le front-end et le back-end à travers ce service.
-
-La Base de Données possède une **IP Cluster** et un **Host Kubernetes**. Tout d'abord, l'IP Cluster est une adresse IP interne spécifique au cluster Kubernetes. De ce fait, le service de la base de données expose cette adresse IP pour que le back-end puisse s'y connecter. De plus, Kubernetes attribue un nom d'hôte à chaque service. Ce nom d'hôte est utilisé dans la configuration du back-end pour se connecter à la base de données.
+Pour faire fonctionner notre application dans Kubernetes, nous avons procédé à divers changements. Tout d'abord, nous avons remplacé le fichier `const.js` par un `.env` pour que ce fichier soit accessible via Kubernetes et pour que nous puissions modifier l'URL de l'API via Kubernetes directement. Puis, nous avons mis à jour des variables d'environnement à l'aide d'un redéploiement, car cela ne se faisait pas automatiquement. Ensuite, nous avons exposé l'API en localhost afin que le front puisse y accéder, étant donné que le réseau de Kubernetes est isolé. Par suite, nous avons changé la BDD HsqlDb pour du MySQL, dans le but de faciliter les échanges et la gestion de la sécurité (user, password, ...) entre l'API et la BDD au sein de Kubernetes. Enfin, en termes d'architecture, nous avons créé des fichiers YAML lors des séances précédentes pour chaque microservice. Pour ce qui est de la communication entre le front-end et le back-end, nous avons utilisé les **NodePorts**. En effet, un service NodePort dans Kubernetes permet d'exposer un service au niveau de chaque nœud du cluster sur un port spécifié. Cela assure une communication entre le front et le back à travers ce service. La base de données, elle, possède une **IP Cluster** et un **Host Kubernetes**. Tout d'abord, l'IP Cluster est une adresse IP interne spécifique au cluster Kubernetes. De ce fait, le service de la base de données expose cette adresse IP pour que le back-end puisse s'y connecter. De plus, Kubernetes attribue un nom d'hôte à chaque service. Ce nom d'hôte est utilisé dans la configuration du back-end pour se connecter à la base de données.
 
 #### Que changeriez vous pour faire fonctionner ça sur Amazon Web Services, et pourquoi ?
 
-Étant donné que nous avons déjà mis en place des conteneurs Docker pour chacune de nos briques de façon à utiliser Kubernetes, le passage à AWS est plus rapide que si nous partions de zéro.
+Étant donné que nous avons déjà mis en place des conteneurs Docker pour chacune de nos briques de façon à utiliser Kubernetes, le passage à AWS est plus rapide que si nous partions de zéro. Ainsi, pour faire fonctionner notre application sur AWS, il faudrait utiliser AWS Elastic Container Service ou Elastic Kubernetes Service pour l'orchestration des conteneurs (à l'instar de Kubernetes). Néanmoins, nous devons rester vigilant, étant donné qu'AWS possède des services propriétaires et donc un mode de fonctionnement qui lui est propre.
 
-Ainsi, pour faire fonctionner notre application sur AWS, il faudrait utiliser AWS Elastic Container Service ou Elastic Kubernetes Service pour l'orchestration des conteneurs (à l'instar de Kubernetes).
+### Bâtissez une architecture résiliente, cassez tout, verdict : est-ce que ça a fonctionné ?
 
-### Bâtissez une architecture résiliente, cassez tout, Verdict : est-ce que ça a fonctionné ?
+#### Écoutez le business de votre application. Quel risque devez vous mitiger et pourquoi ? Quels choix d'architecture peuvent vous aider ?
 
-#### écoutez le business de votre application. Quel risque devez vous mitiger et pourquoi ? Quels choix d'architecture peuvent vous aider ?
+Pour nous aider, nous pouvons nous aider du principe d'Event Driven Architecture (EDA). En effet, l'EDA est un modèle architectural où la communication entre les composants du système est basée sur la notification asynchrone des événements. Les événements, représentant des changements significatifs d'état ou des actions, sont émis par des composants et reçus par d'autres, permettant ainsi une réactivité souple et un découplage entre les parties du système. L'EDA favorise la scalabilité, la flexibilité et la réactivité, permettant l'évolution indépendante des composants tout en facilitant la gestion des systèmes distribués et des flux de données. Avec ce principe, nous pouvons nous appuyer sur un principe de redondance. Cela nous permettrait de mettre en place de la redondance et donc de la résilience, afin de prévenir les potentiels problèmes.
 
-Pour nous aider, nous pouvons nous aider du principe d'Event Driven Architecture (EDA). En effet, l'EDA est un modèle architectural où la communication entre les composants du système est basée sur la notification asynchrone des événements.
+#### Comment faire pour que ça fonctionne dans Kubernetes avec deux instances middle ? refactorez votre code pour qu'il soit résilient en justifiant l'approche.
 
-Les événements, représentant des changements significatifs d'état ou des actions, sont émis par des composants et reçus par d'autres, permettant ainsi une réactivité souple et un découplage entre les parties du système. L'EDA favorise la scalabilité, la flexibilité et la réactivité, permettant l'évolution indépendante des composants tout en facilitant la gestion des systèmes distribués et des flux de données.
+Nous mettons en place un loadbalancing, nous permettant de communiquer avec nos deux instances. Dans notre cas, l'équilibrage de charge pour les instances middle (ou back et front dans notre cas) se fait à l'aide des Services Kubernetes. Aussi, nous utilisons du scaling horizontal des pods Kubernetes pour gérer les charges variables.
 
-Avec ce principe, nous pouvons nous appuyer sur un principe de redondance. Cela nous permettrait de mettre en place de la redondance et donc de la résilience, afin de prévenir les potentiels problèmes.
+#### Cassez des morceaux de l'application, vérifiez ce qui se passe, expliquez.
 
-#### Comment faire pour que ça fonctionne dans Kubernetes avec deux instances middle ? refactorez votre code pour qu'il soit résilient en justifiant l'approche
-
-Nous mettons en place un loadbalancing, nous permettant de communiquer avec nos deux instances. Dans notre cas, l'équilibrage de charge pour les instances middle se fait à l'aide des Services Kubernetes.
-   
-Aussi, nous utilisons du scaling horizontal des pods Kubernetes pour gérer les charges variables.
-
-#### Cassez des morceaux de l'application, vérifiez ce qui se passe, expliquez
-
-// TODO
+Durant cette phase, nous avons dupliqué le back en Spring boot, ainsi que le front de notre application (afin d'avoir deux réplicats) et nous les avons délibérément altérés pour évaluer le comportement du système. Ainsi afin de simuler une situation de défaillance, nous avons procédé à la suppression d'un des deux réplicats actifs. Malgré cette modification, la navigation sur le site s'est déroulée sans aucun problème apparent. Ce constat a révélé une gestion efficace de la charge, redirigeant automatiquement le trafic vers le réplicat toujours en service, grâce au loadbalancer, et déclenchant rapidement la relance du réplicat supprimé. Cette expérience a démontré la robustesse du système, illustrant la capacité du mécanisme de réplication et de redémarrage automatique à maintenir la continuité du service, même en présence de défaillances temporaires. De plus, ce test confirme également la nature "stateless" de nos services, soulignant leur capacité à maintenir la cohérence et la disponibilité malgré la modification ou la perte temporaire d'une instance.
 
 #### Que changeriez vous pour faire fonctionner ça sur Amazon Web Services, et pourquoi (oui, à nouveau :)) ?
 
-Comme vu précédemment, AWS propose des solutions d'orchestration (ECS et EKS). Concernant le load balancing, il propose également une solution pour cela, qui est Elastic Load Balancing (ELB).
+Comme vu précédemment, AWS propose des solutions d'orchestration (ECS et EKS).  Par conséquent, il propose également une solution pour faire load balancing et pouvoir s'adapter en cas de panne, il s'agit en effet de l'outil : Elastic Load Balancing (ELB). Néanmoins, comme tout à l'heure, nous devons rester vigilant, étant donné qu'AWS possède des services propriétaires et donc un mode de fonctionnement qui lui est propre.
