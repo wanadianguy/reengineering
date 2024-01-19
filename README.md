@@ -446,32 +446,34 @@ Cependant, cette modification a également nécessité une adaptation dans le `m
 
 ### Refactorez votre application pour le cloud
 
-#### Comment faire pour que ça fonctionne dans Kubernetes avec front, middle et back ? Décrivez vos changements d'architecture, et implémentez les
+#### Comment faire pour que ça fonctionne dans Kubernetes avec front, middle et back ? Décrivez vos changements d'architecture, et implémentez les.
 
-Remplacement du fichier const.js par .env pour que ce fichier soit accessible via Kubernetes et pour que nous puissions modifier l'URL de l'API via Kubernetes directement.
+Remplacement du fichier `const.js` par un `.env` pour que ce fichier soit accessible via Kubernetes et pour que nous puissions modifier l'URL de l'API via Kubernetes directement.
 
-Mise à jour des variables d'environnement à l'aide d'un redeploiement, car cela ne se fait pas automatiquement.
+Mise à jour des variables d'environnement à l'aide d'un redéploiement, car cela ne se fait pas automatiquement.
 
 Exposition de l'API en localhost afin que le front puisse y accéder, étant donné que le réseau de Kubernetes est isolé.
 
-Changement de la BDD HsqlDb pour du MySQL dans le but de faciliter les échanges et la gestion de la sécurité (user, password, ...) entre l'API et la BDD au sein de Kubernetes.
+Changement de la BDD HsqlDb pour du MySQL, dans le but de faciliter les échanges et la gestion de la sécurité (user, password, ...) entre l'API et la BDD au sein de Kubernetes.
 
-En termes d'architecture, nous avons créé des fichiers yml lors des séances précédentes pour chaque microservice.
+En termes d'architecture, nous avons créé des fichiers YAML lors des séances précédentes pour chaque microservice.
 
-Pour la communication entre le front et back, nous avons utilisé les NodePorts. En effet, un service NodePort dans Kubernetes permet d'exposer un service au niveau de chaque nœud du cluster sur un port spécifié. Cela assure une communication entre le front-end et le back-end à travers ce service.
-La Base de Données possède une IP Cluster et un Host Kubernetes. Tout d'abord, l'IP Cluster est une adresse IP interne spécifique au cluster Kubernetes. De ce fait, le service de la base de données expose cette adresse IP pour que le back-end puisse s'y connecter. De plus, Kubernetes attribue un nom d'hôte à chaque service. Ce nom d'hôte est utilisé dans la configuration du back-end pour se connecter à la base de données.
+Pour la communication entre le front-end et le back-end, nous avons utilisé les **NodePorts**. En effet, un service NodePort dans Kubernetes permet d'exposer un service au niveau de chaque nœud du cluster sur un port spécifié. Cela assure une communication entre le front-end et le back-end à travers ce service.
+
+La Base de Données possède une **IP Cluster** et un **Host Kubernetes**. Tout d'abord, l'IP Cluster est une adresse IP interne spécifique au cluster Kubernetes. De ce fait, le service de la base de données expose cette adresse IP pour que le back-end puisse s'y connecter. De plus, Kubernetes attribue un nom d'hôte à chaque service. Ce nom d'hôte est utilisé dans la configuration du back-end pour se connecter à la base de données.
 
 #### Que changeriez vous pour faire fonctionner ça sur Amazon Web Services, et pourquoi ?
 
 Étant donné que nous avons déjà mis en place des conteneurs Docker pour chacune de nos briques de façon à utiliser Kubernetes, le passage à AWS est plus rapide que si nous partions de zéro.
 
-Ainsi, pour faire fonctionner notre application sur AWS, il faudrait utiliser AWS Elastic Container Service ou Elastic Kubernetes Service pour l'orchestration des conteneurs (à de Kubernetes).
+Ainsi, pour faire fonctionner notre application sur AWS, il faudrait utiliser AWS Elastic Container Service ou Elastic Kubernetes Service pour l'orchestration des conteneurs (à l'instar de Kubernetes).
 
 ### Bâtissez une architecture résiliente, cassez tout, Verdict : est-ce que ça a fonctionné ?
 
-#### écoutez le business de votre application. Quel risque devez vous mitiger et pourquoi ?, quels choix d'architecture peuvent vous aider ?
+#### écoutez le business de votre application. Quel risque devez vous mitiger et pourquoi ? Quels choix d'architecture peuvent vous aider ?
 
-Pour nous aider, nous pouvons nous aider du principe d'Event Driven Architecture (EDA). En effet, l'EDA est un modèle architectural où la communication entre les composants du système est basée sur la notification asynchrone des événements. Les événements, représentant des changements significatifs d'état ou des actions, sont émis par des composants et reçus par d'autres, permettant ainsi une réactivité souple et un découplage entre les parties du système. L'EDA favorise la scalabilité, la flexibilité et la réactivité, permettant l'évolution indépendante des composants tout en facilitant la gestion des systèmes distribués et des flux de données.
+Pour nous aider, nous pouvons nous aider du principe d'Event Driven Architecture (EDA). En effet, l'EDA est un modèle architectural où la communication entre les composants du système est basée sur la notification asynchrone des événements. \
+Les événements, représentant des changements significatifs d'état ou des actions, sont émis par des composants et reçus par d'autres, permettant ainsi une réactivité souple et un découplage entre les parties du système. L'EDA favorise la scalabilité, la flexibilité et la réactivité, permettant l'évolution indépendante des composants tout en facilitant la gestion des systèmes distribués et des flux de données.
 
 Avec ce principe, nous pouvons nous appuyer sur un principe de redondance. Cela nous permettrait de mettre en place de la redondance et donc de la résilience, afin de prévenir les potentiels problèmes.
 
@@ -487,4 +489,4 @@ Aussi, nous utilisons du scaling horizontal des pods Kubernetes pour gérer les 
 
 #### Que changeriez vous pour faire fonctionner ça sur Amazon Web Services, et pourquoi (oui, à nouveau :)) ?
 
-Rien, car AWS est un orchestrateur également, d'où l'intérêt d'utiliser des fichiers de configuration ?
+Comme vu précédemment, AWS propose des solutions d'orchestration (ECS et EKS). Concernant le load balancing, il propose également une solution pour cela, qui est Elastic Load Balancing (ELB).
